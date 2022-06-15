@@ -5,7 +5,7 @@ public class Komentar {
 	private Korisnik kupac;
 	private SportskiObjekat sportskiObjekat;
 	private String tekstKomentara;
-	private int[] ocena = new int[]{1, 2, 3, 4, 5};
+	private int ocena;
 	
 	
 	public Korisnik getKupac() {
@@ -26,10 +26,10 @@ public class Komentar {
 	public void setTekstKomentara(String tekstKomentara) {
 		this.tekstKomentara = tekstKomentara;
 	}
-	public int[] getOcena() {
+	public int getOcena() {
 		return ocena;
 	}
-	public void setOcena(int[] ocena) {
+	public void setOcena(int ocena) {
 		this.ocena = ocena;
 	}
 	

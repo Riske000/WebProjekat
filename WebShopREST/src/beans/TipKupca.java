@@ -2,9 +2,9 @@ package beans;
 
 public class TipKupca {
 
-	protected String imeTipa;
-	protected double popust;
-	protected double potrebniPoeni;
+	private String imeTipa;
+	private double popust;
+	private double potrebniPoeni;
 	
 	
 	public String getImeTipa() {

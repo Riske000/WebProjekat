@@ -1,16 +1,15 @@
 package beans;
 
-import java.awt.Image;
 
 public class Trening {
 
 	private String naziv;
 	private String tipTreninga;
 	private SportskiObjekat objekatGdePripada;
-	private String trajanje;
+	private double trajanje;
 	private Korisnik trener;
 	private String opis;
-	private Image slika;
+	private String slika;
 	
 	
 	public String getNaziv() {
@@ -31,10 +30,10 @@ public class Trening {
 	public void setObjekatGdePripada(SportskiObjekat objekatGdePripada) {
 		this.objekatGdePripada = objekatGdePripada;
 	}
-	public String getTrajanje() {
+	public double getTrajanje() {
 		return trajanje;
 	}
-	public void setTrajanje(String trajanje) {
+	public void setTrajanje(double trajanje) {
 		this.trajanje = trajanje;
 	}
 	public Korisnik getTrener() {
@@ -49,10 +48,10 @@ public class Trening {
 	public void setOpis(String opis) {
 		this.opis = opis;
 	}
-	public Image getSlika() {
+	public String getSlika() {
 		return slika;
 	}
-	public void setSlika(Image slika) {
+	public void setSlika(String slika) {
 		this.slika = slika;
 	}
 	

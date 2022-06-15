@@ -1,17 +1,19 @@
 package beans;
 
+import java.time.LocalDateTime;
+
 public class IstorijaTreninga {
 
-	private String datumVremePrijave;
+	private LocalDateTime datumVremePrijave;
 	private Trening trening;
 	private Korisnik kupac;
 	private Korisnik trener;
 	
 	
-	public String getDatumVremePrijave() {
+	public LocalDateTime getDatumVremePrijave() {
 		return datumVremePrijave;
 	}
-	public void setDatumVremePrijave(String datumVremePrijave) {
+	public void setDatumVremePrijave(LocalDateTime datumVremePrijave) {
 		this.datumVremePrijave = datumVremePrijave;
 	}
 	public Trening getTrening() {

@@ -1,6 +1,7 @@
 package beans;
 
-import java.awt.Image;
+
+import java.time.LocalTime;
 import java.util.List;
 
 public class SportskiObjekat {
@@ -10,10 +11,10 @@ public class SportskiObjekat {
 	private List<String> sadrzajObjekta;
 	private String status;
 	private Lokacija lokacija;
-	private Image logoObjekta;
+	private String logoObjekta;
 	private double prosecnaOcena;
-	private String radnoVreme;
-	
+	private LocalTime pocetakRadnogVremena;	//local time
+	private LocalTime krajRadnogVremena;
 	
 	public String getIme() {
 		return ime;
@@ -45,10 +46,10 @@ public class SportskiObjekat {
 	public void setLokacija(Lokacija lokacija) {
 		this.lokacija = lokacija;
 	}
-	public Image getLogoObjekta() {
+	public String getLogoObjekta() {
 		return logoObjekta;
 	}
-	public void setLogoObjekta(Image logoObjekta) {
+	public void setLogoObjekta(String logoObjekta) {
 		this.logoObjekta = logoObjekta;
 	}
 	public double getProsecnaOcena() {
@@ -57,12 +58,19 @@ public class SportskiObjekat {
 	public void setProsecnaOcena(double prosecnaOcena) {
 		this.prosecnaOcena = prosecnaOcena;
 	}
-	public String getRadnoVreme() {
-		return radnoVreme;
+	public LocalTime getPocetakRadnogVremena() {
+		return pocetakRadnogVremena;
 	}
-	public void setRadnoVreme(String radnoVreme) {
-		this.radnoVreme = radnoVreme;
+	public void setPocetakRadnogVremena(LocalTime pocetakRadnogVremena) {
+		this.pocetakRadnogVremena = pocetakRadnogVremena;
 	}
+	public LocalTime getKrajRadnogVremena() {
+		return krajRadnogVremena;
+	}
+	public void setKrajRadnogVremena(LocalTime krajRadnogVremena) {
+		this.krajRadnogVremena = krajRadnogVremena;
+	}
+	
 	
 	
 }

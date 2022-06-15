@@ -1,6 +1,7 @@
 package beans;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,22 +9,22 @@ import javax.persistence.UniqueConstraint;
 
 public class Korisnik implements Serializable {
 	
-	protected String korisnickoIme;
-	protected String sifra;
-	protected String ime;
-	protected String prezime;
-	protected String pol;
-	protected String datumRodjenja;
-	protected String uloga;
+	private String korisnickoIme;
+	private String sifra;
+	private String ime;
+	private String prezime;
+	private String pol;
+	private LocalDate datumRodjenja;
+	private String uloga;
 	
 	//trener
-	private List<Trening> istorijaTreninga;
+	private List<IstorijaTreninga> istorijaTreninga;
 	
 	//kupac
 	private Clanarina clanarina;
 	private List<SportskiObjekat> poseceniObjekti;
 	private double brojSakupljenihPoena;
-	private String tipKupca;
+	private TipKupca tipKupca;
 	//menadzer
 	private SportskiObjekat sportskiObjekat;
 	
@@ -88,13 +89,13 @@ public class Korisnik implements Serializable {
 
 
 
-	public String getDatumRodjenja() {
+	public LocalDate getDatumRodjenja() {
 		return datumRodjenja;
 	}
 
 
 
-	public void setDatumRodjenja(String datumRodjenja) {
+	public void setDatumRodjenja(LocalDate datumRodjenja) {
 		this.datumRodjenja = datumRodjenja;
 	}
 
@@ -112,13 +113,13 @@ public class Korisnik implements Serializable {
 
 
 
-	public List<Trening> getIstorijaTreninga() {
+	public List<IstorijaTreninga> getIstorijaTreninga() {
 		return istorijaTreninga;
 	}
 
 
 
-	public void setIstorijaTreninga(List<Trening> istorijaTreninga) {
+	public void setIstorijaTreninga(List<IstorijaTreninga> istorijaTreninga) {
 		this.istorijaTreninga = istorijaTreninga;
 	}
 
