@@ -2,6 +2,9 @@ package beans;
 
 public class Lokacija {
 	
+	private int intId;
+	
+
 	private double geografskaSirina;
 	private double geografskaDuzina;
 	private String adresa;
@@ -17,12 +20,15 @@ public class Lokacija {
 	
 	
 	
-	public Lokacija(double geografskaSirina, double geografskaDuzina, String adresa, String ulica, String broj,
-			String mesto, String postanskiBroj) {
+	
+
+
+	public Lokacija(int intId, double geografskaSirina, double geografskaDuzina,  String ulica,
+			String broj, String mesto, String postanskiBroj) {
 		super();
+		this.intId = intId;
 		this.geografskaSirina = geografskaSirina;
 		this.geografskaDuzina = geografskaDuzina;
-		this.adresa = adresa;
 		this.ulica = ulica;
 		this.broj = broj;
 		this.mesto = mesto;
@@ -30,6 +36,19 @@ public class Lokacija {
 	}
 
 
+
+
+
+
+	public int getIntId() {
+		return intId;
+	}
+
+
+
+	public void setIntId(int intId) {
+		this.intId = intId;
+	}
 
 	public double getGeografskaSirina() {
 		return geografskaSirina;

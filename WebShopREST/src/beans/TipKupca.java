@@ -2,6 +2,7 @@ package beans;
 
 public class TipKupca {
 
+	private int intId;
 	private String imeTipa;
 	private double popust;
 	private double potrebniPoeni;
@@ -13,11 +14,34 @@ public class TipKupca {
 	
 	
 	
-	public TipKupca(String imeTipa, double popust, double potrebniPoeni) {
+	
+
+
+	
+	
+	public TipKupca(int intId, String imeTipa, double popust, double potrebniPoeni) {
 		super();
+		this.intId = intId;
 		this.imeTipa = imeTipa;
 		this.popust = popust;
 		this.potrebniPoeni = potrebniPoeni;
+	}
+
+
+
+
+
+
+
+
+	public int getIntId() {
+		return intId;
+	}
+
+
+
+	public void setIntId(int intId) {
+		this.intId = intId;
 	}
 
 

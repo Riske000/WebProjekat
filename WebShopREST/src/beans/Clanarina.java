@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 public class Clanarina {
 
+	private int intId;
 	private String ID;
 	private String tipClanarine;
 	private LocalDate datumPlacanja;
@@ -23,9 +24,14 @@ public class Clanarina {
 	
 	
 	
-	public Clanarina(String iD, String tipClanarine, LocalDate datumPlacanja, LocalDate pocetniDatumVazenja,
+	
+
+	
+
+	public Clanarina(int intId, String iD, String tipClanarine, LocalDate datumPlacanja, LocalDate pocetniDatumVazenja,
 			LocalDate krajnjiDatumVazenja, double punaCena, Korisnik kupac, String status, int brojTermina) {
 		super();
+		this.intId = intId;
 		ID = iD;
 		this.tipClanarine = tipClanarine;
 		this.datumPlacanja = datumPlacanja;
@@ -35,6 +41,22 @@ public class Clanarina {
 		this.kupac = kupac;
 		this.status = status;
 		this.brojTermina = brojTermina;
+	}
+
+
+
+
+
+
+
+	public int getIntId() {
+		return intId;
+	}
+
+
+
+	public void setIntId(int intId) {
+		this.intId = intId;
 	}
 
 

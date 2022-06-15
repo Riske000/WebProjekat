@@ -10,6 +10,7 @@ import javax.persistence.UniqueConstraint;
 
 public class Korisnik {
 	
+	private int intId;
 	private String korisnickoIme;
 	private String sifra;
 	private String ime;
@@ -37,11 +38,15 @@ public class Korisnik {
 		this.poseceniObjekti = new ArrayList<SportskiObjekat>();
 	}
 	
-	public Korisnik(String korisnickoIme, String sifra, String ime, String prezime, String pol, LocalDate datumRodjenja,
-			String uloga, List<IstorijaTreninga> istorijaTreninga, Clanarina clanarina,
+	
+	
+
+	public Korisnik(int intId, String korisnickoIme, String sifra, String ime, String prezime, String pol,
+			LocalDate datumRodjenja, String uloga, List<IstorijaTreninga> istorijaTreninga, Clanarina clanarina,
 			List<SportskiObjekat> poseceniObjekti, double brojSakupljenihPoena, TipKupca tipKupca,
 			SportskiObjekat sportskiObjekat) {
 		super();
+		this.intId = intId;
 		this.korisnickoIme = korisnickoIme;
 		this.sifra = sifra;
 		this.ime = ime;
@@ -58,6 +63,15 @@ public class Korisnik {
 	}
 
 
+
+
+	public int getIntId() {
+		return intId;
+	}
+
+	public void setIntId(int intId) {
+		this.intId = intId;
+	}
 
 	public String getKorisnickoIme() {
 		return korisnickoIme;

@@ -3,6 +3,7 @@ package beans;
 
 public class Trening {
 
+	private int intId;
 	private String naziv;
 	private String tipTreninga;
 	private SportskiObjekat objekatGdePripada;
@@ -20,9 +21,14 @@ public class Trening {
 	
 	
 	
-	public Trening(String naziv, String tipTreninga, SportskiObjekat objekatGdePripada, double trajanje,
+	
+
+	
+
+	public Trening(int intId, String naziv, String tipTreninga, SportskiObjekat objekatGdePripada, double trajanje,
 			Korisnik trener, String opis, String slika) {
 		super();
+		this.intId = intId;
 		this.naziv = naziv;
 		this.tipTreninga = tipTreninga;
 		this.objekatGdePripada = objekatGdePripada;
@@ -30,6 +36,22 @@ public class Trening {
 		this.trener = trener;
 		this.opis = opis;
 		this.slika = slika;
+	}
+
+
+
+
+
+
+
+	public int getIntId() {
+		return intId;
+	}
+
+
+
+	public void setIntId(int intId) {
+		this.intId = intId;
 	}
 
 

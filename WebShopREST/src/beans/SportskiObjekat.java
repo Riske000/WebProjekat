@@ -7,6 +7,7 @@ import java.util.List;
 
 public class SportskiObjekat {
 
+	private int intId;
 	private String ime;
 	private String tipObjekta;
 	private List<String> sadrzajObjekta;
@@ -24,9 +25,16 @@ public class SportskiObjekat {
 	
 	
 	
-	public SportskiObjekat(String ime, String tipObjekta, List<String> sadrzajObjekta, String status, Lokacija lokacija,
-			String logoObjekta, double prosecnaOcena, LocalTime pocetakRadnogVremena, LocalTime krajRadnogVremena) {
+	
+
+
+	
+
+	public SportskiObjekat(int intId, String ime, String tipObjekta, List<String> sadrzajObjekta, String status,
+			Lokacija lokacija, String logoObjekta, double prosecnaOcena, LocalTime pocetakRadnogVremena,
+			LocalTime krajRadnogVremena) {
 		super();
+		this.intId = intId;
 		this.ime = ime;
 		this.tipObjekta = tipObjekta;
 		this.sadrzajObjekta = sadrzajObjekta;
@@ -36,6 +44,23 @@ public class SportskiObjekat {
 		this.prosecnaOcena = prosecnaOcena;
 		this.pocetakRadnogVremena = pocetakRadnogVremena;
 		this.krajRadnogVremena = krajRadnogVremena;
+	}
+
+
+
+
+
+
+
+
+	public int getIntId() {
+		return intId;
+	}
+
+
+
+	public void setIntId(int intId) {
+		this.intId = intId;
 	}
 
 

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public class IstorijaTreninga {
 
+	private int intId;
 	private LocalDateTime datumVremePrijave;
 	private Trening trening;
 	private Korisnik kupac;
@@ -16,12 +17,34 @@ public class IstorijaTreninga {
 	
 	
 	
-	public IstorijaTreninga(LocalDateTime datumVremePrijave, Trening trening, Korisnik kupac, Korisnik trener) {
+	
+
+	
+
+	public IstorijaTreninga(int intId, LocalDateTime datumVremePrijave, Trening trening, Korisnik kupac,
+			Korisnik trener) {
 		super();
+		this.intId = intId;
 		this.datumVremePrijave = datumVremePrijave;
 		this.trening = trening;
 		this.kupac = kupac;
 		this.trener = trener;
+	}
+
+
+
+
+
+
+
+	public int getIntId() {
+		return intId;
+	}
+
+
+
+	public void setIntId(int intId) {
+		this.intId = intId;
 	}
 
 

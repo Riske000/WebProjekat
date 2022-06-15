@@ -2,6 +2,7 @@ package beans;
 
 public class Komentar {
 
+	private int intId;
 	private Korisnik kupac;
 	private SportskiObjekat sportskiObjekat;
 	private String tekstKomentara;
@@ -14,12 +15,35 @@ public class Komentar {
 	
 	
 	
-	public Komentar(Korisnik kupac, SportskiObjekat sportskiObjekat, String tekstKomentara, int ocena) {
+	
+
+
+	
+	
+	public Komentar(int intId, Korisnik kupac, SportskiObjekat sportskiObjekat, String tekstKomentara, int ocena) {
 		super();
+		this.intId = intId;
 		this.kupac = kupac;
 		this.sportskiObjekat = sportskiObjekat;
 		this.tekstKomentara = tekstKomentara;
 		this.ocena = ocena;
+	}
+
+
+
+
+
+
+
+
+	public int getIntId() {
+		return intId;
+	}
+
+
+
+	public void setIntId(int intId) {
+		this.intId = intId;
 	}
 
 
