@@ -6,7 +6,22 @@ public class TipKupca {
 	private double popust;
 	private double potrebniPoeni;
 	
+	public TipKupca() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
+	
+	
+	public TipKupca(String imeTipa, double popust, double potrebniPoeni) {
+		super();
+		this.imeTipa = imeTipa;
+		this.popust = popust;
+		this.potrebniPoeni = potrebniPoeni;
+	}
+
+
+
 	public String getImeTipa() {
 		return imeTipa;
 	}

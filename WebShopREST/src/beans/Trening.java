@@ -12,6 +12,28 @@ public class Trening {
 	private String slika;
 	
 	
+	
+	public Trening() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+	public Trening(String naziv, String tipTreninga, SportskiObjekat objekatGdePripada, double trajanje,
+			Korisnik trener, String opis, String slika) {
+		super();
+		this.naziv = naziv;
+		this.tipTreninga = tipTreninga;
+		this.objekatGdePripada = objekatGdePripada;
+		this.trajanje = trajanje;
+		this.trener = trener;
+		this.opis = opis;
+		this.slika = slika;
+	}
+
+
+
 	public String getNaziv() {
 		return naziv;
 	}

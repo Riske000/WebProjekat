@@ -7,7 +7,23 @@ public class Komentar {
 	private String tekstKomentara;
 	private int ocena;
 	
+	public Komentar() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
+	
+	
+	public Komentar(Korisnik kupac, SportskiObjekat sportskiObjekat, String tekstKomentara, int ocena) {
+		super();
+		this.kupac = kupac;
+		this.sportskiObjekat = sportskiObjekat;
+		this.tekstKomentara = tekstKomentara;
+		this.ocena = ocena;
+	}
+
+
+
 	public Korisnik getKupac() {
 		return kupac;
 	}

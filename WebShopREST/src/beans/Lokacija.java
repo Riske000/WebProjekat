@@ -10,8 +10,27 @@ public class Lokacija {
 	private String mesto;
 	private String postanskiBroj;
 	
+	public Lokacija() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 	
+	
+	public Lokacija(double geografskaSirina, double geografskaDuzina, String adresa, String ulica, String broj,
+			String mesto, String postanskiBroj) {
+		super();
+		this.geografskaSirina = geografskaSirina;
+		this.geografskaDuzina = geografskaDuzina;
+		this.adresa = adresa;
+		this.ulica = ulica;
+		this.broj = broj;
+		this.mesto = mesto;
+		this.postanskiBroj = postanskiBroj;
+	}
+
+
+
 	public double getGeografskaSirina() {
 		return geografskaSirina;
 	}

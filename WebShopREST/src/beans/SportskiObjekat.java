@@ -2,6 +2,7 @@ package beans;
 
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SportskiObjekat {
@@ -16,6 +17,29 @@ public class SportskiObjekat {
 	private LocalTime pocetakRadnogVremena;	//local time
 	private LocalTime krajRadnogVremena;
 	
+	public SportskiObjekat() {
+		super();
+		this.sadrzajObjekta = new ArrayList<String>();
+	}
+	
+	
+	
+	public SportskiObjekat(String ime, String tipObjekta, List<String> sadrzajObjekta, String status, Lokacija lokacija,
+			String logoObjekta, double prosecnaOcena, LocalTime pocetakRadnogVremena, LocalTime krajRadnogVremena) {
+		super();
+		this.ime = ime;
+		this.tipObjekta = tipObjekta;
+		this.sadrzajObjekta = sadrzajObjekta;
+		this.status = status;
+		this.lokacija = lokacija;
+		this.logoObjekta = logoObjekta;
+		this.prosecnaOcena = prosecnaOcena;
+		this.pocetakRadnogVremena = pocetakRadnogVremena;
+		this.krajRadnogVremena = krajRadnogVremena;
+	}
+
+
+
 	public String getIme() {
 		return ime;
 	}

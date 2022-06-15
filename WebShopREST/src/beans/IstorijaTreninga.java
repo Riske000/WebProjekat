@@ -9,7 +9,23 @@ public class IstorijaTreninga {
 	private Korisnik kupac;
 	private Korisnik trener;
 	
+	public IstorijaTreninga() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
+	
+	
+	public IstorijaTreninga(LocalDateTime datumVremePrijave, Trening trening, Korisnik kupac, Korisnik trener) {
+		super();
+		this.datumVremePrijave = datumVremePrijave;
+		this.trening = trening;
+		this.kupac = kupac;
+		this.trener = trener;
+	}
+
+
+
 	public LocalDateTime getDatumVremePrijave() {
 		return datumVremePrijave;
 	}

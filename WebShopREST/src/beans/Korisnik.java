@@ -2,12 +2,13 @@ package beans;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.UniqueConstraint;
 
-public class Korisnik implements Serializable {
+public class Korisnik {
 	
 	private String korisnickoIme;
 	private String sifra;
@@ -16,6 +17,8 @@ public class Korisnik implements Serializable {
 	private String pol;
 	private LocalDate datumRodjenja;
 	private String uloga;
+	
+	
 	
 	//trener
 	private List<IstorijaTreninga> istorijaTreninga;
@@ -28,6 +31,33 @@ public class Korisnik implements Serializable {
 	//menadzer
 	private SportskiObjekat sportskiObjekat;
 	
+	public Korisnik() {
+		super();
+		this.istorijaTreninga = new ArrayList<IstorijaTreninga>();
+		this.poseceniObjekti = new ArrayList<SportskiObjekat>();
+	}
+	
+	public Korisnik(String korisnickoIme, String sifra, String ime, String prezime, String pol, LocalDate datumRodjenja,
+			String uloga, List<IstorijaTreninga> istorijaTreninga, Clanarina clanarina,
+			List<SportskiObjekat> poseceniObjekti, double brojSakupljenihPoena, TipKupca tipKupca,
+			SportskiObjekat sportskiObjekat) {
+		super();
+		this.korisnickoIme = korisnickoIme;
+		this.sifra = sifra;
+		this.ime = ime;
+		this.prezime = prezime;
+		this.pol = pol;
+		this.datumRodjenja = datumRodjenja;
+		this.uloga = uloga;
+		this.istorijaTreninga = istorijaTreninga;
+		this.clanarina = clanarina;
+		this.poseceniObjekti = poseceniObjekti;
+		this.brojSakupljenihPoena = brojSakupljenihPoena;
+		this.tipKupca = tipKupca;
+		this.sportskiObjekat = sportskiObjekat;
+	}
+
+
 
 	public String getKorisnickoIme() {
 		return korisnickoIme;
@@ -161,13 +191,13 @@ public class Korisnik implements Serializable {
 
 
 
-	public String getTipKupca() {
+	public TipKupca getTipKupca() {
 		return tipKupca;
 	}
 
 
 
-	public void setTipKupca(String tipKupca) {
+	public void setTipKupca(TipKupca tipKupca) {
 		this.tipKupca = tipKupca;
 	}
 
@@ -181,41 +211,6 @@ public class Korisnik implements Serializable {
 
 	public void setSportskiObjekat(SportskiObjekat sportskiObjekat) {
 		this.sportskiObjekat = sportskiObjekat;
-	}
-
-
-
-	public Korisnik() {
-		super();
-	}
-	
-
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(dateOfBirth, firstName, gender, lastName, password, username);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Korisnik other = (Korisnik) obj;
-		return Objects.equals(dateOfBirth, other.dateOfBirth) && Objects.equals(firstName, other.firstName)
-				&& Objects.equals(gender, other.gender) && Objects.equals(lastName, other.lastName)
-				&& Objects.equals(password, other.password) && Objects.equals(username, other.username);
-	}
-
-	
-
-	@Override
-	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + "]";
 	}
 
 }

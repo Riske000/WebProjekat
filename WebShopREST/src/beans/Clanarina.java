@@ -16,6 +16,29 @@ public class Clanarina {
 	private int brojTermina;
 	
 	
+	
+	public Clanarina() {
+		super();
+	}
+	
+	
+	
+	public Clanarina(String iD, String tipClanarine, LocalDate datumPlacanja, LocalDate pocetniDatumVazenja,
+			LocalDate krajnjiDatumVazenja, double punaCena, Korisnik kupac, String status, int brojTermina) {
+		super();
+		ID = iD;
+		this.tipClanarine = tipClanarine;
+		this.datumPlacanja = datumPlacanja;
+		this.pocetniDatumVazenja = pocetniDatumVazenja;
+		this.krajnjiDatumVazenja = krajnjiDatumVazenja;
+		this.punaCena = punaCena;
+		this.kupac = kupac;
+		this.status = status;
+		this.brojTermina = brojTermina;
+	}
+
+
+
 	public String getTipClanarine() {
 		return tipClanarine;
 	}
