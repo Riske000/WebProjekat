@@ -19,11 +19,10 @@ public class Trening {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-	
-	
-
-	
+	public Trening(int intId) {
+		super();
+		this.intId = intId;
+	}
 
 	public Trening(int intId, String naziv, String tipTreninga, SportskiObjekat objekatGdePripada, double trajanje,
 			Korisnik trener, String opis, String slika) {

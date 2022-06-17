@@ -18,7 +18,10 @@ public class Lokacija {
 		
 	}
 	
-	
+	public Lokacija(int intId) {
+		super();
+		this.intId = intId;
+	}
 	
 	
 

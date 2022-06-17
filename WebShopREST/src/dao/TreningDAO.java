@@ -74,8 +74,8 @@ private HashMap<Integer, Trening> treninzi = new HashMap<Integer, Trening>();
 			String line, naziv = "",  tipTreninga = "" , opis = "", slika = "";
 			double trajanje = 0;
 			int id = -1;
-			Korisnik trener;
-			SportskiObjekat objekatGdePripada;
+			Korisnik trener = new Korisnik();
+			SportskiObjekat objekatGdePripada = new SportskiObjekat();
 			StringTokenizer st;
 			
 			SportskiObjekatDAO sod = new SportskiObjekatDAO();
@@ -89,13 +89,13 @@ private HashMap<Integer, Trening> treninzi = new HashMap<Integer, Trening>();
 					naziv = st.nextToken().trim();
 					tipTreninga = st.nextToken().trim();
 					//sportskiObjekat = sod.findObjekat(Integer.parseInt(st.nextToken().trim()));
-					//SportskiObjekat obj = new SportskiObjekat(Integer.parseInt(st.nextToken().trim()));
+					objekatGdePripada = new SportskiObjekat(Integer.parseInt(st.nextToken().trim()));
 					trajanje = Double.parseDouble(st.nextToken().trim());
-					// korisnik trener
+					trener = new Korisnik(Integer.parseInt(st.nextToken().trim()));
 					opis = st.nextToken().trim();
 					slika = st.nextToken().trim();
 				}
-				treninzi.put(id, new Trening(id, naziv, tipTreninga, null, trajanje, null, opis, slika));
+				treninzi.put(id, new Trening(id, naziv, tipTreninga, objekatGdePripada, trajanje, trener, opis, slika));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

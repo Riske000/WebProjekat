@@ -13,7 +13,10 @@ public class TipKupca {
 	}
 	
 	
-	
+	public TipKupca(int intId) {
+		super();
+		this.intId = intId;
+	}
 	
 
 

@@ -24,7 +24,10 @@ public class Clanarina {
 	
 	
 	
-	
+	public Clanarina(int intId) {
+		super();
+		this.intId = intId;
+	}
 
 	
 

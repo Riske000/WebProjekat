@@ -10,7 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import beans.Lokacija;
 import beans.SportskiObjekat;
+import utils.DateHelper;
+import utils.TimeHelper;
 
 public class SportskiObjekatDAO {
 
@@ -73,6 +76,7 @@ private HashMap<Integer, SportskiObjekat> sportskiObjekti = new HashMap<Integer,
 			LocalTime pocetak = LocalTime.now();
 			LocalTime kraj = LocalTime.now();
 			int id = -1;
+			Lokacija lokacija = new Lokacija();
 			StringTokenizer st;
 			while ((line = in.readLine()) != null) {
 				line = line.trim();
@@ -85,14 +89,14 @@ private HashMap<Integer, SportskiObjekat> sportskiObjekti = new HashMap<Integer,
 					tipObjekta = st.nextToken().trim();
 					//za sadrzaj
 					status = st.nextToken().trim();
-					//lokacija = st.nextToken().trim();
+					lokacija = new Lokacija(Integer.parseInt(st.nextToken().trim()));
 					logoObjekta = st.nextToken().trim();
 					prosecnaOcena = Double.parseDouble(st.nextToken().trim());
-					// za vremena konverter
-					// za vremena konverter
+					pocetak  = TimeHelper.stringToTime(st.nextToken().trim());
+					kraj = TimeHelper.stringToTime(st.nextToken().trim());
 				}
 				sportskiObjekti.put(id, new SportskiObjekat(id, ime, tipObjekta,
-						sadrzajObjekta, status, null, logoObjekta, prosecnaOcena,
+						sadrzajObjekta, status, lokacija, logoObjekta, prosecnaOcena,
 						pocetak, kraj));
 			}
 		} catch (Exception e) {

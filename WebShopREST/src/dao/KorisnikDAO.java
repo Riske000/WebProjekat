@@ -4,11 +4,17 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.StringTokenizer;
 
+import beans.Clanarina;
+import beans.IstorijaTreninga;
 import beans.Korisnik;
+import beans.SportskiObjekat;
+import beans.TipKupca;
 import utils.DateHelper;
 
 public class KorisnikDAO {
@@ -58,6 +64,12 @@ public class KorisnikDAO {
 			String line, korisnickoIme = "", sifra = "", ime = "", prezime = "", pol = "", uloga = "";
 			LocalDate datumRodjenja = LocalDate.now();
 			int intId = -1;
+			List<IstorijaTreninga> istorijaTreninga = new ArrayList<IstorijaTreninga>();
+			Clanarina clanarina = new Clanarina();
+			List<SportskiObjekat> poseceniObjekti = new ArrayList<SportskiObjekat>();
+			double brojSakupljenihPoena = -1;
+			TipKupca tipKupca = new TipKupca();
+			SportskiObjekat sportskiObjekat = new SportskiObjekat();
 			
 			StringTokenizer st;
 			while ((line = in.readLine()) != null) {
@@ -74,8 +86,14 @@ public class KorisnikDAO {
 					pol = st.nextToken().trim();
 					datumRodjenja = DateHelper.stringToDate(st.nextToken().trim());
 					uloga = st.nextToken().trim();
+					// istorija trening ucitavanje
+					clanarina = new Clanarina(Integer.parseInt(st.nextToken().trim()));
+					// poseceni objekti ucitavanje
+					brojSakupljenihPoena = Double.parseDouble(st.nextToken().trim());
+					tipKupca = new TipKupca(Integer.parseInt(st.nextToken().trim()));
+					sportskiObjekat = new SportskiObjekat(Integer.parseInt(st.nextToken().trim()));
 				}
-				korisnici.put(intId, new Korisnik(intId, korisnickoIme, sifra, ime, prezime, pol, datumRodjenja, uloga, null, null, null, -1, null, null));
+				korisnici.put(intId, new Korisnik(intId, korisnickoIme, sifra, ime, prezime, pol, datumRodjenja, uloga, istorijaTreninga, clanarina, poseceniObjekti, brojSakupljenihPoena, tipKupca, sportskiObjekat));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

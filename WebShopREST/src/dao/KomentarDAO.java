@@ -73,8 +73,8 @@ private HashMap<Integer, Komentar> komentari = new HashMap<Integer, Komentar>();
 			String line,  tekstKomentara = "" ;
 			int ocena = 1;
 			int id = -1;
-			Korisnik korisnik;
-			SportskiObjekat sportskiObjekat;
+			Korisnik korisnik = new Korisnik();
+			SportskiObjekat sportskiObjekat = new SportskiObjekat();
 			StringTokenizer st;
 			SportskiObjekatDAO sod = new SportskiObjekatDAO();
 			while ((line = in.readLine()) != null) {
@@ -86,11 +86,12 @@ private HashMap<Integer, Komentar> komentari = new HashMap<Integer, Komentar>();
 					id = Integer.parseInt(st.nextToken().trim());
 					// korisnik
 					//sportskiObjekat = sod.findObjekat(Integer.parseInt(st.nextToken().trim()));
-					//SportskiObjekat obj = new SportskiObjekat(Integer.parseInt(st.nextToken().trim()));
+					korisnik = new Korisnik(Integer.parseInt(st.nextToken().trim()));
+					sportskiObjekat = new SportskiObjekat(Integer.parseInt(st.nextToken().trim()));
 					tekstKomentara = st.nextToken().trim();
 					ocena = Integer.parseInt(st.nextToken().trim());
 				}
-				komentari.put(id, new Komentar(id, null, null, tekstKomentara, ocena));
+				komentari.put(id, new Komentar(id, korisnik, sportskiObjekat, tekstKomentara, ocena));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

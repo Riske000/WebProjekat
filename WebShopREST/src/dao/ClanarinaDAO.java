@@ -63,6 +63,7 @@ public class ClanarinaDAO {
 			int brojTermina = -1;
 			int intId = -1;
 			Korisnik korisnik = new Korisnik();
+			//Korisnik korisnik = new Korisnik();
 			
 			StringTokenizer st;
 			while ((line = in.readLine()) != null) {
@@ -78,7 +79,7 @@ public class ClanarinaDAO {
 					pocetniDatumVazenja = DateHelper.stringToDate(st.nextToken().trim());
 					krajnjiDatumVazenja = DateHelper.stringToDate(st.nextToken().trim());
 					punaCena = Double.parseDouble(st.nextToken().trim());
-					//ucitavanje korisnika
+					korisnik =  new Korisnik(Integer.parseInt(st.nextToken().trim()));
 					status = st.nextToken().trim();
 					brojTermina = Integer.parseInt(st.nextToken().trim());
 				}

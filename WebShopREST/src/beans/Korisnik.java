@@ -38,6 +38,11 @@ public class Korisnik {
 		this.poseceniObjekti = new ArrayList<SportskiObjekat>();
 	}
 	
+	public Korisnik(int intId) {
+		super();
+		this.intId = intId;
+	}
+	
 	
 	
 
