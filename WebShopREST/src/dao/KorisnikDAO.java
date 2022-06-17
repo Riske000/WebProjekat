@@ -21,7 +21,7 @@ public class KorisnikDAO {
 
 	private static KorisnikDAO korisnikInstance = null;
 	
-	private HashMap<Integer, Korisnik> korisnici = new HashMap<Integer, Korisnik>();
+	public HashMap<Integer, Korisnik> korisnici = new HashMap<Integer, Korisnik>();
 	
 	private KorisnikDAO() {
 		
@@ -66,7 +66,7 @@ public class KorisnikDAO {
 		this.korisnici.remove(id);
 	}
 	
-	private void loadKorisnici(String contextPath) {
+	public void loadKorisnici(String contextPath) {
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/korisnici.txt");
@@ -117,5 +117,19 @@ public class KorisnikDAO {
 			}
 		}
 		
+	}
+	public void connectKorisnikClanarina() {
+		ArrayList<Clanarina> clanarine = (ArrayList<Clanarina>) ClanarinaDAO.getInstance().findAll();
+		for(Korisnik korisnik : korisnici.values()) {
+			int idTrazeni = korisnik.getClanarina().getIntId();
+			
+			for(Clanarina clanarina : clanarine) {
+				if(clanarina.getIntId() == idTrazeni) {
+					korisnik.setClanarina(clanarina);
+					clanarina.setKupac(korisnik);
+					break;
+				}
+			}
+		}
 	}
 }

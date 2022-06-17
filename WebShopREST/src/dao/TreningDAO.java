@@ -69,7 +69,7 @@ public class TreningDAO {
 		this.treninzi.remove(id);
 	}
 
-	private void loadTreninzi(String contextPath) {
+	public void loadTreninzi(String contextPath) {
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/treninzi.txt");

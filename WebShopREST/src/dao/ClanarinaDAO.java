@@ -16,7 +16,7 @@ public class ClanarinaDAO {
 	
 	private static ClanarinaDAO clanarinaInstance = null;
 	
-	private HashMap<Integer, Clanarina> clanarine = new HashMap<Integer, Clanarina>();
+	public HashMap<Integer, Clanarina> clanarine = new HashMap<Integer, Clanarina>();
 	
 	private ClanarinaDAO() {
 		
@@ -60,7 +60,7 @@ public class ClanarinaDAO {
 		this.clanarine.remove(id);
 	}
 	
-	private void loadClanarine(String contextPath) {
+	public void loadClanarine(String contextPath) {
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/clanarine.txt"); //paket
@@ -108,4 +108,8 @@ public class ClanarinaDAO {
 		}
 		
 	}
+	
+	public 
+	
+	
 }

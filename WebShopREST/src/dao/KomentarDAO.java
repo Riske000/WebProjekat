@@ -20,7 +20,7 @@ public class KomentarDAO {
 	
 	private static KomentarDAO komentarInstance = null;
 	
-	private HashMap<Integer, Komentar> komentari = new HashMap<Integer, Komentar>();
+	public HashMap<Integer, Komentar> komentari = new HashMap<Integer, Komentar>();
 
 	private KomentarDAO() {
 
@@ -72,7 +72,7 @@ public class KomentarDAO {
 		this.komentari.remove(id);
 	}
 
-	private void loadKomentari(String contextPath) {
+	public void loadKomentari(String contextPath) {
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/komentari.txt");

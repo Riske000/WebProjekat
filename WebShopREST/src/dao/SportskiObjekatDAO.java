@@ -69,7 +69,7 @@ public class SportskiObjekatDAO {
 		this.sportskiObjekti.remove(id);
 	}
 
-	private void loadSportskiObjekti(String contextPath) {
+	public void loadSportskiObjekti(String contextPath) {
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/sportskiobjekti.txt");

@@ -19,7 +19,7 @@ public class IstorijaTreningaDAO {
 	
 	private static IstorijaTreningaDAO istorijaTreningaInstance = null;
 	
-	private HashMap<Integer, IstorijaTreninga> istorijeTreninga = new HashMap<Integer,IstorijaTreninga>();
+	public HashMap<Integer, IstorijaTreninga> istorijeTreninga = new HashMap<Integer,IstorijaTreninga>();
 	
 	private IstorijaTreningaDAO(){
 		
@@ -63,7 +63,7 @@ public class IstorijaTreningaDAO {
 		this.istorijeTreninga.remove(id);
 	}
 	
-	private void loadIstorijeTreninga(String contextPath) {
+	public void loadIstorijeTreninga(String contextPath) {
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/istorijeTreninga.txt"); // Dodati i paket u putanju

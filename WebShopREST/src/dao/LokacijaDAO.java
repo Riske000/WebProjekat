@@ -16,7 +16,7 @@ public class LokacijaDAO {
 
 	private static LokacijaDAO lokacijaInstance = null;
 	
-	private HashMap<Integer, Lokacija> lokacije = new HashMap<Integer, Lokacija>();
+	public HashMap<Integer, Lokacija> lokacije = new HashMap<Integer, Lokacija>();
 
 	private LokacijaDAO() {
 
@@ -66,7 +66,7 @@ public class LokacijaDAO {
 		this.lokacije.remove(id);
 	}
 
-	private void loadLokacije(String contextPath) {
+	public void loadLokacije(String contextPath) {
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/lokacije.txt");

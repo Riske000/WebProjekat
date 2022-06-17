@@ -58,7 +58,7 @@ public class TipKupcaDAO {
 		this.tipoviKupca.remove(id);
 	}
 
-	private void loadTipoviKupca(String contextPath) {
+	public void loadTipoviKupca(String contextPath) {
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/tipoviKupca.txt");
