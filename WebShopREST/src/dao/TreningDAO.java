@@ -118,5 +118,33 @@ public class TreningDAO {
 		}
 
 	}
+	
+	public void connectTreningSportskiObjekat() {
+		ArrayList<SportskiObjekat> sportskiObjekti = (ArrayList<SportskiObjekat>) SportskiObjekatDAO.getInstance().findAll();
+		for(Trening trening : treninzi.values()) {
+			int idTrazeni = trening.getObjekatGdePripada().getIntId();
+			
+			for(SportskiObjekat sportskiObjekat : sportskiObjekti) {
+				if(sportskiObjekat.getIntId() == idTrazeni) {
+					trening.setObjekatGdePripada(sportskiObjekat);
+					break;
+				}
+			}
+		}
+	}
+	
+	public void connectTreningTrener() {
+		ArrayList<Korisnik> korisnici = (ArrayList<Korisnik>) KorisnikDAO.getInstance().findAll();
+		for(Trening trening : treninzi.values()) {
+			int idTrazeni = trening.getTrener().getIntId();
+			
+			for(Korisnik korisnik : korisnici) {
+				if(korisnik.getIntId() == idTrazeni) {
+					trening.setTrener(korisnik);
+					break;
+				}
+			}
+		}
+	}
 
 }

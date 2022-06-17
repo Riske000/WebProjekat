@@ -109,7 +109,7 @@ public class ClanarinaDAO {
 		
 	}
 	
-	public 
+	// da li treba connect clanarina <-> korisnik 
 	
 	
 }

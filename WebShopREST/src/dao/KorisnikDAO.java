@@ -57,6 +57,16 @@ public class KorisnikDAO {
 		return korisnik;
 	}
 	
+	public Korisnik checkKorisnickoIme(String korisnickoIme) {
+		for(int intId : korisnici.keySet()) {
+			Korisnik korisnik = korisnici.get(intId);
+			if(korisnik.getKorisnickoIme().equals(korisnickoIme)) {
+				return korisnik;
+			}
+		}
+		return null;
+	}
+	
 	public Korisnik update(Korisnik korisnik) {
 		korisnici.put(korisnik.getIntId(), korisnik);
 		return korisnik;
@@ -127,6 +137,34 @@ public class KorisnikDAO {
 				if(clanarina.getIntId() == idTrazeni) {
 					korisnik.setClanarina(clanarina);
 					clanarina.setKupac(korisnik);
+					break;
+				}
+			}
+		}
+	}
+	
+	public void connectKorisnikTipKupca() {
+		ArrayList<TipKupca> tipoviKorisnika = (ArrayList<TipKupca>) TipKupcaDAO.getInstance().findAll();
+		for(Korisnik korisnik : korisnici.values()) {
+			int idTrazeni = korisnik.getTipKupca().getIntId();
+			
+			for(TipKupca tipKupca : tipoviKorisnika) {
+				if(tipKupca.getIntId() == idTrazeni) {
+					korisnik.setTipKupca(tipKupca);
+					break;
+				}
+			}
+		}
+	}
+	
+	public void connectKorisnikSportskiObjekat() {
+		ArrayList<SportskiObjekat> sportskiObjekti = (ArrayList<SportskiObjekat>) SportskiObjekatDAO.getInstance().findAll();
+		for(Korisnik korisnik : korisnici.values()) {
+			int idTrazeni = korisnik.getSportskiObjekat().getIntId();
+			
+			for(SportskiObjekat sportskiObjekat : sportskiObjekti) {
+				if(sportskiObjekat.getIntId() == idTrazeni) {
+					korisnik.setSportskiObjekat(sportskiObjekat);
 					break;
 				}
 			}

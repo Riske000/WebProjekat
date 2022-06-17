@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import beans.Komentar;
+import beans.Korisnik;
 import beans.Lokacija;
 import beans.SportskiObjekat;
 import utils.DateHelper;
@@ -118,6 +120,20 @@ public class SportskiObjekatDAO {
 			}
 		}
 
+	}
+	
+	public void connectSportskiObjekatLokacija() {
+		ArrayList<Lokacija> lokacije = (ArrayList<Lokacija>) LokacijaDAO.getInstance().findAll();
+		for(SportskiObjekat sportskiObjekat : sportskiObjekti.values()) {
+			int idTrazeni = sportskiObjekat.getLokacija().getIntId();
+			
+			for(Lokacija lokacija : lokacije) {
+				if(lokacija.getIntId() == idTrazeni) {
+					sportskiObjekat.setLokacija(lokacija);
+					break;
+				}
+			}
+		}
 	}
 
 }

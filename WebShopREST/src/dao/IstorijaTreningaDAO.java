@@ -5,10 +5,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
+import beans.Clanarina;
 import beans.IstorijaTreninga;
 import beans.Korisnik;
 import beans.Trening;
@@ -102,5 +104,37 @@ public class IstorijaTreningaDAO {
 			}
 		}
 		
+	}
+	
+	public void connectIstorijaTreningaKupacTrener() {
+		ArrayList<Korisnik> korisnici = (ArrayList<Korisnik>) KorisnikDAO.getInstance().findAll();
+		for(IstorijaTreninga istorijaTreninga : istorijeTreninga.values()) {
+			int idTrazeniKupac = istorijaTreninga.getKupac().getIntId();
+			int idTrazeniTrener = istorijaTreninga.getTrener().getIntId();
+			
+			for(Korisnik korisnik : korisnici) {
+				if(korisnik.getIntId() == idTrazeniKupac) {
+					istorijaTreninga.setKupac(korisnik);
+					break;
+				} else if(korisnik.getIntId() == idTrazeniTrener) {
+					istorijaTreninga.setTrener(korisnik);
+					break;
+				}
+			}
+		}
+	}
+	
+	public void connectIstorijaTreningaTrening() {
+		ArrayList<Trening> treninzi = (ArrayList<Trening>) TreningDAO.getInstance().findAll();
+		for(IstorijaTreninga istorijaTreninga : istorijeTreninga.values()) {
+			int idTrazeni = istorijaTreninga.getTrening().getIntId();
+			
+			for(Trening trening : treninzi) {
+				if(trening.getIntId() == idTrazeni) {
+					istorijaTreninga.setTrening(trening);
+					break;
+				}
+			}
+		}
 	}
 }

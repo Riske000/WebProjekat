@@ -10,9 +10,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import beans.IstorijaTreninga;
 import beans.Komentar;
 import beans.Korisnik;
 import beans.SportskiObjekat;
+import beans.Trening;
 import dao.SportskiObjekatDAO;
 
 public class KomentarDAO {
@@ -84,7 +86,7 @@ public class KomentarDAO {
 			Korisnik korisnik = new Korisnik();
 			SportskiObjekat sportskiObjekat = new SportskiObjekat();
 			StringTokenizer st;
-			SportskiObjekatDAO sod = new SportskiObjekatDAO();
+			//SportskiObjekatDAO sod = new SportskiObjekatDAO();
 			while ((line = in.readLine()) != null) {
 				line = line.trim();
 				if (line.equals("") || line.indexOf('#') == 0)
@@ -118,6 +120,34 @@ public class KomentarDAO {
 			}
 		}
 
+	}
+	
+	public void connectKomentarKupac() {
+		ArrayList<Korisnik> korisnici = (ArrayList<Korisnik>) KorisnikDAO.getInstance().findAll();
+		for(Komentar komentar : komentari.values()) {
+			int idTrazeni = komentar.getKupac().getIntId();
+			
+			for(Korisnik korisnik : korisnici) {
+				if(korisnik.getIntId() == idTrazeni) {
+					komentar.setKupac(korisnik);
+					break;
+				}
+			}
+		}
+	}
+	
+	public void connectKomentarSportskiObjekat() {
+		ArrayList<SportskiObjekat> sportskiObjekti = (ArrayList<SportskiObjekat>) SportskiObjekatDAO.getInstance().findAll();
+		for(Komentar komentar : komentari.values()) {
+			int idTrazeni = komentar.getSportskiObjekat().getIntId();
+			
+			for(SportskiObjekat sportskiObjekat : sportskiObjekti) {
+				if(sportskiObjekat.getIntId() == idTrazeni) {
+					komentar.setSportskiObjekat(sportskiObjekat);
+					break;
+				}
+			}
+		}
 	}
 
 }
