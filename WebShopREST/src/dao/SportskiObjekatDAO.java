@@ -17,29 +17,35 @@ import utils.TimeHelper;
 
 public class SportskiObjekatDAO {
 
-private HashMap<Integer, SportskiObjekat> sportskiObjekti = new HashMap<Integer, SportskiObjekat>();
+	private static SportskiObjekatDAO sportskiObjekatInstance = null;
 	
-	public SportskiObjekatDAO() {
-		
-	}
-	
-	
+	private HashMap<Integer, SportskiObjekat> sportskiObjekti = new HashMap<Integer, SportskiObjekat>();
 
-	public SportskiObjekatDAO(String contextPath) {
+	private SportskiObjekatDAO() {
+
+	}
+
+	private SportskiObjekatDAO(String contextPath) {
 		loadSportskiObjekti(contextPath);
 	}
 
+	public static SportskiObjekatDAO getInstance()
+    {
+        if (sportskiObjekatInstance == null) {
+        	sportskiObjekatInstance = new SportskiObjekatDAO();
+        }
+ 
+        return sportskiObjekatInstance;
+    }
 	
 	public Collection<SportskiObjekat> findAll() {
 		return sportskiObjekti.values();
 	}
 
-	
 	public SportskiObjekat findObjekat(int id) {
 		return sportskiObjekti.containsKey(id) ? sportskiObjekti.get(id) : null;
 	}
-	
-	
+
 	public SportskiObjekat save(SportskiObjekat sportskiObjekat) {
 		Integer maxId = -1;
 		for (Integer id : sportskiObjekti.keySet()) {
@@ -53,17 +59,16 @@ private HashMap<Integer, SportskiObjekat> sportskiObjekti = new HashMap<Integer,
 		sportskiObjekti.put(sportskiObjekat.getIntId(), sportskiObjekat);
 		return sportskiObjekat;
 	}
-	
+
 	public SportskiObjekat update(SportskiObjekat sportskiObjekat) {
 		sportskiObjekti.put(sportskiObjekat.getIntId(), sportskiObjekat);
 		return sportskiObjekat;
 	}
-	
+
 	public void delete(String id) {
 		this.sportskiObjekti.remove(id);
 	}
 
-	
 	private void loadSportskiObjekti(String contextPath) {
 		BufferedReader in = null;
 		try {
@@ -71,7 +76,7 @@ private HashMap<Integer, SportskiObjekat> sportskiObjekti = new HashMap<Integer,
 			System.out.println(file.getCanonicalPath());
 			in = new BufferedReader(new FileReader(file));
 			String line, ime = "", tipObjekta = "", status = "", logoObjekta = "";
-			List<String>sadrzajObjekta = new ArrayList<String>();
+			List<String> sadrzajObjekta = new ArrayList<String>();
 			double prosecnaOcena = 0;
 			LocalTime pocetak = LocalTime.now();
 			LocalTime kraj = LocalTime.now();
@@ -87,8 +92,9 @@ private HashMap<Integer, SportskiObjekat> sportskiObjekti = new HashMap<Integer,
 					id = Integer.parseInt(st.nextToken().trim());
 					ime = st.nextToken().trim();
 					tipObjekta = st.nextToken().trim();
-					//za sadrzaj
+					// za sadrzaj
 					status = st.nextToken().trim();
+
 					lokacija = new Lokacija(Integer.parseInt(st.nextToken().trim()));
 					logoObjekta = st.nextToken().trim();
 					prosecnaOcena = Double.parseDouble(st.nextToken().trim());
@@ -98,18 +104,20 @@ private HashMap<Integer, SportskiObjekat> sportskiObjekti = new HashMap<Integer,
 				sportskiObjekti.put(id, new SportskiObjekat(id, ime, tipObjekta,
 						sadrzajObjekta, status, lokacija, logoObjekta, prosecnaOcena,
 						pocetak, kraj));
+
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if ( in != null ) {
+			if (in != null) {
 				try {
 					in.close();
+				} catch (Exception e) {
 				}
-				catch (Exception e) { }
 			}
 		}
-		
+
 	}
-	
+
 }

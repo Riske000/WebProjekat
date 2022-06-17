@@ -15,32 +15,37 @@ import beans.Korisnik;
 import beans.Trening;
 import beans.SportskiObjekat;
 
-
 public class TreningDAO {
 
-private HashMap<Integer, Trening> treninzi = new HashMap<Integer, Trening>();
+	private static TreningDAO treningInstance = null;
 	
-	public TreningDAO() {
-		
-	}
-	
-	
+	private HashMap<Integer, Trening> treninzi = new HashMap<Integer, Trening>();
 
-	public TreningDAO(String contextPath) {
+	private TreningDAO() {
+
+	}
+
+	private TreningDAO(String contextPath) {
 		loadTreninzi(contextPath);
 	}
-
 	
+	public static TreningDAO getInstance()
+    {
+        if (treningInstance == null) {
+        	treningInstance = new TreningDAO();
+        }
+ 
+        return treningInstance;
+    }
+
 	public Collection<Trening> findAll() {
 		return treninzi.values();
 	}
 
-	
 	public Trening findTrening(int id) {
 		return treninzi.containsKey(id) ? treninzi.get(id) : null;
 	}
-	
-	
+
 	public Trening save(Trening trening) {
 		Integer maxId = -1;
 		for (Integer id : treninzi.keySet()) {
@@ -54,31 +59,30 @@ private HashMap<Integer, Trening> treninzi = new HashMap<Integer, Trening>();
 		treninzi.put(trening.getIntId(), trening);
 		return trening;
 	}
-	
+
 	public Trening update(Trening trening) {
 		treninzi.put(trening.getIntId(), trening);
 		return trening;
 	}
-	
+
 	public void delete(String id) {
 		this.treninzi.remove(id);
 	}
 
-	
 	private void loadTreninzi(String contextPath) {
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/treninzi.txt");
 			System.out.println(file.getCanonicalPath());
 			in = new BufferedReader(new FileReader(file));
-			String line, naziv = "",  tipTreninga = "" , opis = "", slika = "";
+			String line, naziv = "", tipTreninga = "", opis = "", slika = "";
 			double trajanje = 0;
 			int id = -1;
 			Korisnik trener = new Korisnik();
 			SportskiObjekat objekatGdePripada = new SportskiObjekat();
 			StringTokenizer st;
-			
-			SportskiObjekatDAO sod = new SportskiObjekatDAO();
+
+			//SportskiObjekatDAO sod = new SportskiObjekatDAO();
 			while ((line = in.readLine()) != null) {
 				line = line.trim();
 				if (line.equals("") || line.indexOf('#') == 0)
@@ -88,8 +92,13 @@ private HashMap<Integer, Trening> treninzi = new HashMap<Integer, Trening>();
 					id = Integer.parseInt(st.nextToken().trim());
 					naziv = st.nextToken().trim();
 					tipTreninga = st.nextToken().trim();
+
 					//sportskiObjekat = sod.findObjekat(Integer.parseInt(st.nextToken().trim()));
 					objekatGdePripada = new SportskiObjekat(Integer.parseInt(st.nextToken().trim()));
+
+					// sportskiObjekat = sod.findObjekat(Integer.parseInt(st.nextToken().trim()));
+					// SportskiObjekat obj = new
+					// SportskiObjekat(Integer.parseInt(st.nextToken().trim()));
 					trajanje = Double.parseDouble(st.nextToken().trim());
 					trener = new Korisnik(Integer.parseInt(st.nextToken().trim()));
 					opis = st.nextToken().trim();
@@ -100,14 +109,14 @@ private HashMap<Integer, Trening> treninzi = new HashMap<Integer, Trening>();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if ( in != null ) {
+			if (in != null) {
 				try {
 					in.close();
+				} catch (Exception e) {
 				}
-				catch (Exception e) { }
 			}
 		}
-		
+
 	}
-	
+
 }

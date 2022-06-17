@@ -13,14 +13,25 @@ import beans.Korisnik;
 import utils.DateHelper;
 
 public class ClanarinaDAO {
+	
+	private static ClanarinaDAO clanarinaInstance = null;
+	
 	private HashMap<Integer, Clanarina> clanarine = new HashMap<Integer, Clanarina>();
 	
-	public ClanarinaDAO() {
+	private ClanarinaDAO() {
 		
 	}
 	
-	public ClanarinaDAO(String contextPath) {
+	private ClanarinaDAO(String contextPath) {
 		loadClanarine(contextPath);
+	}
+	
+	public static ClanarinaDAO getInstance() {
+		if(clanarinaInstance == null) {
+			clanarinaInstance = new ClanarinaDAO();
+		}
+		
+		return clanarinaInstance;
 	}
 	
 	public Collection<Clanarina> findAll(){

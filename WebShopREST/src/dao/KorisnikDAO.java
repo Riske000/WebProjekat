@@ -19,15 +19,26 @@ import utils.DateHelper;
 
 public class KorisnikDAO {
 
+	private static KorisnikDAO korisnikInstance = null;
+	
 	private HashMap<Integer, Korisnik> korisnici = new HashMap<Integer, Korisnik>();
 	
-	public KorisnikDAO() {
+	private KorisnikDAO() {
 		
 	}
 	
-	public KorisnikDAO(String contextPath) {
+	private KorisnikDAO(String contextPath) {
 		loadKorisnici(contextPath);
 	}
+	
+	public static KorisnikDAO getInstance()
+    {
+        if (korisnikInstance == null) {
+        	korisnikInstance = new KorisnikDAO();
+        }
+ 
+        return korisnikInstance;
+    }
 	
 	public Collection<Korisnik> findAll(){
 		return korisnici.values();

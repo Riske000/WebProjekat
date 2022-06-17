@@ -16,14 +16,25 @@ import utils.DateHelper;
 import utils.DateTimeHelper;
 
 public class IstorijaTreningaDAO {
+	
+	private static IstorijaTreningaDAO istorijaTreningaInstance = null;
+	
 	private HashMap<Integer, IstorijaTreninga> istorijeTreninga = new HashMap<Integer,IstorijaTreninga>();
 	
-	IstorijaTreningaDAO(){
+	private IstorijaTreningaDAO(){
 		
 	}
 	
-	IstorijaTreningaDAO(String contextPath){
+	private IstorijaTreningaDAO(String contextPath){
 		loadIstorijeTreninga(contextPath);
+	}
+	
+	public static IstorijaTreningaDAO getInstance() {
+		if(istorijaTreningaInstance == null) {
+			istorijaTreningaInstance = new IstorijaTreningaDAO();
+		}
+		
+		return istorijaTreningaInstance;
 	}
 	
 	public Collection<IstorijaTreninga> findAll(){
