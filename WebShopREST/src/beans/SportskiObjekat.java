@@ -22,7 +22,10 @@ public class SportskiObjekat {
 		super();
 		this.sadrzajObjekta = new ArrayList<String>();
 	}
-	
+	public SportskiObjekat(int id) {
+		super();
+		intId = id;
+	}
 	
 	
 	

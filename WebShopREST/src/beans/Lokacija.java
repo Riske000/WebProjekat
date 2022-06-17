@@ -15,7 +15,7 @@ public class Lokacija {
 	
 	public Lokacija() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	
