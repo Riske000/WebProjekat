@@ -9,22 +9,33 @@ import java.util.StringTokenizer;
 
 import beans.TipKupca;
 
-
 public class TipKupcaDAO {
+	
+	private static TipKupcaDAO tipKupcaInstance = null;
+	
 	private HashMap<Integer, TipKupca> tipoviKupca = new HashMap<Integer, TipKupca>();
-	
-	public TipKupcaDAO(){
-		
+
+	private TipKupcaDAO() {
+
 	}
-	
-	public TipKupcaDAO(String contextPath) {
+
+	private TipKupcaDAO(String contextPath) {
 		loadTipoviKupca(contextPath);
 	}
 	
-	public Collection<TipKupca> findAll(){
+	public static TipKupcaDAO getInstance()
+    {
+        if (tipKupcaInstance == null) {
+        	tipKupcaInstance = new TipKupcaDAO();
+        }
+ 
+        return tipKupcaInstance;
+    }
+
+	public Collection<TipKupca> findAll() {
 		return tipoviKupca.values();
 	}
-	
+
 	public TipKupca save(TipKupca tipKupca) {
 		Integer maxId = -1;
 		for (int id : tipoviKupca.keySet()) {
@@ -37,16 +48,16 @@ public class TipKupcaDAO {
 		tipoviKupca.put(tipKupca.getIntId(), tipKupca);
 		return tipKupca;
 	}
-	
+
 	public TipKupca update(TipKupca tipKupca) {
 		tipoviKupca.put(tipKupca.getIntId(), tipKupca);
 		return tipKupca;
 	}
-	
+
 	public void delete(int id) {
 		this.tipoviKupca.remove(id);
 	}
-	
+
 	private void loadTipoviKupca(String contextPath) {
 		BufferedReader in = null;
 		try {
@@ -57,7 +68,7 @@ public class TipKupcaDAO {
 			double popust = -1;
 			double potrebniPoeni = -1;
 			int intId = -1;
-			
+
 			StringTokenizer st;
 			while ((line = in.readLine()) != null) {
 				line = line.trim();
@@ -75,13 +86,13 @@ public class TipKupcaDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if ( in != null ) {
+			if (in != null) {
 				try {
 					in.close();
+				} catch (Exception e) {
 				}
-				catch (Exception e) { }
 			}
 		}
-		
+
 	}
 }

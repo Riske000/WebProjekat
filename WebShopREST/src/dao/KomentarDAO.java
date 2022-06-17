@@ -17,29 +17,38 @@ import dao.SportskiObjekatDAO;
 
 public class KomentarDAO {
 
-private HashMap<Integer, Komentar> komentari = new HashMap<Integer, Komentar>();
 	
-	public KomentarDAO() {
-		
-	}
+	private static KomentarDAO komentarInstance = null;
 	
-	
+	private HashMap<Integer, Komentar> komentari = new HashMap<Integer, Komentar>();
 
-	public KomentarDAO(String contextPath) {
+	private KomentarDAO() {
+
+	}
+
+	private KomentarDAO(String contextPath) {
 		loadKomentari(contextPath);
 	}
-
 	
+	
+	public static KomentarDAO getInstance()
+    {
+        if (komentarInstance == null) {
+        	komentarInstance = new KomentarDAO();
+        }
+ 
+        return komentarInstance;
+    }
+	
+
 	public Collection<Komentar> findAll() {
 		return komentari.values();
 	}
 
-	
 	public Komentar findKomentar(int id) {
 		return komentari.containsKey(id) ? komentari.get(id) : null;
 	}
-	
-	
+
 	public Komentar save(Komentar komentar) {
 		Integer maxId = -1;
 		for (Integer id : komentari.keySet()) {
@@ -53,24 +62,23 @@ private HashMap<Integer, Komentar> komentari = new HashMap<Integer, Komentar>();
 		komentari.put(komentar.getIntId(), komentar);
 		return komentar;
 	}
-	
+
 	public Komentar update(Komentar komentar) {
 		komentari.put(komentar.getIntId(), komentar);
 		return komentar;
 	}
-	
+
 	public void delete(String id) {
 		this.komentari.remove(id);
 	}
 
-	
 	private void loadKomentari(String contextPath) {
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/komentari.txt");
 			System.out.println(file.getCanonicalPath());
 			in = new BufferedReader(new FileReader(file));
-			String line,  tekstKomentara = "" ;
+			String line, tekstKomentara = "";
 			int ocena = 1;
 			int id = -1;
 			Korisnik korisnik;
@@ -85,8 +93,9 @@ private HashMap<Integer, Komentar> komentari = new HashMap<Integer, Komentar>();
 				while (st.hasMoreTokens()) {
 					id = Integer.parseInt(st.nextToken().trim());
 					// korisnik
-					//sportskiObjekat = sod.findObjekat(Integer.parseInt(st.nextToken().trim()));
-					//SportskiObjekat obj = new SportskiObjekat(Integer.parseInt(st.nextToken().trim()));
+					// sportskiObjekat = sod.findObjekat(Integer.parseInt(st.nextToken().trim()));
+					// SportskiObjekat obj = new
+					// SportskiObjekat(Integer.parseInt(st.nextToken().trim()));
 					tekstKomentara = st.nextToken().trim();
 					ocena = Integer.parseInt(st.nextToken().trim());
 				}
@@ -95,14 +104,14 @@ private HashMap<Integer, Komentar> komentari = new HashMap<Integer, Komentar>();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if ( in != null ) {
+			if (in != null) {
 				try {
 					in.close();
+				} catch (Exception e) {
 				}
-				catch (Exception e) { }
 			}
 		}
-		
+
 	}
-	
+
 }
