@@ -57,6 +57,10 @@ public class KorisnikDAO {
 		return korisnik;
 	}
 	
+	public Korisnik find(int intId) {
+		return korisnici.get(intId);
+	}
+	
 	public Korisnik checkKorisnickoIme(String korisnickoIme) {
 		for(int intId : korisnici.keySet()) {
 			Korisnik korisnik = korisnici.get(intId);
@@ -65,6 +69,22 @@ public class KorisnikDAO {
 			}
 		}
 		return null;
+	}
+	
+	public Korisnik checkKorisnickoImeSifra(String korisnickoIme, String sifra) {
+		Korisnik pronadjen = null;
+		for(int intId : korisnici.keySet()) {
+			Korisnik korisnik = korisnici.get(intId);
+			if(korisnik.getKorisnickoIme().equals(korisnickoIme)) {
+				pronadjen  = korisnik;
+			}
+		}
+		if(pronadjen != null) {
+			if(!pronadjen.getSifra().equals(sifra)) {
+				pronadjen = null;
+			}
+		}
+		return pronadjen;
 	}
 	
 	public Korisnik update(Korisnik korisnik) {

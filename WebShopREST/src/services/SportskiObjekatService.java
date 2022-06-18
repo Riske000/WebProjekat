@@ -43,13 +43,13 @@ public class SportskiObjekatService {
 		return dao.findAll();
 	}
 	
-	/*@GET
+	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Product getProduct(@PathParam("id") String id) {
-		ProductDAO dao = (ProductDAO) ctx.getAttribute("productDAO");
-		return dao.findProduct(id);
-	}*/
+	public SportskiObjekat getSportskiObjekat(@PathParam("id") int id) {
+		SportskiObjekatDAO dao = (SportskiObjekatDAO) ctx.getAttribute("sportskiObjekatDAO");
+		return dao.findObjekat(id);
+	}
 	
 	@POST
 	@Path("/")
