@@ -39,8 +39,7 @@ public class KorisnikService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(Korisnik korisnik, @Context HttpServletRequest request) {
 		KorisnikDAO korisnikDao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
-		Korisnik logovaniKorisnik = new Korisnik();
-		//Korisnik logovaliKorisnik = korisnikDao.find(user.getUsername(), user.getPassword());
+		Korisnik logovaniKorisnik = korisnikDao.checkKorisnickoImeSifra(korisnik.getKorisnickoIme(), korisnik.getSifra());
 		if (logovaniKorisnik == null) {
 			return Response.status(400).entity("Invalid username and/or password").build();
 		}
