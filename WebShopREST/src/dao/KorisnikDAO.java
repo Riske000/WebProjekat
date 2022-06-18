@@ -104,7 +104,7 @@ public class KorisnikDAO {
 	public void loadKorisnici(String contextPath) {
 		BufferedReader in = null;
 		try {
-			File file = new File(contextPath + "/korisnici.txt");
+			File file = new File(contextPath + "/files/korisnici.txt");
 			System.out.println(file.getCanonicalPath());
 			in = new BufferedReader(new FileReader(file));
 			String line, korisnickoIme = "", sifra = "", ime = "", prezime = "", pol = "", uloga = "";
@@ -158,7 +158,7 @@ public class KorisnikDAO {
 	public void connectKorisnikPoseceniObjekti(String contextPath) {
 		BufferedReader in = null;
 		try {
-			File file = new File(contextPath + "/poseceniObjekti.txt");
+			File file = new File(contextPath + "/files/poseceniObjekti.txt");
 			System.out.println(file.getCanonicalPath());
 			in = new BufferedReader(new FileReader(file));
 			String line;
@@ -192,7 +192,7 @@ public class KorisnikDAO {
 	
 
 	public void connectKorisnikClanarina() {
-		ArrayList<Clanarina> clanarine = (ArrayList<Clanarina>) ClanarinaDAO.getInstance().findAll();
+		ArrayList<Clanarina> clanarine = new ArrayList<Clanarina>(ClanarinaDAO.getInstance().findAll());
 		for (Korisnik korisnik : korisnici.values()) {
 			int idTrazeni = korisnik.getClanarina().getIntId();
 
@@ -207,7 +207,7 @@ public class KorisnikDAO {
 	}
 
 	public void connectKorisnikTipKupca() {
-		ArrayList<TipKupca> tipoviKorisnika = (ArrayList<TipKupca>) TipKupcaDAO.getInstance().findAll();
+		ArrayList<TipKupca> tipoviKorisnika = new ArrayList<TipKupca>(TipKupcaDAO.getInstance().findAll());
 		for (Korisnik korisnik : korisnici.values()) {
 			int idTrazeni = korisnik.getTipKupca().getIntId();
 
@@ -221,8 +221,8 @@ public class KorisnikDAO {
 	}
 
 	public void connectKorisnikSportskiObjekat() {
-		ArrayList<SportskiObjekat> sportskiObjekti = (ArrayList<SportskiObjekat>) SportskiObjekatDAO.getInstance()
-				.findAll();
+		ArrayList<SportskiObjekat> sportskiObjekti = new ArrayList<SportskiObjekat>( SportskiObjekatDAO.getInstance()
+				.findAll());
 		for (Korisnik korisnik : korisnici.values()) {
 			int idTrazeni = korisnik.getSportskiObjekat().getIntId();
 

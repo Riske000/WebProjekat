@@ -33,7 +33,7 @@ public class SportskiObjekatService {
 		if (ctx.getAttribute("sportskiObjekatDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
 	    	PokretanjeProjekta.getInstance(contextPath);
-			ctx.setAttribute("productDAO", SportskiObjekatDAO.getInstance());
+			ctx.setAttribute("sportskiObjekatDAO", SportskiObjekatDAO.getInstance());
 		}
 	}
 	

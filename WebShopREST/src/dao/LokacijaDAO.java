@@ -69,7 +69,7 @@ public class LokacijaDAO {
 	public void loadLokacije(String contextPath) {
 		BufferedReader in = null;
 		try {
-			File file = new File(contextPath + "/lokacije.txt");
+			File file = new File(contextPath + "/files/lokacije.txt");
 			System.out.println(file.getCanonicalPath());
 			in = new BufferedReader(new FileReader(file));
 			String line, ulica = "", broj = "", mesto = "", postanskiBroj = "";

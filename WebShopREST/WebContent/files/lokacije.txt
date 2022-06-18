@@ -1,0 +1,4 @@
+1;45.256;19.914;Kornelija Stankovica;1;Novi Sad;21000
+2;45.266;19.924;Temerinska;25;Novi Sad;21000
+3;45.276;19.934;Maksima Gorkog;32;Novi Sad;21000
+4;45.286;19.944;Slobodana Jovanovica;44;Novi Sad;21000

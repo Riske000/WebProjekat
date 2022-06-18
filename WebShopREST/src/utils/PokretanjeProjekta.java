@@ -7,7 +7,6 @@ import dao.IstorijaTreningaDAO;
 import dao.KomentarDAO;
 import dao.KorisnikDAO;
 import dao.LokacijaDAO;
-import dao.ProductDAO;
 import dao.SportskiObjekatDAO;
 import dao.TipKupcaDAO;
 import dao.TreningDAO;

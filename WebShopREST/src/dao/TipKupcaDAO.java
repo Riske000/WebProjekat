@@ -61,7 +61,7 @@ public class TipKupcaDAO {
 	public void loadTipoviKupca(String contextPath) {
 		BufferedReader in = null;
 		try {
-			File file = new File(contextPath + "/tipoviKupca.txt");
+			File file = new File(contextPath + "/files/tipoviKupca.txt");
 			System.out.println(file.getCanonicalPath());
 			in = new BufferedReader(new FileReader(file));
 			String line, imeTipa = "";

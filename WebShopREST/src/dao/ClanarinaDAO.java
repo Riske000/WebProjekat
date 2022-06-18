@@ -63,7 +63,7 @@ public class ClanarinaDAO {
 	public void loadClanarine(String contextPath) {
 		BufferedReader in = null;
 		try {
-			File file = new File(contextPath + "/clanarine.txt"); //paket
+			File file = new File(contextPath + "/files/clanarine.txt"); //paket
 			System.out.println(file.getCanonicalPath());
 			in = new BufferedReader(new FileReader(file));
 			String line, ID = "", tipClanarine = "", status = "";

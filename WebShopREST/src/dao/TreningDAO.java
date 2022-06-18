@@ -72,7 +72,7 @@ public class TreningDAO {
 	public void loadTreninzi(String contextPath) {
 		BufferedReader in = null;
 		try {
-			File file = new File(contextPath + "/treninzi.txt");
+			File file = new File(contextPath + "/files/treninzi.txt");
 			System.out.println(file.getCanonicalPath());
 			in = new BufferedReader(new FileReader(file));
 			String line, naziv = "", tipTreninga = "", opis = "", slika = "";
@@ -120,7 +120,7 @@ public class TreningDAO {
 	}
 	
 	public void connectTreningSportskiObjekat() {
-		ArrayList<SportskiObjekat> sportskiObjekti = (ArrayList<SportskiObjekat>) SportskiObjekatDAO.getInstance().findAll();
+		ArrayList<SportskiObjekat> sportskiObjekti = new ArrayList<SportskiObjekat>(SportskiObjekatDAO.getInstance().findAll());
 		for(Trening trening : treninzi.values()) {
 			int idTrazeni = trening.getObjekatGdePripada().getIntId();
 			
@@ -134,7 +134,7 @@ public class TreningDAO {
 	}
 	
 	public void connectTreningTrener() {
-		ArrayList<Korisnik> korisnici = (ArrayList<Korisnik>) KorisnikDAO.getInstance().findAll();
+		ArrayList<Korisnik> korisnici = new ArrayList<Korisnik>(KorisnikDAO.getInstance().findAll());
 		for(Trening trening : treninzi.values()) {
 			int idTrazeni = trening.getTrener().getIntId();
 			

@@ -74,7 +74,7 @@ public class SportskiObjekatDAO {
 	public void loadSportskiObjekti(String contextPath) {
 		BufferedReader in = null;
 		try {
-			File file = new File(contextPath + "/sportskiobjekti.txt");
+			File file = new File(contextPath + "/files/sportskiobjekti.txt");
 			System.out.println(file.getCanonicalPath());
 			in = new BufferedReader(new FileReader(file));
 			String line, ime = "", tipObjekta = "", status = "", logoObjekta = "";
@@ -123,7 +123,7 @@ public class SportskiObjekatDAO {
 	}
 	
 	public void connectSportskiObjekatLokacija() {
-		ArrayList<Lokacija> lokacije = (ArrayList<Lokacija>) LokacijaDAO.getInstance().findAll();
+		ArrayList<Lokacija> lokacije = new ArrayList<Lokacija>(LokacijaDAO.getInstance().findAll());
 		for(SportskiObjekat sportskiObjekat : sportskiObjekti.values()) {
 			int idTrazeni = sportskiObjekat.getLokacija().getIntId();
 			

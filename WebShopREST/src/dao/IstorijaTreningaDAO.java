@@ -68,7 +68,7 @@ public class IstorijaTreningaDAO {
 	public void loadIstorijeTreninga(String contextPath) {
 		BufferedReader in = null;
 		try {
-			File file = new File(contextPath + "/istorijeTreninga.txt"); // Dodati i paket u putanju
+			File file = new File(contextPath + "/files/istorijeTreninga.txt"); // Dodati i paket u putanju
 			System.out.println(file.getCanonicalPath());
 			in = new BufferedReader(new FileReader(file));
 			String line;
@@ -107,7 +107,7 @@ public class IstorijaTreningaDAO {
 	}
 	
 	public void connectIstorijaTreningaKupacTrener() {
-		ArrayList<Korisnik> korisnici = (ArrayList<Korisnik>) KorisnikDAO.getInstance().findAll();
+		ArrayList<Korisnik> korisnici = new ArrayList<Korisnik>(KorisnikDAO.getInstance().findAll());
 		for(IstorijaTreninga istorijaTreninga : istorijeTreninga.values()) {
 			int idTrazeniKupac = istorijaTreninga.getKupac().getIntId();
 			int idTrazeniTrener = istorijaTreninga.getTrener().getIntId();
@@ -125,7 +125,7 @@ public class IstorijaTreningaDAO {
 	}
 	
 	public void connectIstorijaTreningaTrening() {
-		ArrayList<Trening> treninzi = (ArrayList<Trening>) TreningDAO.getInstance().findAll();
+		ArrayList<Trening> treninzi = new ArrayList<Trening>(TreningDAO.getInstance().findAll());
 		for(IstorijaTreninga istorijaTreninga : istorijeTreninga.values()) {
 			int idTrazeni = istorijaTreninga.getTrening().getIntId();
 			
@@ -139,7 +139,7 @@ public class IstorijaTreningaDAO {
 	}
 	
 	public void connectIstorijaTreningaKupac() {
-		ArrayList<Korisnik> kupci = (ArrayList<Korisnik>)KorisnikDAO.getInstance().findAll();
+		ArrayList<Korisnik> kupci = new ArrayList<Korisnik>(KorisnikDAO.getInstance().findAll());
 		
 		for(IstorijaTreninga it : istorijeTreninga.values()) {
 			int idTrazeni = it.getKupac().getIntId();

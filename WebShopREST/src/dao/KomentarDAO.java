@@ -77,7 +77,7 @@ public class KomentarDAO {
 	public void loadKomentari(String contextPath) {
 		BufferedReader in = null;
 		try {
-			File file = new File(contextPath + "/komentari.txt");
+			File file = new File(contextPath + "/files/komentari.txt");
 			System.out.println(file.getCanonicalPath());
 			in = new BufferedReader(new FileReader(file));
 			String line, tekstKomentara = "";
@@ -123,7 +123,7 @@ public class KomentarDAO {
 	}
 	
 	public void connectKomentarKupac() {
-		ArrayList<Korisnik> korisnici = (ArrayList<Korisnik>) KorisnikDAO.getInstance().findAll();
+		ArrayList<Korisnik> korisnici = new ArrayList<Korisnik>(KorisnikDAO.getInstance().findAll());
 		for(Komentar komentar : komentari.values()) {
 			int idTrazeni = komentar.getKupac().getIntId();
 			
@@ -137,7 +137,7 @@ public class KomentarDAO {
 	}
 	
 	public void connectKomentarSportskiObjekat() {
-		ArrayList<SportskiObjekat> sportskiObjekti = (ArrayList<SportskiObjekat>) SportskiObjekatDAO.getInstance().findAll();
+		ArrayList<SportskiObjekat> sportskiObjekti = new ArrayList<SportskiObjekat>(SportskiObjekatDAO.getInstance().findAll());
 		for(Komentar komentar : komentari.values()) {
 			int idTrazeni = komentar.getSportskiObjekat().getIntId();
 			
