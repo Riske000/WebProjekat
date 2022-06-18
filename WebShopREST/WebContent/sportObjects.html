@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Web shop</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+	<div id ="sportskiObjekti">
+
+		<table border="1" id="tabela">
+			<thead>
+				<tr bgcolor="lightgrey">
+					<th>ID</th>
+					<th>Ime</th>
+					<th>Tip objekta</th>
+					<th>Status</th>
+                    <th>Lokacija</th>
+					<th>Logo objekta</th>
+					<th>Prosecna ocena</th>
+					<th>Radno vreme</th>
+				</tr>
+			</thead>
+
+			<tr v-for="sp in sportObjects">
+				<td>{{sp.intId }}</td>
+                <td>{{sp.ime }}</td>
+                <td>{{sp.tipObjekta }}</td>
+                <td>{{sp.status }}</td>
+                <td>{{sp.lokacija.ulica}}  {{sp.lokacija.broj}}, {{sp.lokacija.mesto}}</td>
+				<td>{{sp.logoObjekta}}</td>
+				<td>{{sp.prosecnaOcena}}</td>
+				<td>{{sp.pocetakRadnogVremena.hour}}:{{sp.pocetakRadnogVremena.minute}}-{{sp.krajRadnogVremena.hour}}:{{sp.pocetakRadnogVremena.minute}}</td>
+			</tr>
+		</table>
+
+		
+	</div>
+	<script src="js/vue.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="js/sportObjects.js"></script>
+</body>
+
+</html>
+
