@@ -20,30 +20,29 @@ import utils.DateHelper;
 public class KorisnikDAO {
 
 	private static KorisnikDAO korisnikInstance = null;
-	
+
 	public HashMap<Integer, Korisnik> korisnici = new HashMap<Integer, Korisnik>();
-	
+
 	private KorisnikDAO() {
-		
+
 	}
-	
+
 	private KorisnikDAO(String contextPath) {
 		loadKorisnici(contextPath);
 	}
-	
-	public static KorisnikDAO getInstance()
-    {
-        if (korisnikInstance == null) {
-        	korisnikInstance = new KorisnikDAO();
-        }
- 
-        return korisnikInstance;
-    }
-	
-	public Collection<Korisnik> findAll(){
+
+	public static KorisnikDAO getInstance() {
+		if (korisnikInstance == null) {
+			korisnikInstance = new KorisnikDAO();
+		}
+
+		return korisnikInstance;
+	}
+
+	public Collection<Korisnik> findAll() {
 		return korisnici.values();
 	}
-	
+
 	public Korisnik save(Korisnik korisnik) {
 		Integer maxId = -1;
 		for (int id : korisnici.keySet()) {
@@ -56,26 +55,26 @@ public class KorisnikDAO {
 		korisnici.put(korisnik.getIntId(), korisnik);
 		return korisnik;
 	}
-	
+
 	public Korisnik checkKorisnickoIme(String korisnickoIme) {
-		for(int intId : korisnici.keySet()) {
+		for (int intId : korisnici.keySet()) {
 			Korisnik korisnik = korisnici.get(intId);
-			if(korisnik.getKorisnickoIme().equals(korisnickoIme)) {
+			if (korisnik.getKorisnickoIme().equals(korisnickoIme)) {
 				return korisnik;
 			}
 		}
 		return null;
 	}
-	
+
 	public Korisnik update(Korisnik korisnik) {
 		korisnici.put(korisnik.getIntId(), korisnik);
 		return korisnik;
 	}
-	
+
 	public void delete(int id) {
 		this.korisnici.remove(id);
 	}
-	
+
 	public void loadKorisnici(String contextPath) {
 		BufferedReader in = null;
 		try {
@@ -91,7 +90,7 @@ public class KorisnikDAO {
 			double brojSakupljenihPoena = -1;
 			TipKupca tipKupca = new TipKupca();
 			SportskiObjekat sportskiObjekat = new SportskiObjekat();
-			
+
 			StringTokenizer st;
 			while ((line = in.readLine()) != null) {
 				line = line.trim();
@@ -114,27 +113,29 @@ public class KorisnikDAO {
 					tipKupca = new TipKupca(Integer.parseInt(st.nextToken().trim()));
 					sportskiObjekat = new SportskiObjekat(Integer.parseInt(st.nextToken().trim()));
 				}
-				korisnici.put(intId, new Korisnik(intId, korisnickoIme, sifra, ime, prezime, pol, datumRodjenja, uloga, istorijaTreninga, clanarina, poseceniObjekti, brojSakupljenihPoena, tipKupca, sportskiObjekat));
+				korisnici.put(intId, new Korisnik(intId, korisnickoIme, sifra, ime, prezime, pol, datumRodjenja, uloga,
+						istorijaTreninga, clanarina, poseceniObjekti, brojSakupljenihPoena, tipKupca, sportskiObjekat));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if ( in != null ) {
+			if (in != null) {
 				try {
 					in.close();
+				} catch (Exception e) {
 				}
-				catch (Exception e) { }
 			}
 		}
-		
+
 	}
+
 	public void connectKorisnikClanarina() {
 		ArrayList<Clanarina> clanarine = (ArrayList<Clanarina>) ClanarinaDAO.getInstance().findAll();
-		for(Korisnik korisnik : korisnici.values()) {
+		for (Korisnik korisnik : korisnici.values()) {
 			int idTrazeni = korisnik.getClanarina().getIntId();
-			
-			for(Clanarina clanarina : clanarine) {
-				if(clanarina.getIntId() == idTrazeni) {
+
+			for (Clanarina clanarina : clanarine) {
+				if (clanarina.getIntId() == idTrazeni) {
 					korisnik.setClanarina(clanarina);
 					clanarina.setKupac(korisnik);
 					break;
@@ -142,32 +143,34 @@ public class KorisnikDAO {
 			}
 		}
 	}
-	
+
 	public void connectKorisnikTipKupca() {
 		ArrayList<TipKupca> tipoviKorisnika = (ArrayList<TipKupca>) TipKupcaDAO.getInstance().findAll();
-		for(Korisnik korisnik : korisnici.values()) {
+		for (Korisnik korisnik : korisnici.values()) {
 			int idTrazeni = korisnik.getTipKupca().getIntId();
-			
-			for(TipKupca tipKupca : tipoviKorisnika) {
-				if(tipKupca.getIntId() == idTrazeni) {
+
+			for (TipKupca tipKupca : tipoviKorisnika) {
+				if (tipKupca.getIntId() == idTrazeni) {
 					korisnik.setTipKupca(tipKupca);
 					break;
 				}
 			}
 		}
 	}
-	
+
 	public void connectKorisnikSportskiObjekat() {
-		ArrayList<SportskiObjekat> sportskiObjekti = (ArrayList<SportskiObjekat>) SportskiObjekatDAO.getInstance().findAll();
-		for(Korisnik korisnik : korisnici.values()) {
+		ArrayList<SportskiObjekat> sportskiObjekti = (ArrayList<SportskiObjekat>) SportskiObjekatDAO.getInstance()
+				.findAll();
+		for (Korisnik korisnik : korisnici.values()) {
 			int idTrazeni = korisnik.getSportskiObjekat().getIntId();
-			
-			for(SportskiObjekat sportskiObjekat : sportskiObjekti) {
-				if(sportskiObjekat.getIntId() == idTrazeni) {
+
+			for (SportskiObjekat sportskiObjekat : sportskiObjekti) {
+				if (sportskiObjekat.getIntId() == idTrazeni) {
 					korisnik.setSportskiObjekat(sportskiObjekat);
 					break;
 				}
 			}
 		}
 	}
+
 }
