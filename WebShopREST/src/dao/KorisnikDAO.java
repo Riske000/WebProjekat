@@ -154,6 +154,42 @@ public class KorisnikDAO {
 		}
 
 	}
+	
+	public void connectKorisnikPoseceniObjekti(String contextPath) {
+		BufferedReader in = null;
+		try {
+			File file = new File(contextPath + "/poseceniObjekti.txt");
+			System.out.println(file.getCanonicalPath());
+			in = new BufferedReader(new FileReader(file));
+			String line;
+			StringTokenizer st;
+			while ((line = in.readLine()) != null) {
+				line = line.trim();
+				if (line.equals("") || line.indexOf('#') == 0)
+					continue;
+				st = new StringTokenizer(line, ";");
+				while (st.hasMoreTokens()) {
+					int korisnikID = Integer.parseInt(st.nextToken().trim());
+					int objekatID = Integer.parseInt(st.nextToken().trim());
+					Korisnik korisnik = find(korisnikID);
+					SportskiObjekat sportskiObjekat = SportskiObjekatDAO.getInstance().findObjekat(objekatID);
+					
+					korisnik.getPoseceniObjekti().add(sportskiObjekat);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (in != null) {
+				try {
+					in.close();
+				} catch (Exception e) {
+				}
+			}
+		}
+
+	}
+	
 
 	public void connectKorisnikClanarina() {
 		ArrayList<Clanarina> clanarine = (ArrayList<Clanarina>) ClanarinaDAO.getInstance().findAll();

@@ -16,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 
 import beans.SportskiObjekat;
 import dao.SportskiObjekatDAO;
+import utils.PokretanjeProjekta;
 
 @Path("/sportskiObjekti")
 public class SportskiObjekatService {
@@ -31,6 +32,7 @@ public class SportskiObjekatService {
 	public void init() {
 		if (ctx.getAttribute("sportskiObjekatDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
+	    	PokretanjeProjekta.getInstance(contextPath);
 			ctx.setAttribute("productDAO", SportskiObjekatDAO.getInstance());
 		}
 	}

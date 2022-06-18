@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 
 import beans.Korisnik;
 import dao.KorisnikDAO;
+import utils.PokretanjeProjekta;
 
 @Path("/korisnik")
 public class KorisnikService {
@@ -29,6 +30,7 @@ public class KorisnikService {
 	public void init() {
 		if (ctx.getAttribute("korisnikDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
+	    	PokretanjeProjekta.getInstance(contextPath);
 			ctx.setAttribute("korisnikDAO", KorisnikDAO.getInstance());
 		}
 	}

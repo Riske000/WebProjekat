@@ -29,11 +29,22 @@ public class PokretanjeProjekta {
 		TreningDAO.getInstance().loadTreninzi(contextPath);
 		
 		
-		//spajanje usera i clanarine
+		KorisnikDAO.getInstance().connectKorisnikClanarina();
+		KorisnikDAO.getInstance().connectKorisnikSportskiObjekat();
+		KorisnikDAO.getInstance().connectKorisnikTipKupca();
+		KorisnikDAO.getInstance().connectKorisnikPoseceniObjekti(contextPath);
 		
+		KomentarDAO.getInstance().connectKomentarSportskiObjekat();
+		KomentarDAO.getInstance().connectKomentarKupac();
 		
+		SportskiObjekatDAO.getInstance().connectSportskiObjekatLokacija();
 		
+		TreningDAO.getInstance().connectTreningTrener();
+		TreningDAO.getInstance().connectTreningSportskiObjekat();
 		
+		IstorijaTreningaDAO.getInstance().connectIstorijaTreningaKupac();
+		IstorijaTreningaDAO.getInstance().connectIstorijaTreningaKupacTrener();
+		IstorijaTreningaDAO.getInstance().connectIstorijaTreningaTrening();
 	}
 
 	public static PokretanjeProjekta getInstance(String contextPath) {

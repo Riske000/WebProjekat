@@ -137,4 +137,21 @@ public class IstorijaTreningaDAO {
 			}
 		}
 	}
+	
+	public void connectIstorijaTreningaKupac() {
+		ArrayList<Korisnik> kupci = (ArrayList<Korisnik>)KorisnikDAO.getInstance().findAll();
+		
+		for(IstorijaTreninga it : istorijeTreninga.values()) {
+			int idTrazeni = it.getKupac().getIntId();
+			
+			for(Korisnik k : kupci) {
+				if(k.getIntId() == idTrazeni) {
+					it.setKupac(k);
+					k.getIstorijaTreninga().add(it);
+					break;
+				}
+			}
+			
+		}
+	}
 }
