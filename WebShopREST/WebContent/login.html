@@ -4,14 +4,18 @@
 	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-	<form id="login">
+	<form id="loginForm" @submit='loginUser'>
 		<table>
-			<tr><td>Korisnicko ime: </td><td><input type="text" name="username"></td></tr>
-			<tr><td>Lozinka: </td><td><input type="password" name="password"></td></tr>
+			<tr><td>Korisnicko ime: </td><td><input type="text" name="username" v-model="userToLogin.korisnickoIme"></td></tr>
+			<tr><td>Lozinka: </td><td><input type="password" name="password" v-model="userToLogin.sifra"></td></tr>
 			<tr><td><input type="submit" value="Uloguj se"></td></tr>
 		</table>
 		<p id="error" hidden="true"></p>
 		<p id="success" hidden="true"></p>
 	</form>
+	
+	<script src="js/vue.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="js/login.js"></script>	
 </body>
 </html>
