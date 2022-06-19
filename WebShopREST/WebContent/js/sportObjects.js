@@ -8,8 +8,7 @@ var app = new Vue({
 			.then(response => (this.sportObjects = response.data))
 	},
 	methods: {
-		
-		
+	
 		
 	}
 });

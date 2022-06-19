@@ -1,8 +1,10 @@
 package dao;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,6 +22,7 @@ import utils.DateHelper;
 public class KorisnikDAO {
 
 	private static KorisnikDAO korisnikInstance = null;
+	private static String contextPath = "";
 
 	public HashMap<Integer, Korisnik> korisnici = new HashMap<Integer, Korisnik>();
 
@@ -53,6 +56,7 @@ public class KorisnikDAO {
 		maxId++;
 		korisnik.setIntId(maxId);
 		korisnici.put(korisnik.getIntId(), korisnik);
+		sacuvajKorisnike();
 		return korisnik;
 	}
 
@@ -102,6 +106,7 @@ public class KorisnikDAO {
 	}
 
 	public void loadKorisnici(String contextPath) {
+		this.contextPath = contextPath;
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/files/korisnici.txt");
@@ -148,6 +153,29 @@ public class KorisnikDAO {
 			if (in != null) {
 				try {
 					in.close();
+				} catch (Exception e) {
+				}
+			}
+		}
+
+	}
+	
+	public void sacuvajKorisnike() {
+		BufferedWriter out = null;
+		try {
+			File file = new File(contextPath + "/files/korisnici.txt");
+			System.out.println(file.getCanonicalPath());
+			out = new BufferedWriter(new FileWriter(file));
+
+			for(Korisnik korisnik : korisnici.values()) {
+				out.write(korisnik.convertToString() + '\n');
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
 				} catch (Exception e) {
 				}
 			}

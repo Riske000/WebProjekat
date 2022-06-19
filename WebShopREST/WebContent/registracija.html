@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>Registracija</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+	<form id="registrationForm" @submit='createUser'>
+			<table>
+				<tr>
+					<td>Korisnicko ime: </td>
+					<td><input type="text" name="username" v-model="userToRegister.korisnickoIme"></td>
+				</tr>
+				<tr>
+					<td>Sifra: </td>
+					<td><input type="text" name="password" v-model="userToRegister.sifra"></td>
+				</tr>
+				<tr>
+					<td>Ime: </td>
+					<td><input type="text" name="name" v-model="userToRegister.ime"></td>
+				</tr>
+				<tr>
+					<td>Prezime: </td>
+					<td><input type="text" name="surname" v-model="userToRegister.prezime"></td>
+				</tr>
+				<tr>
+					<td>Pol: </td>
+					<td>
+						<input type="radio" id="muski" name="pol" value="muski pol" v-model="userToRegister.pol">
+						<label for="muski">Muski</label>
+						<input type="radio" id="zenski" name="pol" value="zenski pol" v-model="userToRegister.pol">
+						<label for="zenski">Zenski</label>
+						
+					</td>
+				</tr>
+				<tr>
+					<td>Datum rodjenja: </td>
+					<td><input type="date" name="dateofbirth" v-model="userToRegister.datumRodjenja"></td>
+				</tr>
+				
+				<tr>
+					<td><input type="submit" value="Registruj se"></td>
+				</tr>
+			</table>
+
+		<p id = "error">{{error}}</p>
+	</form>
+	
+	<script src="js/vue.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="js/registracija.js"></script>	
+</body>
+</html>
