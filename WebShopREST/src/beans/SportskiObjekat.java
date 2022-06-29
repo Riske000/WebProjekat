@@ -110,20 +110,20 @@ public class SportskiObjekat {
 		this.prosecnaOcena = prosecnaOcena;
 	}
 
-	public LocalTime getPocetakRadnogVremena() {
-		return pocetakRadnogVremena;
+	public String getPocetakRadnogVremena() {
+		return TimeHelper.timeToString(pocetakRadnogVremena);
 	}
 
-	public void setPocetakRadnogVremena(LocalTime pocetakRadnogVremena) {
-		this.pocetakRadnogVremena = pocetakRadnogVremena;
+	public void setPocetakRadnogVremena(String pocetakRadnogVremena) {
+		this.pocetakRadnogVremena = TimeHelper.stringToTime(pocetakRadnogVremena);
 	}
 
-	public LocalTime getKrajRadnogVremena() {
-		return krajRadnogVremena;
+	public String getKrajRadnogVremena() {
+		return TimeHelper.timeToString(krajRadnogVremena);
 	}
 
-	public void setKrajRadnogVremena(LocalTime krajRadnogVremena) {
-		this.krajRadnogVremena = krajRadnogVremena;
+	public void setKrajRadnogVremena(String krajRadnogVremena) {
+		this.krajRadnogVremena = TimeHelper.stringToTime(krajRadnogVremena);
 	}
 	
 	public String convertToString() { //da li treba lista sadrzajObjekta

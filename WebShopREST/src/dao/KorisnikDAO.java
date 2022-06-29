@@ -60,41 +60,35 @@ public class KorisnikDAO {
 		return korisnik;
 	}
 
-
-
-	
 	public Korisnik find(int intId) {
 		return korisnici.get(intId);
 	}
-	
 
-	public Korisnik checkKorisnickoIme(String korisnickoIme) {
+	public boolean postojiKorisnickoIme(String korisnickoIme) {
 		for (int intId : korisnici.keySet()) {
 			Korisnik korisnik = korisnici.get(intId);
 			if (korisnik.getKorisnickoIme().equals(korisnickoIme)) {
-				return korisnik;
+				return true;
 			}
 		}
-		return null;
+		return false;
 	}
 
-	
 	public Korisnik checkKorisnickoImeSifra(String korisnickoIme, String sifra) {
 		Korisnik pronadjen = null;
-		for(int intId : korisnici.keySet()) {
+		for (int intId : korisnici.keySet()) {
 			Korisnik korisnik = korisnici.get(intId);
-			if(korisnik.getKorisnickoIme().equals(korisnickoIme)) {
-				pronadjen  = korisnik;
+			if (korisnik.getKorisnickoIme().equals(korisnickoIme)) {
+				pronadjen = korisnik;
 			}
 		}
-		if(pronadjen != null) {
-			if(!pronadjen.getSifra().equals(sifra)) {
+		if (pronadjen != null) {
+			if (!pronadjen.getSifra().equals(sifra)) {
 				pronadjen = null;
 			}
 		}
 		return pronadjen;
 	}
-	
 
 	public Korisnik update(Korisnik korisnik) {
 		korisnici.put(korisnik.getIntId(), korisnik);
@@ -138,25 +132,25 @@ public class KorisnikDAO {
 					datumRodjenja = DateHelper.stringToDate(st.nextToken().trim());
 					uloga = st.nextToken().trim();
 					// istorija trening ucitavanje
-					
+
 					int clanarinaId = Integer.parseInt(st.nextToken().trim());
-					
-					if(clanarinaId != -1) {
+
+					if (clanarinaId != -1) {
 						clanarina = new Clanarina(clanarinaId);
 					}
-					
+
 					// poseceni objekti ucitavanje
 					brojSakupljenihPoena = Double.parseDouble(st.nextToken().trim());
-					
+
 					int tipKupcaId = Integer.parseInt(st.nextToken().trim());
-					
-					if(tipKupcaId != -1) {
+
+					if (tipKupcaId != -1) {
 						tipKupca = new TipKupca(tipKupcaId);
 					}
-					
+
 					int sportskiObjekatId = Integer.parseInt(st.nextToken().trim());
-					
-					if(sportskiObjekatId != -1) {
+
+					if (sportskiObjekatId != -1) {
 						sportskiObjekat = new SportskiObjekat(sportskiObjekatId);
 					}
 				}
@@ -175,7 +169,7 @@ public class KorisnikDAO {
 		}
 
 	}
-	
+
 	public void sacuvajKorisnike() {
 		BufferedWriter out = null;
 		try {
@@ -183,7 +177,7 @@ public class KorisnikDAO {
 			System.out.println(file.getCanonicalPath());
 			out = new BufferedWriter(new FileWriter(file));
 
-			for(Korisnik korisnik : korisnici.values()) {
+			for (Korisnik korisnik : korisnici.values()) {
 				out.write(korisnik.convertToString() + '\n');
 			}
 		} catch (Exception e) {
@@ -198,7 +192,7 @@ public class KorisnikDAO {
 		}
 
 	}
-	
+
 	public void connectKorisnikPoseceniObjekti(String contextPath) {
 		BufferedReader in = null;
 		try {
@@ -217,7 +211,7 @@ public class KorisnikDAO {
 					int objekatID = Integer.parseInt(st.nextToken().trim());
 					Korisnik korisnik = find(korisnikID);
 					SportskiObjekat sportskiObjekat = SportskiObjekatDAO.getInstance().findObjekat(objekatID);
-					
+
 					korisnik.getPoseceniObjekti().add(sportskiObjekat);
 				}
 			}
@@ -233,12 +227,11 @@ public class KorisnikDAO {
 		}
 
 	}
-	
 
 	public void connectKorisnikClanarina() {
 		ArrayList<Clanarina> clanarine = new ArrayList<Clanarina>(ClanarinaDAO.getInstance().findAll());
 		for (Korisnik korisnik : korisnici.values()) {
-			if(korisnik.getClanarina() == null) {
+			if (korisnik.getClanarina() == null) {
 				continue;
 			}
 			int idTrazeni = korisnik.getClanarina().getIntId();
@@ -256,7 +249,7 @@ public class KorisnikDAO {
 	public void connectKorisnikTipKupca() {
 		ArrayList<TipKupca> tipoviKorisnika = new ArrayList<TipKupca>(TipKupcaDAO.getInstance().findAll());
 		for (Korisnik korisnik : korisnici.values()) {
-			if(korisnik.getTipKupca() == null) {
+			if (korisnik.getTipKupca() == null) {
 				continue;
 			}
 			int idTrazeni = korisnik.getTipKupca().getIntId();
@@ -271,10 +264,10 @@ public class KorisnikDAO {
 	}
 
 	public void connectKorisnikSportskiObjekat() {
-		ArrayList<SportskiObjekat> sportskiObjekti = new ArrayList<SportskiObjekat>( SportskiObjekatDAO.getInstance()
-				.findAll());
+		ArrayList<SportskiObjekat> sportskiObjekti = new ArrayList<SportskiObjekat>(
+				SportskiObjekatDAO.getInstance().findAll());
 		for (Korisnik korisnik : korisnici.values()) {
-			if(korisnik.getSportskiObjekat() == null) {
+			if (korisnik.getSportskiObjekat() == null) {
 				continue;
 			}
 			int idTrazeni = korisnik.getSportskiObjekat().getIntId();
@@ -286,6 +279,22 @@ public class KorisnikDAO {
 				}
 			}
 		}
+	}
+
+	public ArrayList<Korisnik> search(String searchIme, String searchPrezime, String searchKorisnickoIme) {
+		ArrayList<Korisnik> pronadjeni = new ArrayList<Korisnik>();
+
+		for (Korisnik k : korisnici.values()) {
+			if (k.getKorisnickoIme().toLowerCase().contains(searchKorisnickoIme.toLowerCase())) {
+				if (k.getIme().toLowerCase().contains(searchIme.toLowerCase())) {
+					if (k.getPrezime().toLowerCase().contains(searchPrezime.toLowerCase())) {
+						pronadjeni.add(k);
+					}
+				}
+			}
+		}
+
+		return pronadjeni;
 	}
 
 }

@@ -68,7 +68,7 @@ public class KorisnikService {
 		return (Korisnik) request.getSession().getAttribute("user");
 	}
 	
-	@POST
+	/*@POST
 	@Path("/register")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -87,6 +87,6 @@ public class KorisnikService {
 			korisnikDAO.save(userToRegister);
 			return Response.status(200).build();
 		}
-	}
+	}*/
 
 }

@@ -20,8 +20,13 @@ var app = new Vue({
 			axios.post('rest/korisnik1/login', this.userToLogin)
 				.then((response) => {
 					alert('Uspesno ste se ulogovali')
+				}).catch(() =>{
+					alert('Pogresno korisnicko ime ili sifra!')
+					event.preventDefault();
+					return;
 				})
 			event.preventDefault();
+			return;
 		}
 	}
 });

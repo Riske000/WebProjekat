@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Korisnici</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="styles.css">
+<script src="jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+	<div id="korisnici">
+
+		<p style="text-align: right;">
+			<label v-bind:hidden="loggedUser.korisnickoIme==undefined">Trenutni korisnik:</label> 
+			<label v-bind:hidden="loggedUser.korisnickoIme==undefined">{{loggedUser.korisnickoIme}}</label>
+			<label v-bind:hidden="loggedUser.korisnickoIme!=undefined"><a href="login.html">Uloguj se</a> </label>
+			<label v-bind:hidden="loggedUser.korisnickoIme!=undefined"><a href="registracija.html">Registruj se</a> </label>
+			<label v-bind:hidden="loggedUser.korisnickoIme==undefined"><a href="profil.html">Moj profil</a> </label> 
+		</p>
+
+		<p>
+			<input type="text" name="searchIme" v-model="searchIme">
+			<input type="text" name="searchPrezime" v-model="searchPrezime">
+			<input type="text" name="searchKorisnickoIme" v-model="searchKorisnickoIme">
+			<button value="Pretrazi" v-on:click="pretraziKorisnike">Pretrazi</button>
+		</p>
+
+
+
+		<table border="1" id="tabela">
+			<thead>
+				<tr bgcolor="lightgrey">
+				    <th>Korisnicko ime</th>
+					<th>Ime</th>
+					<th>Prezime</th>
+					<th>Pol</th>
+					<th>Datum rodjenja</th>
+					<th>Uloga</th>
+				</tr>
+			</thead>
+
+			<tr v-for="k in korisnici">
+				<td>{{k.korisnickoIme }}</td>
+				<td>{{k.ime }}</td>
+				<td>{{k.prezime }}</td>
+				<td>{{k.pol }}</td>
+				<td>{{k.datumRodjenja}} </td>
+				<td>{{k.uloga}}</td>
+			</tr>
+		</table>
+
+
+	</div>
+	<script src="js/vue.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="js/korisnici.js"></script>
+</body>
+
+</html>

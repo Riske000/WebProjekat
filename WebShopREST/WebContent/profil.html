@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+
+<body>
+	<div class="container" id="mojProfil">
+		<div class="title">Moj profil</div>
+		<form @submit='createUser'>
+			<div class="user-details">
+
+
+				<div class="input-box">
+					<span class="details"></span>
+
+				</div>
+
+				<div class="input-box">
+					<span class="details">Ime</span> <input type="text" name="name"
+						placeholder="Enter your name" required v-model="newUser.ime"
+						pattern="[A-Za-z]{1,32}" >
+				</div>
+
+				<div class="input-box">
+					<span class="details">Prezime</span> <input type="text"
+						name="surname" placeholder="Enter your surname" required
+						v-model="newUser.prezime" pattern="[A-Za-z]{1,32}">
+				</div>
+
+				<div class="input-box">
+					<span class="details">Datum rodjenja</span> <input type="date"
+						name="birthday" placeholder="Enter your birthday" required
+						v-model="newUser.datumRodjenja">
+				</div>
+
+
+				<div class="input-box">
+					<span class="details">Pol</span> <select type="combobox"
+						class="combobox" width="15" required
+						v-model="newUser.pol" size=1
+						style="width: 300px; height: 40px; border-radius: 5px; font-size: 16px">
+						<option value="zenski pol">Zenski</option>
+						<option value="muski pol">Muski</option>
+					</select>
+				</div>
+
+				<div class="input-box">
+					<span class="details">Korisnicko ime</span> <input type="text"
+						name="username" placeholder="Enter your username" required
+						v-model="newUser.korisnickoIme">
+				</div>
+
+				<div class="input-box">
+					<span class="details">Sifra</span> <input type="password"
+						name="password" placeholder="Enter your password" required
+						v-model="newUser.sifra">
+				</div>
+
+
+				<div class="button">
+					<input type="submit" value="Register">
+
+				</div>
+			</div>
+		</form>
+		<p> {{error }} </p>
+	</div>
+
+
+	<script src="js/vue.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="js/profil.js"></script>
+
+</body>
+</html>

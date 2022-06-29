@@ -82,8 +82,9 @@ public class SportskiObjekatService {
 	@GET
 	@Path("/search")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<SportskiObjekat> search(@QueryParam("searchValue") String searchValue, @QueryParam("criterion") String criterion) {
+	public ArrayList<SportskiObjekat> search(@QueryParam("searchIme") String searchIme, @QueryParam("searchTip") String searchTip,
+			@QueryParam("searchLokacija") String searchLokacija, @QueryParam("searchOcena") String searchOcena) {
 		SportskiObjekatDAO dao = (SportskiObjekatDAO) ctx.getAttribute("sportskiObjekatDAO");
-		return dao.search(searchValue, criterion);
+		return dao.search(searchIme, searchTip, searchLokacija, searchOcena);
 	}
 }

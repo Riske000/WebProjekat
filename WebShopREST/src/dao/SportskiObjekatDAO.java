@@ -21,7 +21,7 @@ public class SportskiObjekatDAO {
 
 	private static SportskiObjekatDAO sportskiObjekatInstance = null;
 	private static String contextPath = "";
-	
+
 	private HashMap<Integer, SportskiObjekat> sportskiObjekti = new HashMap<Integer, SportskiObjekat>();
 
 	private SportskiObjekatDAO() {
@@ -32,15 +32,14 @@ public class SportskiObjekatDAO {
 		loadSportskiObjekti(contextPath);
 	}
 
-	public static SportskiObjekatDAO getInstance()
-    {
-        if (sportskiObjekatInstance == null) {
-        	sportskiObjekatInstance = new SportskiObjekatDAO();
-        }
- 
-        return sportskiObjekatInstance;
-    }
-	
+	public static SportskiObjekatDAO getInstance() {
+		if (sportskiObjekatInstance == null) {
+			sportskiObjekatInstance = new SportskiObjekatDAO();
+		}
+
+		return sportskiObjekatInstance;
+	}
+
 	public Collection<SportskiObjekat> findAll() {
 		return sportskiObjekti.values();
 	}
@@ -60,6 +59,7 @@ public class SportskiObjekatDAO {
 		maxId++;
 		sportskiObjekat.setIntId(maxId);
 		sportskiObjekti.put(sportskiObjekat.getIntId(), sportskiObjekat);
+		sacuvajSportskeObjekte();
 		return sportskiObjekat;
 	}
 
@@ -102,13 +102,11 @@ public class SportskiObjekatDAO {
 					lokacija = new Lokacija(Integer.parseInt(st.nextToken().trim()));
 					logoObjekta = st.nextToken().trim();
 					prosecnaOcena = Double.parseDouble(st.nextToken().trim());
-					pocetak  = TimeHelper.stringToTime(st.nextToken().trim());
+					pocetak = TimeHelper.stringToTime(st.nextToken().trim());
 					kraj = TimeHelper.stringToTime(st.nextToken().trim());
 				}
-				sportskiObjekti.put(id, new SportskiObjekat(id, ime, tipObjekta,
-						sadrzajObjekta, status, lokacija, logoObjekta, prosecnaOcena,
-						pocetak, kraj));
-
+				sportskiObjekti.put(id, new SportskiObjekat(id, ime, tipObjekta, sadrzajObjekta, status, lokacija,
+						logoObjekta, prosecnaOcena, pocetak, kraj));
 
 			}
 		} catch (Exception e) {
@@ -123,15 +121,15 @@ public class SportskiObjekatDAO {
 		}
 
 	}
-	
+
 	public void sacuvajSportskeObjekte() {
 		BufferedWriter out = null;
 		try {
-			File file = new File(contextPath + "/files/sportskiObjekti.txt"); //proveri naziv fajla
+			File file = new File(contextPath + "/files/sportskiObjekti.txt"); // proveri naziv fajla
 			System.out.println(file.getCanonicalPath());
 			out = new BufferedWriter(new FileWriter(file));
 
-			for(SportskiObjekat sportskiObjekat : sportskiObjekti.values()) {
+			for (SportskiObjekat sportskiObjekat : sportskiObjekti.values()) {
 				out.write(sportskiObjekat.convertToString() + '\n');
 			}
 		} catch (Exception e) {
@@ -146,44 +144,31 @@ public class SportskiObjekatDAO {
 		}
 
 	}
-	
-	public ArrayList<SportskiObjekat> search(String searchValue, String criterion){
+
+	public ArrayList<SportskiObjekat> search(String searchIme, String searchTip, String searchLokacija, String searchOcena) {
 		ArrayList<SportskiObjekat> pronadjeni = new ArrayList<SportskiObjekat>();
-		if(criterion.equals("ime")) {
-			for(SportskiObjekat sp : sportskiObjekti.values()) {
-				if(sp.getIme().toLowerCase().contains(searchValue.toLowerCase())) {
-					pronadjeni.add(sp);
-				}
-			}
-		} else if(criterion.equals("tipObjekta")) {
-			for(SportskiObjekat sp : sportskiObjekti.values()) {
-				if(sp.getTipObjekta().toLowerCase().contains(searchValue.toLowerCase())) {
-					pronadjeni.add(sp);
-				}
-			}
-		} else if(criterion.equals("lokacija")){
-			for(SportskiObjekat sp : sportskiObjekti.values()) {
-				if(sp.getLokacija().getAdress().toLowerCase().contains(searchValue.toLowerCase())) {
-					pronadjeni.add(sp);
-				}
-			}
-		} else {
-			for(SportskiObjekat sp : sportskiObjekti.values()) {
-				if(sp.getProsecnaOcena() == Double.parseDouble(searchValue)) {
-					pronadjeni.add(sp);
+
+		for (SportskiObjekat sp : sportskiObjekti.values()) {
+			if (sp.getIme().toLowerCase().contains(searchIme.toLowerCase())) {
+				if (sp.getLokacija().getAdress().toLowerCase().contains(searchLokacija.toLowerCase())) {
+					if (sp.getTipObjekta().toLowerCase().contains(searchTip.toLowerCase())) {
+						if (sp.getProsecnaOcena() >= Double.parseDouble(searchOcena) ) {
+							pronadjeni.add(sp);
+						}
+					}
 				}
 			}
 		}
 		return pronadjeni;
 	}
-	
+
 	public void connectSportskiObjekatLokacija() {
 		ArrayList<Lokacija> lokacije = new ArrayList<Lokacija>(LokacijaDAO.getInstance().findAll());
-		for(SportskiObjekat sportskiObjekat : sportskiObjekti.values()) {
+		for (SportskiObjekat sportskiObjekat : sportskiObjekti.values()) {
 			int idTrazeni = sportskiObjekat.getLokacija().getIntId();
-			
-			for(Lokacija lokacija : lokacije) {
-				if(lokacija.getIntId() == idTrazeni) {
+
+			for (Lokacija lokacija : lokacije) {
+				if (lokacija.getIntId() == idTrazeni) {
 					sportskiObjekat.setLokacija(lokacija);
 					break;
 				}

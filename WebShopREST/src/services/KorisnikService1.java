@@ -1,5 +1,8 @@
 package services;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -8,12 +11,15 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import beans.Korisnik;
+import beans.SportskiObjekat;
 import dao.KorisnikDAO;
+import dao.SportskiObjekatDAO;
 import utils.PokretanjeProjekta;
 
 @Path("/korisnik1")
@@ -35,19 +41,29 @@ public class KorisnikService1 {
 		}
 	}
 	
+	@GET
+	@Path("/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Korisnik> getKorisnici() {
+		KorisnikDAO dao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
+		return dao.findAll();
+	}
+	
 	
 	@POST
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Korisnik register(Korisnik userToRegister) {
+	public Response register(Korisnik userToRegister) {
 
 		KorisnikDAO korisnikDAO = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
 
-		if (korisnikDAO.checkKorisnickoIme(userToRegister.getKorisnickoIme()) != null) {
-			return null;
+		boolean retVal = korisnikDAO.postojiKorisnickoIme(userToRegister.getKorisnickoIme());
+		if(retVal) {
+			return Response.status(400).entity("Korisnicko ime vec postoji!").build();			
 		}
-		return korisnikDAO.save(userToRegister);
+		korisnikDAO.save(userToRegister);
+		return Response.status(200).build();
 		
 	}
 
@@ -59,7 +75,7 @@ public class KorisnikService1 {
 		KorisnikDAO korisnikDao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
 		Korisnik logovaniKorisnik = korisnikDao.checkKorisnickoImeSifra(korisnik.getKorisnickoIme(), korisnik.getSifra());
 		if (logovaniKorisnik == null) {
-			return Response.status(400).entity("Invalid username and/or password").build();
+			return Response.status(400).entity("Pogresno korisnicko ime ili sifra!").build();
 		}
 		request.getSession().setAttribute("user", logovaniKorisnik);
 		return Response.status(200).build();
@@ -71,5 +87,14 @@ public class KorisnikService1 {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Korisnik login(@Context HttpServletRequest request) {
 		return (Korisnik) request.getSession().getAttribute("user");
+	}
+	
+	@GET
+	@Path("/search")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Korisnik> search(@QueryParam("searchIme") String searchIme, @QueryParam("searchPrezime") String searchPrezime, 
+			@QueryParam("searchKorisnickoIme") String searchKorisnickoIme) {
+		KorisnikDAO dao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
+		return dao.search(searchIme, searchPrezime, searchKorisnickoIme);
 	}
 }

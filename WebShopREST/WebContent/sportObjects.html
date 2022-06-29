@@ -12,20 +12,19 @@
 	<div id="sportskiObjekti">
 
 		<p style="text-align: right;">
-			<label v-bind:hidden="loggedUser=='{}'">{{loggedUser.tren}}</label> 
-			<label v-bind:hidden="loggedUser=='{}'">{{loggedUser.korisnickoIme}}</label>
-			<label v-if="logovan"><a href="login.html">Uloguj se</a> </label>
-			<label v-if="logovan"><a href="registracija.html">Registruj se</a> </label>
+			<label v-bind:hidden="loggedUser.korisnickoIme==undefined">Trenutni korisnik:</label> 
+			<label v-bind:hidden="loggedUser.korisnickoIme==undefined">{{loggedUser.korisnickoIme}}</label>
+			<label v-bind:hidden="loggedUser.korisnickoIme!=undefined"><a href="login.html">Uloguj se</a> </label>
+			<label v-bind:hidden="loggedUser.korisnickoIme!=undefined"><a href="registracija.html">Registruj se</a> </label>
+			<label v-bind:hidden="loggedUser.korisnickoIme==undefined"><a href="profil.html">Moj profil</a> </label> 
 		</p>
 
 		<p>
-			<label>Pretrazi po: </label> <select name="kriterijumi"
-				id="kriterijumi" v-model="criterium">
-				<option value="ime">Ime</option>
-				<option value="tipObjekta">Tip</option>
-				<option value="lokacija">Lokacija</option>
-				<option value="prosecna ocena">Prosecna ocena</option>
-			</select> <input type="text" name="searchValue" v-model="searchValue">
+			
+			<input type="text" placeholder="Ime" name="searchIme" v-model="searchIme">
+			<input type="text" placeholder="Tip" name="searchTip" v-model="searchTip">
+			<input type="text" placeholder="Lokacija" name="searchLokacija" v-model="searchLokacija">
+			<input type="number" min="1" max="5" value="1"  name="searchProsecnaOcena" v-model="searchOcena">
 			<button value="Pretrazi" v-on:click="pretraziOjekte">Pretrazi</button>
 		</p>
 
@@ -54,7 +53,7 @@
 					{{sp.lokacija.mesto}}</td>
 				<td><img src="sp.logoObjekta"></img></td>
 				<td>{{sp.prosecnaOcena}}</td>
-				<td>{{sp.pocetakRadnogVremena.hour}}:{{sp.pocetakRadnogVremena.minute}}-{{sp.krajRadnogVremena.hour}}:{{sp.pocetakRadnogVremena.minute}}</td>
+				<td>{{sp.pocetakRadnogVremena}}-{{sp.krajRadnogVremena}}</td>
 			</tr>
 		</table>
 

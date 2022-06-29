@@ -21,8 +21,13 @@ var app = new Vue({
 			axios.post('rest/korisnik1', this.userToRegister)
 				.then((response) => {
 					alert('Uspesno ste se registrovali!')
+				}).catch(() =>{
+					alert('Korisnicko ime vec postoji!')
+					event.preventDefault();
+					return;
 				})
 			event.preventDefault();
+			return;
 		}
 	}
 });

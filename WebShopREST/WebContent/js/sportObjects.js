@@ -2,8 +2,10 @@ var app = new Vue({
 	el: '#sportskiObjekti',
 	data: {
 		sportObjects: null,
-		searchValue: "",
-		criterium: "",
+		searchIme: "",
+		searchTip: "",
+		searchLokacija: "",
+		searchOcena: "1",
 		loggedUser: {},
 		logovan: false
 	},
@@ -17,7 +19,8 @@ var app = new Vue({
 	},
 	methods: {
 		pretraziOjekte: function() {
-			axios.get('rest/sportskiObjekti/search', { params: { searchValue: this.searchValue, criterion: this.criterium } })
+			axios.get('rest/sportskiObjekti/search', { params: { searchIme: this.searchIme, searchTip: this.searchTip, searchLokacija: this.searchLokacija, 
+				searchOcena: this.searchOcena } })
 				.then(response => (this.sportObjects = response.data))
 		}
 
