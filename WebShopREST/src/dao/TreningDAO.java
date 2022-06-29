@@ -1,8 +1,10 @@
 package dao;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,10 +16,12 @@ import beans.Komentar;
 import beans.Korisnik;
 import beans.Trening;
 import beans.SportskiObjekat;
+import beans.TipKupca;
 
 public class TreningDAO {
 
 	private static TreningDAO treningInstance = null;
+	private static String contextPath = "";
 	
 	private HashMap<Integer, Trening> treninzi = new HashMap<Integer, Trening>();
 
@@ -71,6 +75,7 @@ public class TreningDAO {
 
 	public void loadTreninzi(String contextPath) {
 		BufferedReader in = null;
+		this.contextPath = contextPath;
 		try {
 			File file = new File(contextPath + "/files/treninzi.txt");
 			System.out.println(file.getCanonicalPath());
@@ -78,7 +83,7 @@ public class TreningDAO {
 			String line, naziv = "", tipTreninga = "", opis = "", slika = "";
 			double trajanje = 0;
 			int id = -1;
-			Korisnik trener = new Korisnik();
+			Korisnik trener = null;
 			SportskiObjekat objekatGdePripada = new SportskiObjekat();
 			StringTokenizer st;
 
@@ -100,7 +105,11 @@ public class TreningDAO {
 					// SportskiObjekat obj = new
 					// SportskiObjekat(Integer.parseInt(st.nextToken().trim()));
 					trajanje = Double.parseDouble(st.nextToken().trim());
-					trener = new Korisnik(Integer.parseInt(st.nextToken().trim()));
+					int trenerId = Integer.parseInt(st.nextToken().trim());
+					
+					if(trenerId != -1) {
+						trener = new Korisnik(trenerId);
+					}
 					opis = st.nextToken().trim();
 					slika = st.nextToken().trim();
 				}
@@ -112,6 +121,29 @@ public class TreningDAO {
 			if (in != null) {
 				try {
 					in.close();
+				} catch (Exception e) {
+				}
+			}
+		}
+
+	}
+	
+	public void sacuvajTreninge() {
+		BufferedWriter out = null;
+		try {
+			File file = new File(contextPath + "/files/treninzi.txt"); //proveri naziv fajla
+			System.out.println(file.getCanonicalPath());
+			out = new BufferedWriter(new FileWriter(file));
+
+			for(Trening trening : treninzi.values()) {
+				out.write(trening.convertToString() + '\n');
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
 				} catch (Exception e) {
 				}
 			}
@@ -136,6 +168,9 @@ public class TreningDAO {
 	public void connectTreningTrener() {
 		ArrayList<Korisnik> korisnici = new ArrayList<Korisnik>(KorisnikDAO.getInstance().findAll());
 		for(Trening trening : treninzi.values()) {
+			if(trening.getTrener() == null) {
+				continue;
+			}
 			int idTrazeni = trening.getTrener().getIntId();
 			
 			for(Korisnik korisnik : korisnici) {

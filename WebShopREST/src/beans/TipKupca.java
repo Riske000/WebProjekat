@@ -1,5 +1,7 @@
 package beans;
 
+import utils.TimeHelper;
+
 public class TipKupca {
 
 	private int intId;
@@ -68,7 +70,7 @@ public class TipKupca {
 		this.potrebniPoeni = potrebniPoeni;
 	}
 	
-	
-	
-	
+	public String convertToString() { 
+		return intId + ";" + imeTipa + ";" + popust + ";" + potrebniPoeni;
+	}
 }

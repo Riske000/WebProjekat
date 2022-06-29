@@ -1,8 +1,10 @@
 package dao;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,16 +12,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import beans.Komentar;
 import beans.Korisnik;
 import beans.Lokacija;
 import beans.SportskiObjekat;
-import utils.DateHelper;
 import utils.TimeHelper;
 
 public class SportskiObjekatDAO {
 
 	private static SportskiObjekatDAO sportskiObjekatInstance = null;
+	private static String contextPath = "";
 	
 	private HashMap<Integer, SportskiObjekat> sportskiObjekti = new HashMap<Integer, SportskiObjekat>();
 
@@ -73,6 +74,7 @@ public class SportskiObjekatDAO {
 
 	public void loadSportskiObjekti(String contextPath) {
 		BufferedReader in = null;
+		this.contextPath = contextPath;
 		try {
 			File file = new File(contextPath + "/files/sportskiobjekti.txt");
 			System.out.println(file.getCanonicalPath());
@@ -120,6 +122,59 @@ public class SportskiObjekatDAO {
 			}
 		}
 
+	}
+	
+	public void sacuvajSportskeObjekte() {
+		BufferedWriter out = null;
+		try {
+			File file = new File(contextPath + "/files/sportskiObjekti.txt"); //proveri naziv fajla
+			System.out.println(file.getCanonicalPath());
+			out = new BufferedWriter(new FileWriter(file));
+
+			for(SportskiObjekat sportskiObjekat : sportskiObjekti.values()) {
+				out.write(sportskiObjekat.convertToString() + '\n');
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
+				} catch (Exception e) {
+				}
+			}
+		}
+
+	}
+	
+	public ArrayList<SportskiObjekat> search(String searchValue, String criterion){
+		ArrayList<SportskiObjekat> pronadjeni = new ArrayList<SportskiObjekat>();
+		if(criterion.equals("ime")) {
+			for(SportskiObjekat sp : sportskiObjekti.values()) {
+				if(sp.getIme().toLowerCase().contains(searchValue.toLowerCase())) {
+					pronadjeni.add(sp);
+				}
+			}
+		} else if(criterion.equals("tipObjekta")) {
+			for(SportskiObjekat sp : sportskiObjekti.values()) {
+				if(sp.getTipObjekta().toLowerCase().contains(searchValue.toLowerCase())) {
+					pronadjeni.add(sp);
+				}
+			}
+		} else if(criterion.equals("lokacija")){
+			for(SportskiObjekat sp : sportskiObjekti.values()) {
+				if(sp.getLokacija().getAdress().toLowerCase().contains(searchValue.toLowerCase())) {
+					pronadjeni.add(sp);
+				}
+			}
+		} else {
+			for(SportskiObjekat sp : sportskiObjekti.values()) {
+				if(sp.getProsecnaOcena() == Double.parseDouble(searchValue)) {
+					pronadjeni.add(sp);
+				}
+			}
+		}
+		return pronadjeni;
 	}
 	
 	public void connectSportskiObjekatLokacija() {

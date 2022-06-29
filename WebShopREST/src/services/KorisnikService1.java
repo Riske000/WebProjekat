@@ -4,6 +4,7 @@ import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -43,6 +44,9 @@ public class KorisnikService1 {
 
 		KorisnikDAO korisnikDAO = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
 
+		if (korisnikDAO.checkKorisnickoIme(userToRegister.getKorisnickoIme()) != null) {
+			return null;
+		}
 		return korisnikDAO.save(userToRegister);
 		
 	}
@@ -59,5 +63,13 @@ public class KorisnikService1 {
 		}
 		request.getSession().setAttribute("user", logovaniKorisnik);
 		return Response.status(200).build();
+	}
+	
+	@GET
+	@Path("/currentUser")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Korisnik login(@Context HttpServletRequest request) {
+		return (Korisnik) request.getSession().getAttribute("user");
 	}
 }

@@ -1,8 +1,10 @@
 package dao;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,11 +12,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import beans.Komentar;
 import beans.Lokacija;
 
 public class LokacijaDAO {
 
 	private static LokacijaDAO lokacijaInstance = null;
+	private static String contextPath = "";
 	
 	public HashMap<Integer, Lokacija> lokacije = new HashMap<Integer, Lokacija>();
 
@@ -68,6 +72,7 @@ public class LokacijaDAO {
 
 	public void loadLokacije(String contextPath) {
 		BufferedReader in = null;
+		this.contextPath = contextPath;
 		try {
 			File file = new File(contextPath + "/files/lokacije.txt");
 			System.out.println(file.getCanonicalPath());
@@ -100,6 +105,29 @@ public class LokacijaDAO {
 			if (in != null) {
 				try {
 					in.close();
+				} catch (Exception e) {
+				}
+			}
+		}
+
+	}
+	
+	public void sacuvajLokacije() {
+		BufferedWriter out = null;
+		try {
+			File file = new File(contextPath + "/files/lokacije.txt"); //proveri naziv fajla
+			System.out.println(file.getCanonicalPath());
+			out = new BufferedWriter(new FileWriter(file));
+
+			for(Lokacija lokacija : lokacije.values()) {
+				out.write(lokacija.convertToString() + '\n');
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
 				} catch (Exception e) {
 				}
 			}

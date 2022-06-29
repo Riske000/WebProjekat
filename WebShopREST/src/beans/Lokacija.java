@@ -1,5 +1,7 @@
 package beans;
 
+import utils.DateTimeHelper;
+
 public class Lokacija {
 	
 	private int intId;
@@ -91,16 +93,11 @@ public class Lokacija {
 	}
 	
 	public String getAdress() {
-		adresa = this.ulica + " " + this.broj + ", " + this.mesto + ", " + this.postanskiBroj;
+		adresa = this.ulica + " " + this.broj + ", " + this.mesto;
 		return adresa;
 	}
 	
-	
-
-	
-	
-	
-	
-	
-	
+	public String convertToString() {
+		return intId + ";" + geografskaSirina + ";" + geografskaDuzina + ";" + ulica + ";" + broj + ";" + mesto + ";" + postanskiBroj;
+	}
 }

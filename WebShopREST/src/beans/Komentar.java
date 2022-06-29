@@ -1,5 +1,7 @@
 package beans;
 
+import utils.DateHelper;
+
 public class Komentar {
 
 	private int intId;
@@ -73,5 +75,8 @@ public class Komentar {
 		this.ocena = ocena;
 	}
 	
+	public String convertToString() {
+		return intId + ";" + kupac.getIntId() + ";" + sportskiObjekat.getIntId() + ";" + tekstKomentara + ";" + ocena;
+	}
 	
 }

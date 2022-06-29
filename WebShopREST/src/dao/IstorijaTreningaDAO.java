@@ -1,8 +1,10 @@
 package dao;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import utils.DateTimeHelper;
 public class IstorijaTreningaDAO {
 	
 	private static IstorijaTreningaDAO istorijaTreningaInstance = null;
+	private static String contextPath = "";
 	
 	public HashMap<Integer, IstorijaTreninga> istorijeTreninga = new HashMap<Integer,IstorijaTreninga>();
 	
@@ -66,6 +69,7 @@ public class IstorijaTreningaDAO {
 	}
 	
 	public void loadIstorijeTreninga(String contextPath) {
+		this.contextPath = contextPath;
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/files/istorijeTreninga.txt"); // Dodati i paket u putanju
@@ -74,9 +78,9 @@ public class IstorijaTreningaDAO {
 			String line;
 			LocalDateTime datumVremePrijave = LocalDateTime.now();
 			int intId = -1;
-			Trening trening = new Trening();
-			Korisnik kupac = new Korisnik();
-			Korisnik trener = new Korisnik();
+			Trening trening = null;
+			Korisnik kupac = null;
+			Korisnik trener = null;
 			
 			StringTokenizer st;
 			while ((line = in.readLine()) != null) {
@@ -87,11 +91,22 @@ public class IstorijaTreningaDAO {
 				while (st.hasMoreTokens()) {
 					intId = Integer.parseInt(st.nextToken().trim());
 					datumVremePrijave = DateTimeHelper.stringToDateTime(st.nextToken().trim());
-					trening = new Trening(Integer.parseInt(st.nextToken().trim()));
-					kupac = new Korisnik(Integer.parseInt(st.nextToken().trim()));
-					trener = new Korisnik(Integer.parseInt(st.nextToken().trim()));
+					int treningId = Integer.parseInt(st.nextToken().trim());
+					if(treningId != -1) {
+						trening = new Trening(treningId);
+					}
+					
+					int kupacId = Integer.parseInt(st.nextToken().trim());
+					if(kupacId != -1) {
+						kupac = new Korisnik(kupacId);
+					}
+					
+					int trenerId = Integer.parseInt(st.nextToken().trim());
+					if(trenerId != -1) {
+						trener = new Korisnik(trenerId);
+					}
 				}
-				istorijeTreninga.put(intId, new IstorijaTreninga()); //Promeniti konstruktor
+				istorijeTreninga.put(intId, new IstorijaTreninga(intId, datumVremePrijave, trening, kupac, trener));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -104,6 +119,29 @@ public class IstorijaTreningaDAO {
 			}
 		}
 		
+	}
+	
+	public void sacuvajIstorijeTreninga() {
+		BufferedWriter out = null;
+		try {
+			File file = new File(contextPath + "/files/istorijeTreninga.txt"); //proveri naziv fajla
+			System.out.println(file.getCanonicalPath());
+			out = new BufferedWriter(new FileWriter(file));
+
+			for(IstorijaTreninga istorijaTreninga : istorijeTreninga.values()) {
+				out.write(istorijaTreninga.convertToString() + '\n');
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
+				} catch (Exception e) {
+				}
+			}
+		}
+
 	}
 	
 	public void connectIstorijaTreningaKupacTrener() {
@@ -127,6 +165,9 @@ public class IstorijaTreningaDAO {
 	public void connectIstorijaTreningaTrening() {
 		ArrayList<Trening> treninzi = new ArrayList<Trening>(TreningDAO.getInstance().findAll());
 		for(IstorijaTreninga istorijaTreninga : istorijeTreninga.values()) {
+			if(istorijaTreninga.getTrening() == null) {
+				continue;
+			}
 			int idTrazeni = istorijaTreninga.getTrening().getIntId();
 			
 			for(Trening trening : treninzi) {
@@ -140,14 +181,34 @@ public class IstorijaTreningaDAO {
 	
 	public void connectIstorijaTreningaKupac() {
 		ArrayList<Korisnik> kupci = new ArrayList<Korisnik>(KorisnikDAO.getInstance().findAll());
-		
 		for(IstorijaTreninga it : istorijeTreninga.values()) {
+			if(it.getKupac() == null) {
+				continue;
+			}
 			int idTrazeni = it.getKupac().getIntId();
 			
 			for(Korisnik k : kupci) {
 				if(k.getIntId() == idTrazeni) {
 					it.setKupac(k);
-					k.getIstorijaTreninga().add(it);
+					break;
+				}
+			}
+			
+		}
+	}
+	
+	public void connectIstorijaTreningaTrener() {
+		ArrayList<Korisnik> treneri = new ArrayList<Korisnik>(KorisnikDAO.getInstance().findAll());
+		for(IstorijaTreninga it : istorijeTreninga.values()) {
+			if(it.getTrener() == null) {
+				continue;
+			}
+			int idTrazeni = it.getTrener().getIntId();
+			
+			for(Korisnik t : treneri) {
+				if(t.getIntId() == idTrazeni) {
+					it.setTrener(t);
+					t.getIstorijaTreninga().add(it);
 					break;
 				}
 			}

@@ -3,6 +3,8 @@ package beans;
 import java.time.LocalDate;
 import java.util.Arrays;
 
+import utils.DateHelper;
+
 public class Clanarina {
 
 	private int intId;
@@ -121,6 +123,10 @@ public class Clanarina {
 	public String getStatus() {
 		return status;
 	}
-
+	
+	public String convertToString() {
+		return intId + ";" + ID + ";" + tipClanarine + ";" + DateHelper.dateToString(datumPlacanja) + ";" + DateHelper.dateToString(pocetniDatumVazenja) + ";" + DateHelper.dateToString(krajnjiDatumVazenja) + ";" + punaCena + ";" 
+				+ kupac.getIntId() + ";" + status + ";" + brojTermina;
+	}
 	
 }

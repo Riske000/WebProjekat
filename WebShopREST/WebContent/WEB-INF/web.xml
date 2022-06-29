@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://JAVA.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>WebShopREST</display-name>
   <welcome-file-list>
-    <welcome-file>pocetna.html</welcome-file>
+    <welcome-file>sportObjects.html</welcome-file>
   </welcome-file-list>
   <!-- Obavezan Jersey REST Service servlet -->
   <servlet>

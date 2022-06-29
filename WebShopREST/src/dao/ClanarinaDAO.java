@@ -1,8 +1,10 @@
 package dao;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
@@ -15,6 +17,7 @@ import utils.DateHelper;
 public class ClanarinaDAO {
 	
 	private static ClanarinaDAO clanarinaInstance = null;
+	private static String contextPath = "";
 	
 	public HashMap<Integer, Clanarina> clanarine = new HashMap<Integer, Clanarina>();
 	
@@ -61,6 +64,7 @@ public class ClanarinaDAO {
 	}
 	
 	public void loadClanarine(String contextPath) {
+		this.contextPath = contextPath;
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/files/clanarine.txt"); //paket
@@ -73,7 +77,7 @@ public class ClanarinaDAO {
 			double punaCena = -1;
 			int brojTermina = -1;
 			int intId = -1;
-			Korisnik korisnik = new Korisnik();
+			Korisnik korisnik = null;
 			//Korisnik korisnik = new Korisnik();
 			
 			StringTokenizer st;
@@ -90,7 +94,10 @@ public class ClanarinaDAO {
 					pocetniDatumVazenja = DateHelper.stringToDate(st.nextToken().trim());
 					krajnjiDatumVazenja = DateHelper.stringToDate(st.nextToken().trim());
 					punaCena = Double.parseDouble(st.nextToken().trim());
-					korisnik =  new Korisnik(Integer.parseInt(st.nextToken().trim()));
+					int korisnikId = Integer.parseInt(st.nextToken().trim());
+					if(korisnikId != -1) {
+						korisnik = new Korisnik(korisnikId);
+					}
 					status = st.nextToken().trim();
 					brojTermina = Integer.parseInt(st.nextToken().trim());
 				}
@@ -107,6 +114,29 @@ public class ClanarinaDAO {
 			}
 		}
 		
+	}
+	
+	public void sacuvajClanarine() {
+		BufferedWriter out = null;
+		try {
+			File file = new File(contextPath + "/files/clanarine.txt"); //proveri naziv fajla
+			System.out.println(file.getCanonicalPath());
+			out = new BufferedWriter(new FileWriter(file));
+
+			for(Clanarina clanarina : clanarine.values()) {
+				out.write(clanarina.convertToString() + '\n');
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
+				} catch (Exception e) {
+				}
+			}
+		}
+
 	}
 	
 	// da li treba connect clanarina <-> korisnik 

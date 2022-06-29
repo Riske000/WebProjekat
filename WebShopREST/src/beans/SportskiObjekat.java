@@ -4,6 +4,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.DateHelper;
+import utils.TimeHelper;
+
 public class SportskiObjekat {
 
 	private int intId;
@@ -121,6 +124,11 @@ public class SportskiObjekat {
 
 	public void setKrajRadnogVremena(LocalTime krajRadnogVremena) {
 		this.krajRadnogVremena = krajRadnogVremena;
+	}
+	
+	public String convertToString() { //da li treba lista sadrzajObjekta
+		return intId + ";" + ime + ";" + tipObjekta + ";" + status + ";" + lokacija.getIntId() + ";" + logoObjekta + ";" + prosecnaOcena + ";" 
+				+ TimeHelper.timeToString(pocetakRadnogVremena) + ";" + TimeHelper.timeToString(krajRadnogVremena);
 	}
 
 }

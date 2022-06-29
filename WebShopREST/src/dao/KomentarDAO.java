@@ -1,8 +1,10 @@
 package dao;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,6 +23,7 @@ public class KomentarDAO {
 
 	
 	private static KomentarDAO komentarInstance = null;
+	private static String contextPath = "";
 	
 	public HashMap<Integer, Komentar> komentari = new HashMap<Integer, Komentar>();
 
@@ -75,6 +78,7 @@ public class KomentarDAO {
 	}
 
 	public void loadKomentari(String contextPath) {
+		this.contextPath = contextPath;
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/files/komentari.txt");
@@ -83,8 +87,8 @@ public class KomentarDAO {
 			String line, tekstKomentara = "";
 			int ocena = 1;
 			int id = -1;
-			Korisnik korisnik = new Korisnik();
-			SportskiObjekat sportskiObjekat = new SportskiObjekat();
+			Korisnik korisnik = null;
+			SportskiObjekat sportskiObjekat = null;
 			StringTokenizer st;
 			//SportskiObjekatDAO sod = new SportskiObjekatDAO();
 			while ((line = in.readLine()) != null) {
@@ -95,10 +99,19 @@ public class KomentarDAO {
 				while (st.hasMoreTokens()) {
 					id = Integer.parseInt(st.nextToken().trim());
 					// korisnik
+					int korisnikId = Integer.parseInt(st.nextToken().trim());
+					
+					if(korisnikId != -1) {
+						korisnik = new Korisnik(korisnikId);
+					}
+					
+					int sportskiObjekatId = Integer.parseInt(st.nextToken().trim());
+					
+					if(sportskiObjekatId != -1) {
+						sportskiObjekat = new SportskiObjekat(sportskiObjekatId);
+					}
 
 					//sportskiObjekat = sod.findObjekat(Integer.parseInt(st.nextToken().trim()));
-					korisnik = new Korisnik(Integer.parseInt(st.nextToken().trim()));
-					sportskiObjekat = new SportskiObjekat(Integer.parseInt(st.nextToken().trim()));
 
 					// sportskiObjekat = sod.findObjekat(Integer.parseInt(st.nextToken().trim()));
 					// SportskiObjekat obj = new
@@ -122,9 +135,35 @@ public class KomentarDAO {
 
 	}
 	
+	public void sacuvajKomentare() {
+		BufferedWriter out = null;
+		try {
+			File file = new File(contextPath + "/files/komentari.txt"); //proveri naziv fajla
+			System.out.println(file.getCanonicalPath());
+			out = new BufferedWriter(new FileWriter(file));
+
+			for(Komentar komentar : komentari.values()) {
+				out.write(komentar.convertToString() + '\n');
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
+				} catch (Exception e) {
+				}
+			}
+		}
+
+	}
+	
 	public void connectKomentarKupac() {
 		ArrayList<Korisnik> korisnici = new ArrayList<Korisnik>(KorisnikDAO.getInstance().findAll());
 		for(Komentar komentar : komentari.values()) {
+			if(komentar.getKupac() == null) {
+				continue;
+			}
 			int idTrazeni = komentar.getKupac().getIntId();
 			
 			for(Korisnik korisnik : korisnici) {
@@ -139,6 +178,9 @@ public class KomentarDAO {
 	public void connectKomentarSportskiObjekat() {
 		ArrayList<SportskiObjekat> sportskiObjekti = new ArrayList<SportskiObjekat>(SportskiObjekatDAO.getInstance().findAll());
 		for(Komentar komentar : komentari.values()) {
+			if(komentar.getSportskiObjekat() == null) {
+				continue;
+			}
 			int idTrazeni = komentar.getSportskiObjekat().getIntId();
 			
 			for(SportskiObjekat sportskiObjekat : sportskiObjekti) {

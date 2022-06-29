@@ -1,5 +1,6 @@
 package beans;
 
+import utils.TimeHelper;
 
 public class Trening {
 
@@ -98,5 +99,8 @@ public class Trening {
 		this.slika = slika;
 	}
 	
-	
+	public String convertToString() {
+		return intId + ";" + naziv + ";" + tipTreninga + ";" + objekatGdePripada.getIntId() + ";" + trajanje + ";" + ((trener == null)?-1:trener.getIntId()) + ";" + opis + ";" 
+				+ slika;
+	}
 }

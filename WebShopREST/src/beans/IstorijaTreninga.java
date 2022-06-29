@@ -2,6 +2,9 @@ package beans;
 
 import java.time.LocalDateTime;
 
+import utils.DateHelper;
+import utils.DateTimeHelper;
+
 public class IstorijaTreninga {
 
 	private int intId;
@@ -72,6 +75,10 @@ public class IstorijaTreninga {
 	}
 	public void setTrener(Korisnik trener) {
 		this.trener = trener;
+	}
+	
+	public String convertToString() {
+		return intId + ";" + DateTimeHelper.dateTimeToString(datumVremePrijave) + ";" + trening.getIntId() + ";" + kupac.getIntId() + ";" + ((trener == null)?-1:trener.getIntId()) ;
 	}
 	
 	

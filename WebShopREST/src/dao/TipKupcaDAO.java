@@ -1,17 +1,21 @@
 package dao;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
+import beans.Lokacija;
 import beans.TipKupca;
 
 public class TipKupcaDAO {
 	
 	private static TipKupcaDAO tipKupcaInstance = null;
+	private static String contextPath = "";
 	
 	private HashMap<Integer, TipKupca> tipoviKupca = new HashMap<Integer, TipKupca>();
 
@@ -60,6 +64,7 @@ public class TipKupcaDAO {
 
 	public void loadTipoviKupca(String contextPath) {
 		BufferedReader in = null;
+		this.contextPath = contextPath;
 		try {
 			File file = new File(contextPath + "/files/tipoviKupca.txt");
 			System.out.println(file.getCanonicalPath());
@@ -89,6 +94,29 @@ public class TipKupcaDAO {
 			if (in != null) {
 				try {
 					in.close();
+				} catch (Exception e) {
+				}
+			}
+		}
+
+	}
+	
+	public void sacuvajTipoveKupca() {
+		BufferedWriter out = null;
+		try {
+			File file = new File(contextPath + "/files/tipoviKupca.txt"); //proveri naziv fajla
+			System.out.println(file.getCanonicalPath());
+			out = new BufferedWriter(new FileWriter(file));
+
+			for(TipKupca tipKupca : tipoviKupca.values()) {
+				out.write(tipKupca.convertToString() + '\n');
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
 				} catch (Exception e) {
 				}
 			}

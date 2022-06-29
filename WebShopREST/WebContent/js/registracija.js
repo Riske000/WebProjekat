@@ -6,7 +6,7 @@ var app = new Vue({
 	},
 	mounted() {
 		this.userToRegister = {
-			intId: '', korisnickoIme: null, sifra: null, ime: null, prezime: null, pol: null, datumRodjenja: null
+			intId: '', korisnickoIme: null, sifra: null, ime: null, prezime: null, pol: null, datumRodjenja: null, uloga: 'kupac'
 		}
 	},
 	methods: {
@@ -18,7 +18,7 @@ var app = new Vue({
 				event.preventDefault();
 				return;
 			}
-			axios.post('rest/korisnik1/', this.userToRegister)
+			axios.post('rest/korisnik1', this.userToRegister)
 				.then((response) => {
 					alert('Uspesno ste se registrovali!')
 				})

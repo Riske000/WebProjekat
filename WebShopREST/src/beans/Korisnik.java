@@ -20,7 +20,10 @@ public class Korisnik {
 	private String pol;
 	private LocalDate datumRodjenja;
 	private String uloga;
-
+	
+	public String tren = "Trenutni korisnik:";
+	public String login = "Uloguj se";
+	public String register = "Registruj se";
 	// trener
 	private List<IstorijaTreninga> istorijaTreninga;
 

@@ -116,11 +116,11 @@ public class KorisnikDAO {
 			LocalDate datumRodjenja = LocalDate.now();
 			int intId = -1;
 			List<IstorijaTreninga> istorijaTreninga = new ArrayList<IstorijaTreninga>();
-			Clanarina clanarina = new Clanarina();
+			Clanarina clanarina = null;
 			List<SportskiObjekat> poseceniObjekti = new ArrayList<SportskiObjekat>();
 			double brojSakupljenihPoena = -1;
-			TipKupca tipKupca = new TipKupca();
-			SportskiObjekat sportskiObjekat = new SportskiObjekat();
+			TipKupca tipKupca = null;
+			SportskiObjekat sportskiObjekat = null;
 
 			StringTokenizer st;
 			while ((line = in.readLine()) != null) {
@@ -138,11 +138,27 @@ public class KorisnikDAO {
 					datumRodjenja = DateHelper.stringToDate(st.nextToken().trim());
 					uloga = st.nextToken().trim();
 					// istorija trening ucitavanje
-					clanarina = new Clanarina(Integer.parseInt(st.nextToken().trim()));
+					
+					int clanarinaId = Integer.parseInt(st.nextToken().trim());
+					
+					if(clanarinaId != -1) {
+						clanarina = new Clanarina(clanarinaId);
+					}
+					
 					// poseceni objekti ucitavanje
 					brojSakupljenihPoena = Double.parseDouble(st.nextToken().trim());
-					tipKupca = new TipKupca(Integer.parseInt(st.nextToken().trim()));
-					sportskiObjekat = new SportskiObjekat(Integer.parseInt(st.nextToken().trim()));
+					
+					int tipKupcaId = Integer.parseInt(st.nextToken().trim());
+					
+					if(tipKupcaId != -1) {
+						tipKupca = new TipKupca(tipKupcaId);
+					}
+					
+					int sportskiObjekatId = Integer.parseInt(st.nextToken().trim());
+					
+					if(sportskiObjekatId != -1) {
+						sportskiObjekat = new SportskiObjekat(sportskiObjekatId);
+					}
 				}
 				korisnici.put(intId, new Korisnik(intId, korisnickoIme, sifra, ime, prezime, pol, datumRodjenja, uloga,
 						istorijaTreninga, clanarina, poseceniObjekti, brojSakupljenihPoena, tipKupca, sportskiObjekat));
@@ -222,6 +238,9 @@ public class KorisnikDAO {
 	public void connectKorisnikClanarina() {
 		ArrayList<Clanarina> clanarine = new ArrayList<Clanarina>(ClanarinaDAO.getInstance().findAll());
 		for (Korisnik korisnik : korisnici.values()) {
+			if(korisnik.getClanarina() == null) {
+				continue;
+			}
 			int idTrazeni = korisnik.getClanarina().getIntId();
 
 			for (Clanarina clanarina : clanarine) {
@@ -237,6 +256,9 @@ public class KorisnikDAO {
 	public void connectKorisnikTipKupca() {
 		ArrayList<TipKupca> tipoviKorisnika = new ArrayList<TipKupca>(TipKupcaDAO.getInstance().findAll());
 		for (Korisnik korisnik : korisnici.values()) {
+			if(korisnik.getTipKupca() == null) {
+				continue;
+			}
 			int idTrazeni = korisnik.getTipKupca().getIntId();
 
 			for (TipKupca tipKupca : tipoviKorisnika) {
@@ -252,6 +274,9 @@ public class KorisnikDAO {
 		ArrayList<SportskiObjekat> sportskiObjekti = new ArrayList<SportskiObjekat>( SportskiObjekatDAO.getInstance()
 				.findAll());
 		for (Korisnik korisnik : korisnici.values()) {
+			if(korisnik.getSportskiObjekat() == null) {
+				continue;
+			}
 			int idTrazeni = korisnik.getSportskiObjekat().getIntId();
 
 			for (SportskiObjekat sportskiObjekat : sportskiObjekti) {
