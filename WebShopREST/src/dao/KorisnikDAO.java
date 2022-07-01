@@ -18,6 +18,8 @@ import beans.Korisnik;
 import beans.SportskiObjekat;
 import beans.TipKupca;
 import utils.DateHelper;
+import utils.ImeTipa;
+import utils.Uloge;
 
 public class KorisnikDAO {
 
@@ -47,6 +49,14 @@ public class KorisnikDAO {
 	}
 
 	public Korisnik save(Korisnik korisnik) {
+		if(korisnik.getUloga() == Uloge.KUPAC) {
+			TipKupca type = new TipKupca(0);
+			type.setImeTipa(ImeTipa.BRONZANI);
+			type.setPopust(0);
+			type.setPotrebniPoeni(0);
+			type = TipKupcaDAO.getInstance().save(type);
+			korisnik.setTipKupca(type);
+		}
 		Integer maxId = -1;
 		for (int id : korisnici.keySet()) {
 			if (id > maxId) {
@@ -92,6 +102,7 @@ public class KorisnikDAO {
 
 	public Korisnik update(Korisnik korisnik) {
 		korisnici.put(korisnik.getIntId(), korisnik);
+		sacuvajKorisnike();
 		return korisnik;
 	}
 

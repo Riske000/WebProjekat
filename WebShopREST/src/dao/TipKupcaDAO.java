@@ -50,6 +50,7 @@ public class TipKupcaDAO {
 		maxId++;
 		tipKupca.setIntId(maxId);
 		tipoviKupca.put(tipKupca.getIntId(), tipKupca);
+		sacuvajTipoveKupca();
 		return tipKupca;
 	}
 

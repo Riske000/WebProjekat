@@ -6,9 +6,11 @@ import java.util.Collection;
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -81,6 +83,7 @@ public class KorisnikService1 {
 		return Response.status(200).build();
 	}
 	
+	
 	@GET
 	@Path("/currentUser")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -96,5 +99,14 @@ public class KorisnikService1 {
 			@QueryParam("searchKorisnickoIme") String searchKorisnickoIme) {
 		KorisnikDAO dao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
 		return dao.search(searchIme, searchPrezime, searchKorisnickoIme);
+	}
+	
+	@PUT
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Korisnik changeOne(Korisnik korisnik) {
+		KorisnikDAO dao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
+		return dao.update(korisnik);
 	}
 }

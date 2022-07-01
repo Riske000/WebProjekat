@@ -9,8 +9,12 @@ var app = new Vue({
 		.then((response) => {this.newUser = response.data})
 		},
 	methods: {
-		createUser: function (event) {
-			
+		updateUser: function (event) {
+			axios.put('rest/korisnik1/', this.newUser)
+					.then((response) => {
+						alert('Podaci su uspesno promenjeni ')
+					})
+			event.preventDefault();
 		}
 	}
 });
