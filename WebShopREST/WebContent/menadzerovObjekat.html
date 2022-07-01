@@ -7,67 +7,68 @@
 <body>
 	<div id="sportskiObjekat">
 		<table>
-				<tr>
-					<td>Ime: </td>
-					<td><input type="text" name="ime" v-model="noviSportskiObjekat.ime"></td>
-				</tr>
-				<tr>
-					<td>Tip objekta: </td>
-					<td><select name="tipObjekta" id="tipObjekta" v-model="noviSportskiObjekat.tipObjekta">
-  							<option value="teretana">Teretana</option>
-  							<option value="bazen">Bazen</option>
-  							<option value="sportski centar">Sportski centar</option>
-  							<option value="plesni studio">Plesni studio</option>
-  							<option value="fitnes centar">Fitnes centar</option>
-  							<option value="fudbalski teren">Fudbalski teren</option>
-  							<option value="kosarkaski teren">Kosarkaski teren</option>
-						</select></td>
-				</tr>
-				<tr>
-					<td>Geografska sirina: </td>
-					<td><input type="number" name="geografskaSirina" v-model="noviSportskiObjekat.lokacija.geografskaSirina"></td>
-				</tr>
-				<tr>
-					<td>Geografska duzina: </td>
-					<td><input type="number" name="geografskaDuzina" v-model="noviSportskiObjekat.lokacija.geografskaDuzina"></td>
-				</tr>
-				<tr>
-					<td>Ulica: </td>
-					<td><input type="text" name="ulica" v-model="noviSportskiObjekat.lokacija.ulica"></td>
-				</tr>
-				<tr>
-					<td>Broj: </td>
-					<td><input type="text" name="broj" v-model="noviSportskiObjekat.lokacija.broj"></td>
-				</tr>
+			<tr>
+				<td>Ime: </td>
+				<td><input type="text" name="ime" v-model="sportskiObjekat.ime"></td>
+			</tr>
+			<tr>
+				<td>Tip objekta: </td>
+				<td><select name="tipObjekta" id="tipObjekta" v-model="sportskiObjekat.tipObjekta">
+  						<option value="teretana">Teretana</option>
+  						<option value="bazen">Bazen</option>
+  						<option value="sportski centar">Sportski centar</option>
+  						<option value="plesni studio">Plesni studio</option>
+  						<option value="fitnes centar">Fitnes centar</option>
+  						<option value="fudbalski teren">Fudbalski teren</option>
+  						<option value="kosarkaski teren">Kosarkaski teren</option>
+					</select></td>
+			</tr>
+			<tr>
+				<td>Geografska sirina: </td>
+				<td><input type="number" name="geografskaSirina" v-model="sportskiObjekat.lokacija.geografskaSirina"></td>
+			</tr>
+			<tr>
+				<td>Geografska duzina: </td>
+				<td><input type="number" name="geografskaDuzina" v-model="sportskiObjekat.lokacija.geografskaDuzina"></td>
+			</tr>
+			<tr>
+				<td>Ulica: </td>
+				<td><input type="text" name="ulica" v-model="sportskiObjekat.lokacija.ulica"></td>
+			</tr>
+			<tr>
+				<td>Broj: </td>
+				<td><input type="text" name="broj" v-model="sportskiObjekat.lokacija.broj"></td>
+			</tr>
 				
-				<tr>
-					<td>Mesto: </td>
-					<td><input type="text" name="mesto" v-model="noviSportskiObjekat.lokacija.mesto"></td>
-				</tr>
+			<tr>
+				<td>Mesto: </td>
+				<td><input type="text" name="mesto" v-model="sportskiObjekat.lokacija.mesto"></td>
+			</tr>
 				
-				<tr>
-					<td>Postanski broj: </td>
-					<td><input type="text" name="postanskiBroj" v-model="noviSportskiObjekat.lokacija.postanskiBroj"></td>
-				</tr>
+			<tr>
+				<td>Postanski broj: </td>
+				<td><input type="text" name="postanskiBroj" v-model="sportskiObjekat.lokacija.postanskiBroj"></td>
+			</tr>
 				
-				<tr>
-					<td>Pocetak radnog vremena: </td>
-					<td><input type="time" name="pocetakRadnogVremena" v-model="noviSportskiObjekat.pocetakRadnogVremena"></td>
-				</tr>
+			<tr>
+				<td>Prosecna ocena: </td>
+				<td><input type="number" name="prosecnaOcena" v-model="sportskiObjekat.prosecnaOcena"></td>
+			</tr>
 				
-				<tr>
-					<td>Kraj radnog vremena: </td>
-					<td><input type="time" name="krajRadnogVremena" v-model="noviSportskiObjekat.krajRadnogVremena"></td>
-				</tr>
+			<tr>
+				<td>Pocetak radnog vremena: </td>
+				<td><input type="time" name="pocetakRadnogVremena" v-model="sportskiObjekat.pocetakRadnogVremena"></td>
+			</tr>
 				
-				<tr>
-				
-				<tr>
-					<td><input type="submit" value="Kreiraj"></td>
-				</tr>
-			</table>
-
+			<tr>
+				<td>Kraj radnog vremena: </td>
+				<td><input type="time" name="krajRadnogVremena" v-model="sportskiObjekat.krajRadnogVremena"></td>
+			</tr>
+		</table>	
 	</div>
+	<script src="js/vue.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="js/menadzerovObjekat.js"></script>
 	
 </body>
 </html>

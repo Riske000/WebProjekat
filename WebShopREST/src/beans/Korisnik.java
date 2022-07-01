@@ -178,7 +178,7 @@ public class Korisnik {
 
 	public String convertToString() {
 		return intId + ";" + korisnickoIme + ";" + sifra + ";" + ime + ";" + prezime + ";" + pol + ";" + DateHelper.dateToString(datumRodjenja) + ";" 
-				+ uloga + ";" + ((clanarina == null)?-1:clanarina.getIntId()) + ";" + brojSakupljenihPoena + ";" + ((tipKupca == null)?-1:tipKupca.getIntId()) + ";" + ((sportskiObjekat == null)?-1:tipKupca.getIntId());
+				+ uloga + ";" + ((clanarina == null)?-1:clanarina.getIntId()) + ";" + brojSakupljenihPoena + ";" + ((tipKupca == null)?-1:tipKupca.getIntId()) + ";" + ((sportskiObjekat == null)?-1:sportskiObjekat.getIntId());
 	}
 
 }

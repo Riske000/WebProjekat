@@ -10,11 +10,7 @@ var app = new Vue({
 		axios.get('rest/korisnik1/currentUser').then((response) => {
 			this.loggedUser = response.data
 			})
-		axios.get('rest/sportskiObjekti/getSportsObject', { params: { id: this.sportskiObjekat.intId } }).
-			then((response) => {
-			this.sportskiObjekat = response.data
-			})
-		axios.get('rest/sportskiObjekti/getSportsObject', { params: { id: this.sportskiObjekat.intId } }).
+		axios.get('rest/sportskiObjekti/getSportsObject', { params: { id: this.loggedUser.sportskiObjekat.intId } }).
 			then((response) => {
 			this.sportskiObjekat = response.data
 			})
@@ -22,9 +18,7 @@ var app = new Vue({
 	},
 	methods: {
 		pretraziOjekte: function() {
-			axios.get('rest/sportskiObjekti/search', { params: { searchIme: this.searchIme, searchTip: this.searchTip, searchLokacija: this.searchLokacija, 
-				searchOcena: this.searchOcena } })
-				.then(response => (this.sportObjects = response.data))
+			
 		}
 
 

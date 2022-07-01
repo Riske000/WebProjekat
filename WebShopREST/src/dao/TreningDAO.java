@@ -45,6 +45,18 @@ public class TreningDAO {
 	public Collection<Trening> findAll() {
 		return treninzi.values();
 	}
+	
+	public Collection<Korisnik> getTreneriZaSportskiObjekat(int idSportskogObjekta){
+		ArrayList<Korisnik> treneriZaSportskiObjekat = new ArrayList<Korisnik>();
+		for(Trening trening : treninzi.values()) {
+			if(trening.getObjekatGdePripada().getIntId() == idSportskogObjekta) {
+				if(trening.getTrener() != null) {
+					treneriZaSportskiObjekat.add(trening.getTrener());
+				}
+			}
+		}
+		return treneriZaSportskiObjekat;
+	}
 
 	public Trening findTrening(int id) {
 		return treninzi.containsKey(id) ? treninzi.get(id) : null;

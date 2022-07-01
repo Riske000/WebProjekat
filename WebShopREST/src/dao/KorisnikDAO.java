@@ -296,5 +296,17 @@ public class KorisnikDAO {
 
 		return pronadjeni;
 	}
+	
+	public ArrayList<Korisnik> getKupciZaSportskiObjekat(int idSportskogObjekta){
+		ArrayList<Korisnik> kupci = new ArrayList<Korisnik>();
+		for(Korisnik korisnik : korisnici.values()) {
+			for(SportskiObjekat sportskiObjekat : korisnik.getPoseceniObjekti()) {
+				if(sportskiObjekat.getIntId() == idSportskogObjekta) {
+					kupci.add(korisnik);
+				}
+			}
+		}
+		return kupci;
+	}
 
 }
