@@ -1,13 +1,13 @@
 var app = new Vue({
 	el: '#noviSportskiObjekatForm',
 	data: {
-		noviSportskiObjekat : {
-			intId: '', ime: null, tipObjekta: null, status: "ne radi", lokacija: {geografskaSirina: '', geografskaDuzina: '', ulica: null, broj: '', mesto: null, postanskiBroj: null},
-			logoObjekta:" ", pocetakRadnogVremena: null, krajRadnogVremena: null
-		} ,
+		noviSportskiObjekat : {} ,
+		novaLokacija: {},
 		error: '',
 		slobodniMenadzeri: null,
-		imaSlobodnih: 'true'
+		imaSlobodnih: 'true',
+		izabraniMenadzer: null, 
+		prikaziFormu: false
 	},
 	mounted() {
 		this.noviSportskiObjekat = {

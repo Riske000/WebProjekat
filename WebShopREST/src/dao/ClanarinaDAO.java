@@ -12,6 +12,7 @@ import java.util.StringTokenizer;
 
 import beans.Clanarina;
 import beans.Korisnik;
+import beans.SportskiObjekat;
 import utils.DateHelper;
 
 public class ClanarinaDAO {
@@ -39,6 +40,10 @@ public class ClanarinaDAO {
 	
 	public Collection<Clanarina> findAll(){
 		return clanarine.values();
+	}
+	
+	public Clanarina findClanarina(int id) {
+		return clanarine.containsKey(id) ? clanarine.get(id) : null;
 	}
 	
 	public Clanarina save(Clanarina clanarina) {

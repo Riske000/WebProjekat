@@ -102,6 +102,16 @@ public class KorisnikDAO {
 
 	public Korisnik update(Korisnik korisnik) {
 		korisnici.put(korisnik.getIntId(), korisnik);
+		if(korisnik.getSportskiObjekat() !=null) {
+			int id = korisnik.getSportskiObjekat().getIntId();
+			SportskiObjekat sportskiObjekat = SportskiObjekatDAO.getInstance().findObjekat(id);
+			korisnik.setSportskiObjekat(sportskiObjekat);
+		}
+		if(korisnik.getClanarina() != null) {
+			int id = korisnik.getClanarina().getIntId();
+			Clanarina clanarina = ClanarinaDAO.getInstance().findClanarina(id);
+			korisnik.setClanarina(clanarina);
+		}
 		sacuvajKorisnike();
 		return korisnik;
 	}
