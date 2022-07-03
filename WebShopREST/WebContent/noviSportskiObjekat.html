@@ -65,10 +65,16 @@
 				
 				<tr>
 					<td>Menadzer: </td>
-					<td><select v-bind:hidden="imaSlobodnih == 'false'">
-							<option v-for="sm in slobodniMenadzeri">{{sm.ime}}
-								{{sm.prezime}} {{sm.korisnickoIme}}</option>
-						</select></td>
+					<td><select v-bind:hidden="freeManagers === null || freeManagers.length == 0" v-on:click="selectManager($event.target.value)" >
+						<option v-for="fm in freeManagers" >
+						 {{fm.name}} {{fm.surname}} {{fm.user_name}} 
+						</option>
+					</select>
+					
+					<button v-bind:hidden="freeManagers !== null && freeManagers.length != 0" v-on:click="showForm()"> Register manager</button>
+					
+					<h v-bind:hidden="showRegisterForm == false"> forma </h></td>
+				</tr>
 				<tr>
 					<td><input type="submit" value="Kreiraj"></td>
 				</tr>

@@ -1,42 +1,51 @@
 var app = new Vue({
 	el: '#noviSportskiObjekatForm',
 	data: {
-		noviSportskiObjekat : {
-			intId: '', ime: null, tipObjekta: null, status: "ne radi", lokacija: {geografskaSirina: '', geografskaDuzina: '', ulica: null, broj: '', mesto: null, postanskiBroj: null},
-			logoObjekta:" ", pocetakRadnogVremena: null, krajRadnogVremena: null
-		} ,
+		noviSportskiObjekat : {} ,
+		novaLokacija: {},
 		error: '',
 		slobodniMenadzeri: null,
-		imaSlobodnih: 'true'
+		imaSlobodnih: 'true',
+		izabraniMenadzer: null, 
+		prikaziFormu: false
 	},
 	mounted() {
-		this.noviSportskiObjekat = {
-			intId: '', ime: null, tipObjekta: null, status: "ne radi", lokacija: {geografskaSirina: '', geografskaDuzina: '', ulica: null, broj: '', mesto: null, postanskiBroj: null},
-			logoObjekta:" ", pocetakRadnogVremena: null, krajRadnogVremena: null
-		} 
+		 
 		axios.get('rest/korisnik1/freeManagers')
-			 .then((response) => {this.slobodniMenadzeri = response.data;})
-		if(this.slobodniMenadzeri === null){
-			this.imaSlobodnih = 'false';
-		}
+			 .then((response) => {console.log(response.data)
+								  this.slobodniMenadzeri = response.data
+								})
+		this.noviSportskiObjekat = {
+			intId: '', ime: null, tipObjekta: null, sadrzajObjekta: null,  status: "ne radi", lokacija: null,
+			logoObjekta: null, prosecnaOcena: null, pocetakRadnogVremena: null, krajRadnogVremena: null}
+		this.novaLokacija = {intId: '', geografskaSirina: null, geografskaDuzina: null, ulica: null, broj: null, mesto: null, postanskiBroj: null}
 	},
 	methods: {
 		createSportskiObjekat: function(event) {
 			this.error = ""
-			if (!this.noviSportskiObjekat.ime || !this.noviSportskiObjekat.tipObjekta || !this.noviSportskiObjekat.lokacija.geografskaSirina
-			 			|| !this.noviSportskiObjekat.lokacija.geografskaDuzina || !this.noviSportskiObjekat.lokacija.ulica || !this.noviSportskiObjekat.lokacija.broj 
-			 			|| !this.noviSportskiObjekat.lokacija.mesto || !this.noviSportskiObjekat.lokacija.postanskiBroj) {
+			if (!this.noviSportskiObjekat.ime || !this.noviSportskiObjekat.tipObjekta || !this.noviSportskiObjekat.logoObjekta) {
 				this.error = "Sva polja moraju biti uneta!";
 				event.preventDefault();
 				return;
 			}
+			if(!this.novaLokacija.geografskaDuzina || !this.novaLokacija.geografskaSirina || !this.novaLokacija.ulica || !this.novaLokacija.broj || !this.novaLokacija.mesto || !this.novaLokacija.postanskiBroj){
+				this.error = "Sva polja moraju biti uneta!";
+				event.preventDefault();
+				return;
+			}
+			if(this.izabraniMenadzer === null){
+				this.izabraniMenadzer = this.slobodniMenadzeri[0]
+			}
+
+			this.noviSportskiObjekat.lokacija = this.novaLokacija
 			axios.post('rest/sportskiObjekti', this.noviSportskiObjekat)
 				.then((response) => {
 					alert('Uspesno ste kreirali sportski objekat!')
 				}).catch(() =>{
-					alert('Korisnicko ime vec postoji!')
-					event.preventDefault();
-					return;
+					alert('This sport object already exists.')
+					 this.error = "This sport object already exists.";
+					 event.preventDefault();
+					 return;
 				})
 			event.preventDefault();
 			return;
