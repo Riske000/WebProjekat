@@ -5,7 +5,7 @@ var app = new Vue({
 		searchIme: "",
 		searchTip: "",
 		searchLokacija: "",
-		searchOcena: "1",
+		searchOcena: "",
 		loggedUser: {},
 		logovan: false
 	},
@@ -19,6 +19,9 @@ var app = new Vue({
 	},
 	methods: {
 		pretraziOjekte: function() {
+			if(this.searchOcena == ""){
+				this.searchOcena = "1";
+			}
 			axios.get('rest/sportskiObjekti/search', { params: { searchIme: this.searchIme, searchTip: this.searchTip, searchLokacija: this.searchLokacija, 
 				searchOcena: this.searchOcena } })
 				.then(response => (this.sportObjects = response.data))

@@ -18,6 +18,7 @@ import beans.Korisnik;
 import beans.SportskiObjekat;
 import beans.TipKupca;
 import utils.DateHelper;
+import utils.ImeTipa;
 import utils.Uloge;
 
 public class KorisnikDAO {
@@ -48,6 +49,14 @@ public class KorisnikDAO {
 	}
 
 	public Korisnik save(Korisnik korisnik) {
+		if(korisnik.getUloga() == Uloge.KUPAC) {
+			TipKupca type = new TipKupca(0);
+			type.setImeTipa(ImeTipa.BRONZANI);
+			type.setPopust(0);
+			type.setPotrebniPoeni(0);
+			type = TipKupcaDAO.getInstance().save(type);
+			korisnik.setTipKupca(type);
+		}
 		Integer maxId = -1;
 		for (int id : korisnici.keySet()) {
 			if (id > maxId) {
@@ -93,6 +102,7 @@ public class KorisnikDAO {
 
 	public Korisnik update(Korisnik korisnik) {
 		korisnici.put(korisnik.getIntId(), korisnik);
+		sacuvajKorisnike();
 		return korisnik;
 	}
 
@@ -110,12 +120,7 @@ public class KorisnikDAO {
 			String line, korisnickoIme = "", sifra = "", ime = "", prezime = "", pol = "", uloga = "";
 			LocalDate datumRodjenja = LocalDate.now();
 			int intId = -1;
-			List<IstorijaTreninga> istorijaTreninga = new ArrayList<IstorijaTreninga>();
-			Clanarina clanarina = null;
-			List<SportskiObjekat> poseceniObjekti = new ArrayList<SportskiObjekat>();
 			double brojSakupljenihPoena = -1;
-			TipKupca tipKupca = null;
-			SportskiObjekat sportskiObjekat = null;
 
 			StringTokenizer st;
 			while ((line = in.readLine()) != null) {
@@ -124,6 +129,12 @@ public class KorisnikDAO {
 					continue;
 				st = new StringTokenizer(line, ";");
 				while (st.hasMoreTokens()) {
+					List<IstorijaTreninga> istorijaTreninga = new ArrayList<IstorijaTreninga>();
+					Clanarina clanarina = null;
+					List<SportskiObjekat> poseceniObjekti = new ArrayList<SportskiObjekat>();
+					TipKupca tipKupca = null;
+					SportskiObjekat sportskiObjekat = null;
+					
 					intId = Integer.parseInt(st.nextToken().trim());
 					korisnickoIme = st.nextToken().trim();
 					sifra = st.nextToken().trim();
@@ -154,9 +165,9 @@ public class KorisnikDAO {
 					if (sportskiObjekatId != -1) {
 						sportskiObjekat = new SportskiObjekat(sportskiObjekatId);
 					}
+					korisnici.put(intId, new Korisnik(intId, korisnickoIme, sifra, ime, prezime, pol, datumRodjenja, uloga,
+							istorijaTreninga, clanarina, poseceniObjekti, brojSakupljenihPoena, tipKupca, sportskiObjekat));
 				}
-				korisnici.put(intId, new Korisnik(intId, korisnickoIme, sifra, ime, prezime, pol, datumRodjenja, uloga,
-						istorijaTreninga, clanarina, poseceniObjekti, brojSakupljenihPoena, tipKupca, sportskiObjekat));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
