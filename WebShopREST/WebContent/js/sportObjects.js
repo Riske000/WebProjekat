@@ -7,7 +7,8 @@ var app = new Vue({
 		searchLokacija: "",
 		searchOcena: "",
 		loggedUser: {},
-		logovan: false
+		logovan: false,
+		error: ""
 	},
 	mounted() {
 		axios.get('rest/sportskiObjekti')
@@ -19,8 +20,13 @@ var app = new Vue({
 	},
 	methods: {
 		pretraziOjekte: function() {
+			this.error = " ";
 			if(this.searchOcena == ""){
 				this.searchOcena = "1";
+			}
+			if(this.searchOcena < 1 || this.searchOcena > 5){
+				this.error = "Vrednost mora biti izmedju 1 i 5!";
+				return;
 			}
 			axios.get('rest/sportskiObjekti/search', { params: { searchIme: this.searchIme, searchTip: this.searchTip, searchLokacija: this.searchLokacija, 
 				searchOcena: this.searchOcena } })
