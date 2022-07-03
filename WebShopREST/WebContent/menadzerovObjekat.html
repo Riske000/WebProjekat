@@ -9,11 +9,11 @@
 		<table>
 			<tr>
 				<td>Ime: </td>
-				<td><input type="text" name="ime" v-model="sportskiObjekat.ime"></td>
+				<td><input type="text" name="ime" v-model="loggedUser.sportskiObjekat.ime"></td>
 			</tr>
 			<tr>
 				<td>Tip objekta: </td>
-				<td><select name="tipObjekta" id="tipObjekta" v-model="sportskiObjekat.tipObjekta">
+				<td><select name="tipObjekta" id="tipObjekta" v-model="loggedUser.sportskiObjekat.tipObjekta">
   						<option value="teretana">Teretana</option>
   						<option value="bazen">Bazen</option>
   						<option value="sportski centar">Sportski centar</option>
@@ -25,46 +25,82 @@
 			</tr>
 			<tr>
 				<td>Geografska sirina: </td>
-				<td><input type="number" name="geografskaSirina" v-model="sportskiObjekat.lokacija.geografskaSirina"></td>
+				<td><input type="number" name="geografskaSirina" v-model="loggedUser.sportskiObjekat.lokacija.geografskaSirina"></td>
 			</tr>
 			<tr>
 				<td>Geografska duzina: </td>
-				<td><input type="number" name="geografskaDuzina" v-model="sportskiObjekat.lokacija.geografskaDuzina"></td>
+				<td><input type="number" name="geografskaDuzina" v-model="loggedUser.sportskiObjekat.lokacija.geografskaDuzina"></td>
 			</tr>
 			<tr>
 				<td>Ulica: </td>
-				<td><input type="text" name="ulica" v-model="sportskiObjekat.lokacija.ulica"></td>
+				<td><input type="text" name="ulica" v-model="loggedUser.sportskiObjekat.lokacija.ulica"></td>
 			</tr>
 			<tr>
 				<td>Broj: </td>
-				<td><input type="text" name="broj" v-model="sportskiObjekat.lokacija.broj"></td>
+				<td><input type="text" name="broj" v-model="loggedUser.sportskiObjekat.lokacija.broj"></td>
 			</tr>
 				
 			<tr>
 				<td>Mesto: </td>
-				<td><input type="text" name="mesto" v-model="sportskiObjekat.lokacija.mesto"></td>
+				<td><input type="text" name="mesto" v-model="loggedUser.sportskiObjekat.lokacija.mesto"></td>
 			</tr>
 				
 			<tr>
 				<td>Postanski broj: </td>
-				<td><input type="text" name="postanskiBroj" v-model="sportskiObjekat.lokacija.postanskiBroj"></td>
+				<td><input type="text" name="postanskiBroj" v-model="loggedUser.sportskiObjekat.lokacija.postanskiBroj"></td>
 			</tr>
 				
 			<tr>
 				<td>Prosecna ocena: </td>
-				<td><input type="number" name="prosecnaOcena" v-model="sportskiObjekat.prosecnaOcena"></td>
+				<td><input type="number" name="prosecnaOcena" v-model="loggedUser.sportskiObjekat.prosecnaOcena"></td>
 			</tr>
 				
 			<tr>
 				<td>Pocetak radnog vremena: </td>
-				<td><input type="time" name="pocetakRadnogVremena" v-model="sportskiObjekat.pocetakRadnogVremena"></td>
+				<td><input type="time" name="pocetakRadnogVremena" v-model="loggedUser.sportskiObjekat.pocetakRadnogVremena"></td>
 			</tr>
 				
 			<tr>
 				<td>Kraj radnog vremena: </td>
-				<td><input type="time" name="krajRadnogVremena" v-model="sportskiObjekat.krajRadnogVremena"></td>
+				<td><input type="time" name="krajRadnogVremena" v-model="loggedUser.sportskiObjekat.krajRadnogVremena"></td>
 			</tr>
-		</table>	
+		</table>
+		
+		<button value="Treneri" v-on:click="pretraziOjekte">Treneri</button>
+		
+		<table border="1" id="tabela">
+			<thead>
+				<tr bgcolor="lightgrey">
+					<th>Ime</th>
+					<th>Prezime</th>
+					<th>Korisnicko ime</th>
+				</tr>
+			</thead>
+
+			<tr v-for="t in treneri">
+				<td>{{t.ime }}</td>
+				<td>{{t.prezime }}</td>
+				<td>{{t.korisnickoIme }}</td>
+			</tr>
+		</table>
+		
+		<button value="Posetioci" v-on:click="getPosetioci">Posetioci</button>
+		
+		<table border="1" id="tabela">
+			<thead>
+				<tr bgcolor="lightgrey">
+					<th>Ime</th>
+					<th>Prezime</th>
+					<th>Korisnicko ime</th>
+				</tr>
+			</thead>
+
+			<tr v-for="k in kupci">
+				<td>{{k.ime }}</td>
+				<td>{{k.prezime }}</td>
+				<td>{{k.korisnickoIme }}</td>
+			</tr>
+		</table>		
 	</div>
 	<script src="js/vue.js"></script>
 	<script src="js/axios.js"></script>

@@ -105,4 +105,13 @@ public class KorisnikService1 {
 		KorisnikDAO dao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
 		return dao.getKupciZaSportskiObjekat(idSportskogObjekta);
 	}
+	
+	@GET
+	@Path("/freeManagers")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Korisnik> getSlobodniMenadzeri() {
+		KorisnikDAO dao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
+		return dao.getSlobodniMenadzeri();
+	}
 }

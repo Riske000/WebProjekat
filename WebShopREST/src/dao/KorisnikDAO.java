@@ -18,6 +18,7 @@ import beans.Korisnik;
 import beans.SportskiObjekat;
 import beans.TipKupca;
 import utils.DateHelper;
+import utils.Uloge;
 
 public class KorisnikDAO {
 
@@ -303,10 +304,25 @@ public class KorisnikDAO {
 			for(SportskiObjekat sportskiObjekat : korisnik.getPoseceniObjekti()) {
 				if(sportskiObjekat.getIntId() == idSportskogObjekta) {
 					kupci.add(korisnik);
+					break;
 				}
 			}
 		}
 		return kupci;
+	}
+	
+	public ArrayList<Korisnik> getSlobodniMenadzeri(){
+		ArrayList<Korisnik> freeManagers = new ArrayList<Korisnik>();
+		
+		for(Korisnik korisnik : korisnici.values()) {
+			if(korisnik.getUloga().equals( Uloge.MENADZER)) {
+				if(korisnik.getSportskiObjekat() == null) {
+					freeManagers.add(korisnik);
+				}
+			}
+		}
+		return freeManagers;
+		
 	}
 
 }

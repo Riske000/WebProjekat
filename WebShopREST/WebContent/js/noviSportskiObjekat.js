@@ -1,14 +1,24 @@
 var app = new Vue({
 	el: '#noviSportskiObjekatForm',
 	data: {
-		noviSportskiObjekat: {},
-		error: ''
+		noviSportskiObjekat : {
+			intId: '', ime: null, tipObjekta: null, status: "ne radi", lokacija: {geografskaSirina: '', geografskaDuzina: '', ulica: null, broj: '', mesto: null, postanskiBroj: null},
+			logoObjekta:" ", pocetakRadnogVremena: null, krajRadnogVremena: null
+		} ,
+		error: '',
+		slobodniMenadzeri: null,
+		imaSlobodnih: 'true'
 	},
 	mounted() {
 		this.noviSportskiObjekat = {
-			intId: '', ime: null, tipObjekta: null, status: " ne radi", lokacija: {geografskaSirina: '', geografskaDuzina: '', ulica: null, broj: '', mesto: null, postanskiBroj: null},
+			intId: '', ime: null, tipObjekta: null, status: "ne radi", lokacija: {geografskaSirina: '', geografskaDuzina: '', ulica: null, broj: '', mesto: null, postanskiBroj: null},
 			logoObjekta:" ", pocetakRadnogVremena: null, krajRadnogVremena: null
 		} 
+		axios.get('rest/korisnik1/freeManagers')
+			 .then((response) => {this.slobodniMenadzeri = response.data;})
+		if(this.slobodniMenadzeri === null){
+			this.imaSlobodnih = 'false';
+		}
 	},
 	methods: {
 		createSportskiObjekat: function(event) {
