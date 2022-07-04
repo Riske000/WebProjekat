@@ -58,6 +58,7 @@ public class LokacijaDAO {
 		maxId++;
 		lokacija.setIntId(maxId);
 		lokacije.put(lokacija.getIntId(), lokacija);
+		sacuvajLokacije();
 		return lokacija;
 	}
 

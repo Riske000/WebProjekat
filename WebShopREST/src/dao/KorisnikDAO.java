@@ -101,17 +101,22 @@ public class KorisnikDAO {
 	}
 
 	public Korisnik update(Korisnik korisnik) {
-		korisnici.put(korisnik.getIntId(), korisnik);
+		
 		if(korisnik.getSportskiObjekat() !=null) {
 			int id = korisnik.getSportskiObjekat().getIntId();
-			SportskiObjekat sportskiObjekat = SportskiObjekatDAO.getInstance().findObjekat(id);
-			korisnik.setSportskiObjekat(sportskiObjekat);
+			Collection<SportskiObjekat> sportskiObjekti = SportskiObjekatDAO.getInstance().findAll();
+			ArrayList<SportskiObjekat> sportskiObjekti1 = new ArrayList<SportskiObjekat>();
+			for(SportskiObjekat sp : sportskiObjekti) {
+				sportskiObjekti1.add(sp);
+			}
+			korisnik.setSportskiObjekat(sportskiObjekti1.get(sportskiObjekti1.size()-1));
 		}
 		if(korisnik.getClanarina() != null) {
 			int id = korisnik.getClanarina().getIntId();
 			Clanarina clanarina = ClanarinaDAO.getInstance().findClanarina(id);
 			korisnik.setClanarina(clanarina);
 		}
+		korisnici.put(korisnik.getIntId(), korisnik);
 		sacuvajKorisnike();
 		return korisnik;
 	}

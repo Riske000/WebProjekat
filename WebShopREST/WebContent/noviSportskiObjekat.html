@@ -1,90 +1,149 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <title>Novi sportski objekat</title>
-        <meta charset="UTF-8">
-        <link rel="stylesheet" type="text/css" href="styles.css">
+<title>Novi sportski objekat</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
 <body>
-	<p style="text-align: right;"><a href="sportObjects.html">Pocetna</a></p>
-	<form id="noviSportskiObjekatForm" @submit='createSportskiObjekat'>
+	<p style="text-align: right;">
+		<a href="sportObjects.html">Pocetna</a>
+	</p>
+	<div id="noviSportskiObjekat">
+		<form  @submit='createSportskiObjekat'>
 			<table>
 				<tr>
-					<td>Ime: </td>
-					<td><input type="text" name="ime" v-model="noviSportskiObjekat.ime"></td>
+					<td>Ime:</td>
+					<td><input type="text" name="ime"
+						v-model="noviSportskiObjekat.ime"></td>
 				</tr>
 				<tr>
-					<td>Tip objekta: </td>
-					<td><select name="tipObjekta" id="tipObjekta" v-model="noviSportskiObjekat.tipObjekta">
-  							<option value="teretana">Teretana</option>
-  							<option value="bazen">Bazen</option>
-  							<option value="sportski centar">Sportski centar</option>
-  							<option value="plesni studio">Plesni studio</option>
-  							<option value="fitnes centar">Fitnes centar</option>
-  							<option value="fudbalski teren">Fudbalski teren</option>
-  							<option value="kosarkaski teren">Kosarkaski teren</option>
-						</select></td>
+					<td>Tip objekta:</td>
+					<td><select name="tipObjekta" id="tipObjekta"
+						v-model="noviSportskiObjekat.tipObjekta">
+							<option value="teretana">Teretana</option>
+							<option value="bazen">Bazen</option>
+							<option value="sportski centar">Sportski centar</option>
+							<option value="plesni studio">Plesni studio</option>
+							<option value="fitnes centar">Fitnes centar</option>
+							<option value="fudbalski teren">Fudbalski teren</option>
+							<option value="kosarkaski teren">Kosarkaski teren</option>
+					</select></td>
 				</tr>
 				<tr>
-					<td>Geografska sirina: </td>
-					<td><input type="number" name="geografskaSirina1" v-model="noviSportskiObjekat.lokacija.geografskaSirina"></td>
+					<td>Geografska sirina:</td>
+					<td><input type="number" name="geografskaSirina1"
+						v-model="novaLokacija.geografskaSirina"></td>
 				</tr>
 				<tr>
-					<td>Geografska duzina: </td>
-					<td><input type="number" name="geografskaDuzina1" v-model="noviSportskiObjekat.lokacija.geografskaDuzina"></td>
+					<td>Geografska duzina:</td>
+					<td><input type="number" name="geografskaDuzina1"
+						v-model="novaLokacija.geografskaDuzina"></td>
 				</tr>
 				<tr>
-					<td>Ulica: </td>
-					<td><input type="text" name="ulica" v-model="noviSportskiObjekat.lokacija.ulica"></td>
+					<td>Ulica:</td>
+					<td><input type="text" name="ulica"
+						v-model="novaLokacija.ulica"></td>
 				</tr>
 				<tr>
-					<td>Broj: </td>
-					<td><input type="text" name="broj" v-model="noviSportskiObjekat.lokacija.broj"></td>
+					<td>Broj:</td>
+					<td><input type="text" name="broj" v-model="novaLokacija.broj"></td>
 				</tr>
-				
+
 				<tr>
-					<td>Mesto: </td>
-					<td><input type="text" name="mesto" v-model="noviSportskiObjekat.lokacija.mesto"></td>
+					<td>Mesto:</td>
+					<td><input type="text" name="mesto"
+						v-model="novaLokacija.mesto"></td>
 				</tr>
-				
+
 				<tr>
-					<td>Postanski broj: </td>
-					<td><input type="text" name="postanskiBroj" v-model="noviSportskiObjekat.lokacija.postanskiBroj"></td>
+					<td>Postanski broj:</td>
+					<td><input type="text" name="postanskiBroj"
+						v-model="novaLokacija.postanskiBroj"></td>
 				</tr>
-				
+
 				<tr>
-					<td>Pocetak radnog vremena: </td>
-					<td><input type="time" name="pocetakRadnogVremena" v-model="noviSportskiObjekat.pocetakRadnogVremena"></td>
+					<td>Pocetak radnog vremena:</td>
+					<td><input type="time" name="pocetakRadnogVremena"
+						v-model="noviSportskiObjekat.pocetakRadnogVremena"></td>
 				</tr>
-				
+
 				<tr>
-					<td>Kraj radnog vremena: </td>
-					<td><input type="time" name="krajRadnogVremena" v-model="noviSportskiObjekat.krajRadnogVremena"></td>
+					<td>Kraj radnog vremena:</td>
+					<td><input type="time" name="krajRadnogVremena"
+						v-model="noviSportskiObjekat.krajRadnogVremena"></td>
 				</tr>
-				
+
 				<tr>
-					<td>Menadzer: </td>
-					<td><select v-bind:hidden="freeManagers === null || freeManagers.length == 0" v-on:click="selectManager($event.target.value)" >
-						<option v-for="fm in freeManagers" >
-						 {{fm.name}} {{fm.surname}} {{fm.user_name}} 
-						</option>
-					</select>
-					
-					<button v-bind:hidden="freeManagers !== null && freeManagers.length != 0" v-on:click="showForm()"> Register manager</button>
-					
-					<h v-bind:hidden="showRegisterForm == false"> forma </h></td>
+					<td>Menadzer:</td>
+					<td><select
+						v-bind:hidden="slobodniMenadzeri === null || slobodniMenadzeri.length == 0"
+						v-on:click="selectManager($event.target.value)">
+							<option v-for="sm in slobodniMenadzeri">{{sm.ime}}
+								{{sm.prezime}} {{sm.korisnickoIme}}</option>
+					</select></td>
 				</tr>
 				<tr>
-					<td><input type="submit" value="Kreiraj"></td>
+					<td><input type="submit" value="Kreiraj"
+						v-on:click="createSportskiObjekat()"></td>
 				</tr>
 			</table>
+			<p id="error">{{error}}</p>
+		</form>
 
-		<p id = "error">{{error}}</p>
-	</form>
-	
+		<button v-bind:hidden="slobodniMenadzeri !== null && slobodniMenadzeri.length != 0"
+							v-on:click="showForm()">Registruj menadzera</button>
+
+		<h v-bind:hidden="prikaziFormu === false">
+			<form id="registrationForm" @submit='createUser'>
+				<table>
+					<tr>
+						<td>Korisnicko ime:</td>
+						<td><input type="text" name="username"
+							v-model="userToRegister.korisnickoIme"></td>
+					</tr>
+					<tr>
+						<td>Sifra:</td>
+						<td><input type="password" name="password"
+							v-model="userToRegister.sifra"></td>
+					</tr>
+					<tr>
+						<td>Ime:</td>
+						<td><input type="text" name="name"
+							v-model="userToRegister.ime"></td>
+					</tr>
+					<tr>
+						<td>Prezime:</td>
+						<td><input type="text" name="surname"
+							v-model="userToRegister.prezime"></td>
+					</tr>
+					<tr>
+						<td>Pol:</td>
+						<td><input type="radio" id="muski" name="pol"
+							value="muski pol" v-model="userToRegister.pol"> <label
+							for="muski">Muski</label> <input type="radio" id="zenski"
+							name="pol" value="zenski pol" v-model="userToRegister.pol">
+							<label for="zenski">Zenski</label></td>
+					</tr>
+					<tr>
+						<td>Datum rodjenja:</td>
+						<td><input type="date" name="dateofbirth"
+							v-model="userToRegister.datumRodjenja"></td>
+					</tr>
+
+					<tr>
+						<td><input type="submit" value="Registruj"
+							v-on:click="createUser()"></td>
+					</tr>
+				</table>
+			</form>
+		</h>
+	</div>
+
+
 	<script src="js/vue.js"></script>
 	<script src="js/axios.js"></script>
-	<script src="js/noviSportskiObjekat.js"></script>	
+	<script src="js/noviSportskiObjekat.js"></script>
 </body>
 </html>
