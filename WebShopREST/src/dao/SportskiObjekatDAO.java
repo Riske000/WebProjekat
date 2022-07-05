@@ -58,6 +58,17 @@ public class SportskiObjekatDAO {
 		}
 		maxId++;
 		sportskiObjekat.setIntId(maxId);
+		
+		LokacijaDAO.getInstance().save(sportskiObjekat.getLokacija());
+		if(sportskiObjekat.getLokacija() !=null) {
+			Collection<Lokacija> lokacije = LokacijaDAO.getInstance().findAll();
+			ArrayList<Lokacija> lokacije1 = new ArrayList<Lokacija>();
+			for(Lokacija l : lokacije) {
+				lokacije1.add(l);
+			}
+			sportskiObjekat.setLokacija(lokacije1.get(lokacije1.size()-1));
+		}
+		
 		sportskiObjekti.put(sportskiObjekat.getIntId(), sportskiObjekat);
 		sacuvajSportskeObjekte();
 		return sportskiObjekat;

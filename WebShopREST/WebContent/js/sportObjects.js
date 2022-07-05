@@ -21,6 +21,7 @@ var app = new Vue({
 	methods: {
 		pretraziOjekte: function() {
 			this.error = " ";
+
 			if(this.searchOcena == ""){
 				this.searchOcena = "1";
 			}
