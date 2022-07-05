@@ -5,6 +5,8 @@ import java.util.Collection;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -15,6 +17,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import beans.SportskiObjekat;
 import dao.SportskiObjekatDAO;
@@ -61,6 +64,25 @@ public class SportskiObjekatService {
 	public SportskiObjekat save(SportskiObjekat sportskiObjekat) {
 		SportskiObjekatDAO dao = (SportskiObjekatDAO) ctx.getAttribute("sportskiObjekatDAO");
 		return dao.save(sportskiObjekat);
+	}
+	
+	@POST
+	@Path("/setSelected")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response setSelected(SportskiObjekat obj, @Context HttpServletRequest request) {
+		SportskiObjekat objekat = SportskiObjekatDAO.getInstance().findObjekat(obj.getIntId());
+		request.getSession().setAttribute("selected", objekat);
+		return Response.status(200).build();
+	}
+	
+	@GET
+	@Path("/getSelected")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public SportskiObjekat getSelected( @Context HttpServletRequest request) {
+		SportskiObjekat objekat = (SportskiObjekat)request.getSession().getAttribute("selected");
+		return objekat;
 	}
 	
 	@PUT

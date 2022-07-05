@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container" id="viewSO">
+		<div class="title">Sportski objekat</div>
+		<form>
+			<div class="user-details">
+
+
+				<div class="input-box">
+					<span class="details"></span>
+
+				</div>
+
+				<div class="input-box">
+
+					<span class="details">Name</span> <input type="text" name="name"
+						v-model="so.ime"
+						pattern="[A-Za-z]{1,32}" disabled>
+				</div>
+
+				<div class="input-box">
+					<span class="details">Type</span> <input type="text"
+						name="surname" 
+						v-model="so.tipObjekta" pattern="[A-Za-z]{1,32}" disabled>
+				</div>
+
+				<div class="input-box">
+					<span class="details">Working status</span> <input type="text"
+						name="birthday"
+						v-model="so.status" disabled>
+				</div>
+
+
+				<div class="input-box">
+					<span class="details">Street</span> <input type="text"
+						v-model="so.lokacija.ulica" width="15" disabled>
+
+				</div>
+				<div class="input-box">
+					<span class="details">Number</span> <input type="text"
+						v-model="so.lokacija.broj" width="15" disabled>
+
+				</div>
+				<div class="input-box">
+					<span class="details">City</span> <input type="text"
+						v-model="so.lokacija.mesto" width="15" disabled>
+
+				</div>
+
+				<div class="input-box">
+					<span class="details">Average grade</span> <input type="text"
+						name="grade" 
+						v-model="so.prosecnaOcena" disabled>
+				</div>
+
+				
+			</div>
+		</form>
+
+	</div>
+
+
+	<script src="js/vue.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="js/sportskiObjekat.js"></script>
+
+</body>
+</html>

@@ -45,7 +45,7 @@
 				</tr>
 			</thead>
 
-			<tr v-for="sp in sportObjects">
+			<tr v-for="sp in sportObjects" v-on:click="Selected(sp)">
 				<td>{{sp.intId }}</td>
 				<td>{{sp.ime }}</td>
 				<td>{{sp.tipObjekta }}</td>
