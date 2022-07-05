@@ -8,7 +8,8 @@ var app = new Vue({
 		searchOcena: "",
 		loggedUser: {},
 		logovan: false,
-		error: ""
+		error: "",
+		intId: ""
 	},
 	mounted() {
 		axios.get('rest/sportskiObjekti')
@@ -32,6 +33,13 @@ var app = new Vue({
 			axios.get('rest/sportskiObjekti/search', { params: { searchIme: this.searchIme, searchTip: this.searchTip, searchLokacija: this.searchLokacija, 
 				searchOcena: this.searchOcena } })
 				.then(response => (this.sportObjects = response.data))
+		},
+		
+		Selected: function(sp) {
+			axios.post('rest/sportskiObjekti/setSelected', { intId: sp.intId } ).then((response)=>{
+				window.location.href = 'http://localhost:8080/WebShopREST/sportskiObjekat.html';
+			})
+			
 		}
 
 
