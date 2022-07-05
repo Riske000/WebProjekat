@@ -105,8 +105,9 @@ public class IstorijaTreningaDAO {
 					if(trenerId != -1) {
 						trener = new Korisnik(trenerId);
 					}
+					istorijeTreninga.put(intId, new IstorijaTreninga(intId, datumVremePrijave, trening, kupac, trener));
 				}
-				istorijeTreninga.put(intId, new IstorijaTreninga(intId, datumVremePrijave, trening, kupac, trener));
+				
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -214,5 +215,15 @@ public class IstorijaTreningaDAO {
 			}
 			
 		}
+	}
+	
+	public Collection<IstorijaTreninga> getIstorijaTreningaZaKorisnika(int idKorisnika){
+		ArrayList<IstorijaTreninga> pronadjene = new ArrayList<IstorijaTreninga>();
+		for(IstorijaTreninga istorijaTreninga : istorijeTreninga.values()) {
+			if(istorijaTreninga.getKupac().getIntId() == idKorisnika) {
+				pronadjene.add(istorijaTreninga);
+			}
+		}
+		return pronadjene;
 	}
 }

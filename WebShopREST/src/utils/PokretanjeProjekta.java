@@ -42,7 +42,7 @@ public class PokretanjeProjekta {
 		TreningDAO.getInstance().connectTreningSportskiObjekat();
 		
 		IstorijaTreningaDAO.getInstance().connectIstorijaTreningaKupac();
-		IstorijaTreningaDAO.getInstance().connectIstorijaTreningaKupacTrener();
+		IstorijaTreningaDAO.getInstance().connectIstorijaTreningaTrener();
 		IstorijaTreningaDAO.getInstance().connectIstorijaTreningaTrening();
 	}
 

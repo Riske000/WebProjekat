@@ -1,29 +1,31 @@
-package beans;
+package dto;
 
 import java.time.LocalDateTime;
 
-import utils.DateHelper;
-import utils.DateTimeHelper;
+import beans.IstorijaTreninga;
+import beans.Korisnik;
+import beans.Trening;
 
-public class IstorijaTreninga {
-
+public class IstorijaTreningaDTO {
 	private int intId;
 	private LocalDateTime datumVremePrijave;
 	private Trening trening;
 	private Korisnik kupac;
 	private Korisnik trener;
 	
-	public IstorijaTreninga() {
-		super();
+	public IstorijaTreningaDTO() {
+		
 	}
 	
+	public IstorijaTreningaDTO(IstorijaTreninga istorijaTreninga) {
+		this.intId = istorijaTreninga.getIntId();
+		this.datumVremePrijave = istorijaTreninga.getDatumVremePrijave();
+		this.trening = istorijaTreninga.getTrening();
+		this.kupac = istorijaTreninga.getKupac();
+		this.trener = istorijaTreninga.getTrener();
+	}
 	
-	
-	
-
-	
-
-	public IstorijaTreninga(int intId, LocalDateTime datumVremePrijave, Trening trening, Korisnik kupac,
+	public IstorijaTreningaDTO(int intId, LocalDateTime datumVremePrijave, Trening trening, Korisnik kupac,
 			Korisnik trener) {
 		super();
 		this.intId = intId;
@@ -32,25 +34,12 @@ public class IstorijaTreninga {
 		this.kupac = kupac;
 		this.trener = trener;
 	}
-
-
-
-
-
-
-
 	public int getIntId() {
 		return intId;
 	}
-
-
-
 	public void setIntId(int intId) {
 		this.intId = intId;
 	}
-
-
-
 	public LocalDateTime getDatumVremePrijave() {
 		return datumVremePrijave;
 	}
@@ -63,22 +52,19 @@ public class IstorijaTreninga {
 	public void setTrening(Trening trening) {
 		this.trening = trening;
 	}
-	public Korisnik getKupac() {
-		return kupac;
+	public int getKupac() {
+		return kupac.getIntId();
 	}
 	public void setKupac(Korisnik kupac) {
 		this.kupac = kupac;
 	}
-	public Korisnik getTrener() {
-		return trener;
+	public int getTrener() {
+		return (trener==null)?-1:trener.getIntId();
 	}
 	public void setTrener(Korisnik trener) {
 		this.trener = trener;
 	}
 	
-	public String convertToString() {
-		return intId + ";" + DateTimeHelper.dateTimeToString(datumVremePrijave) + ";" + trening.getIntId() + ";" + kupac.getIntId() + ";" + ((trener == null)?-1:trener.getIntId()) ;
-	}
 	
 	
 }
