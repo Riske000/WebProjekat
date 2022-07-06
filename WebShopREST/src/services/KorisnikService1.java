@@ -93,9 +93,10 @@ public class KorisnikService1 {
 	@Path("/currentUser")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Korisnik login(@Context HttpServletRequest request) {
+	public KorisnikDTO login(@Context HttpServletRequest request) {
 		Korisnik logovani = (Korisnik) request.getSession().getAttribute("user");
-		return logovani;
+		KorisnikDTO logovaniDTO = new KorisnikDTO(logovani);
+		return logovaniDTO;
 	}
 	
 	@GET
