@@ -6,7 +6,7 @@ var app = new Vue({
 		istorijeTreninga: null,
 	},
 	mounted() {
-		axios.get('rest/currentUser')
+		axios.get('rest/korisnik1/currentUser')
 			.then((response) => {
 				this.newUser = response.data;
 				axios.get('rest/istorijaTreninga/getITforUser', { params: { idKorisnika: this.newUser.intId } }).
