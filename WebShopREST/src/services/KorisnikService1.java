@@ -22,6 +22,7 @@ import beans.Korisnik;
 import beans.SportskiObjekat;
 import dao.KorisnikDAO;
 import dao.SportskiObjekatDAO;
+import dto.KorisnikDTO;
 import utils.PokretanjeProjekta;
 
 @Path("/korisnik1")
@@ -46,9 +47,14 @@ public class KorisnikService1 {
 	@GET
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Korisnik> getKorisnici() {
+	public Collection<KorisnikDTO> getKorisnici() {
 		KorisnikDAO dao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
-		return dao.findAll();
+		Collection<Korisnik> korisnici = dao.findAll();
+		ArrayList<KorisnikDTO> korisniciDTO = new ArrayList<KorisnikDTO>();
+		for(Korisnik k : korisnici) {
+			korisniciDTO.add(new KorisnikDTO(k));
+		}
+		return korisniciDTO;
 	}
 	
 	
@@ -56,16 +62,16 @@ public class KorisnikService1 {
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response register(Korisnik userToRegister) {
+	public Korisnik register(Korisnik userToRegister) { //da li ce biti problem kad vraca trenera
 
 		KorisnikDAO korisnikDAO = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
 
 		boolean retVal = korisnikDAO.postojiKorisnickoIme(userToRegister.getKorisnickoIme());
 		if(retVal) {
-			return Response.status(400).entity("Korisnicko ime vec postoji!").build();			
+			return null;			
 		}
-		korisnikDAO.save(userToRegister);
-		return Response.status(200).build();
+		Korisnik korisnik = korisnikDAO.save(userToRegister);
+		return korisnik;
 		
 	}
 
@@ -73,7 +79,7 @@ public class KorisnikService1 {
 	@Path("/login")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response login(Korisnik korisnik, @Context HttpServletRequest request) {
+	public Response login(Korisnik korisnik, @Context HttpServletRequest request) { // da li je problem ako se loguje trener
 		KorisnikDAO korisnikDao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
 		Korisnik logovaniKorisnik = korisnikDao.checkKorisnickoImeSifra(korisnik.getKorisnickoIme(), korisnik.getSifra());
 		if (logovaniKorisnik == null) {
@@ -88,7 +94,8 @@ public class KorisnikService1 {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Korisnik login(@Context HttpServletRequest request) {
-		return (Korisnik) request.getSession().getAttribute("user");
+		Korisnik logovani = (Korisnik) request.getSession().getAttribute("user");
+		return logovani;
 	}
 	
 	@GET

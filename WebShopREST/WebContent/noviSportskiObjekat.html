@@ -77,68 +77,68 @@
 
 				<tr>
 					<td>Menadzer:</td>
-					<td><select
-						v-bind:hidden="slobodniMenadzeri === null || slobodniMenadzeri.length == 0"
-						v-on:click="selectManager($event.target.value)">
-							<option v-for="sm in slobodniMenadzeri">{{sm.ime}}
+					<td><select v-model="izabraniMenadzer" v-bind:hidden="slobodniMenadzeri === null || slobodniMenadzeri.length == 0">
+							<option v-for="sm in slobodniMenadzeri" :value="sm">{{sm.ime}}
 								{{sm.prezime}} {{sm.korisnickoIme}}</option>
-					</select></td>
+					</select>
+					<div class="button1"
+							v-bind:hidden="slobodniMenadzeri !== null && slobodniMenadzeri.length != 0"
+							v-on:click="showForm()">
+							<button type="button">Registruj menadzera</button>
+					</div>
+					
+					</td>
 				</tr>
 				<tr>
-					<td><input type="submit" value="Kreiraj"
-						v-on:click="createSportskiObjekat()"></td>
+					<td><input type="submit" value="Kreiraj"></td>
 				</tr>
 			</table>
+			
 			<p id="error">{{error}}</p>
 		</form>
 
-		<button v-bind:hidden="slobodniMenadzeri !== null && slobodniMenadzeri.length != 0"
-							v-on:click="showForm()">Registruj menadzera</button>
+		<div class="input-box" v-bind:hidden="prikaziFormu == false">
 
-		<h v-bind:hidden="prikaziFormu === false">
-			<form id="registrationForm" @submit='createUser'>
-				<table>
-					<tr>
-						<td>Korisnicko ime:</td>
-						<td><input type="text" name="username"
-							v-model="userToRegister.korisnickoIme"></td>
-					</tr>
-					<tr>
-						<td>Sifra:</td>
-						<td><input type="password" name="password"
-							v-model="userToRegister.sifra"></td>
-					</tr>
-					<tr>
-						<td>Ime:</td>
-						<td><input type="text" name="name"
-							v-model="userToRegister.ime"></td>
-					</tr>
-					<tr>
-						<td>Prezime:</td>
-						<td><input type="text" name="surname"
-							v-model="userToRegister.prezime"></td>
-					</tr>
-					<tr>
-						<td>Pol:</td>
-						<td><input type="radio" id="muski" name="pol"
-							value="muski pol" v-model="userToRegister.pol"> <label
-							for="muski">Muski</label> <input type="radio" id="zenski"
-							name="pol" value="zenski pol" v-model="userToRegister.pol">
-							<label for="zenski">Zenski</label></td>
-					</tr>
-					<tr>
-						<td>Datum rodjenja:</td>
-						<td><input type="date" name="dateofbirth"
-							v-model="userToRegister.datumRodjenja"></td>
-					</tr>
+			<div class="input-box">
+				<span class="details">Ime</span> <input v-model="izabraniMenadzer.ime" type="text" name="ime">
+			</div>
 
-					<tr>
-						<td><input type="submit" value="Registruj"
-							v-on:click="createUser()"></td>
-					</tr>
-				</table>
-			</form>
-		</h>
+			<div class="input-box">
+				<span class="details">Prezime</span> <input v-model="izabraniMenadzer.prezime" type="text"
+					name="prezime">
+			</div>
+
+			<div class="input-box">
+				<span class="details">Datum rodjenja</span> <input v-model="izabraniMenadzer.datumRodjenja" type="date"
+					name="datumRodjenja">
+			</div>
+
+
+			<div class="input-box">
+				<span class="details">Pol</span> 
+				<input type="radio" id="muski" name="pol"
+						value="muski pol" v-model="izabraniMenadzer.pol"> <label
+						for="muski">Muski</label> <input type="radio" id="zenski"
+						name="pol" value="zenski pol" v-model="izabraniMenadzer.pol">
+						<label for="zenski">Zenski</label>
+			</div>
+
+			<div class="input-box">
+				<span class="details">Korisnicko ime</span> <input v-model="izabraniMenadzer.korisnickoIme" type="text"
+					name="korisnickoIme">
+			</div>
+
+			<div class="input-box">
+				<span class="details">Sifra</span> <input v-model="izabraniMenadzer.sifra" type="password"
+					name="password">
+			</div>
+
+			<div class="button">
+				<button type="button" v-on:click="createUser">Reigistruj</button>
+			</div>
+
+
+		</div>
 	</div>
 
 

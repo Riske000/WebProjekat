@@ -20,11 +20,11 @@ var app = new Vue({
 			}
 			axios.post('rest/korisnik1', this.userToRegister)
 				.then((response) => {
-					alert('Uspesno ste se registrovali!')
-				}).catch(() =>{
-					alert('Korisnicko ime vec postoji!')
-					event.preventDefault();
-					return;
+					if(response.data === ""){
+						alert('Korisnicko ime vec postoji!')
+					}else{
+						alert('Uspesno ste se registrovali!')
+					}
 				})
 			event.preventDefault();
 			return;

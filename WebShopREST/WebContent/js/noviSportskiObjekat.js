@@ -6,9 +6,10 @@ var app = new Vue({
 		error: '',
 		slobodniMenadzeri: null,
 		imaSlobodnih: 'true',
-		izabraniMenadzer: null, 
+		izabraniMenadzer: {}, 
 		prikaziFormu: false,
-		userToRegister: {}
+		userToRegister: {},
+		pravimoNovogMenadzera: false
 	},
 	mounted() {
 		 
@@ -43,6 +44,17 @@ var app = new Vue({
 			axios.post('rest/sportskiObjekti', this.noviSportskiObjekat)
 				.then((response) => {
 					alert('Uspesno ste kreirali sportski objekat!')
+					this.noviSportskiObjekat = response.data;
+					this.izabraniMenadzer.sportskiObjekat = this.noviSportskiObjekat;
+					axios.put('rest/korisnik1/', this.izabraniMenadzer)
+						.then((response) => {
+							alert('Sport object added to manager')
+						}).catch(() => {
+							alert('This sport object already exists.USER');
+							this.error = "This sport object already exists.";
+							event.preventDefault();
+							return;
+						})
 				}).catch(() =>{
 					alert('This sport object already exists.')
 					 this.error = "This sport object already exists.";
@@ -50,16 +62,6 @@ var app = new Vue({
 					 return;
 				})
 
-			this.izabraniMenadzer.sportskiObjekat = this.noviSportskiObjekat;
-			axios.put('rest/korisnik1/', this.izabraniMenadzer)
-			.then((response) => {
-				alert('Sport object added to manager')
-			}).catch(() => {
-				alert('This sport object already exists.')
-				this.error = "This sport object already exists.";
-				event.preventDefault();
-				return;
-			})
 			event.preventDefault();
 		},
 		selectManager: function(menadzer) {
@@ -70,20 +72,23 @@ var app = new Vue({
 	   },
 	   createUser: function() {
 		this.error = ""
-			if (!this.userToRegister.korisnickoIme || !this.userToRegister.sifra || !this.userToRegister.ime || !this.userToRegister.prezime
-			 			|| !this.userToRegister.pol || !this.userToRegister.datumRodjenja) {
+			if (!this.izabraniMenadzer.korisnickoIme || !this.izabraniMenadzer.sifra || !this.izabraniMenadzer.ime || !this.izabraniMenadzer.prezime
+			 			|| !this.izabraniMenadzer.pol || !this.izabraniMenadzer.datumRodjenja) {
 				this.error = "Sva polja moraju biti uneta!";
+				event.preventDefault();
 				return;
 			}
-			axios.post('rest/korisnik1', this.userToRegister)
+			this.izabraniMenadzer.uloga = 'menadzer';
+			axios.post('rest/korisnik1', this.izabraniMenadzer)
 				.then((response) => {
 					alert('Uspesno ste registrovali novog menadzera!')
+					this.izabraniMenadzer = response.data
 				}).catch(() =>{
 					alert('Korisnicko ime vec postoji!')
+					event.preventDefault();
 					return;
 				})
-			this.izabraniMenadzer = this.userToRegister;
-			return;
+			event.preventDefault();
 	   }
 	}
 });

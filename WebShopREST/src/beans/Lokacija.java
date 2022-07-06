@@ -92,7 +92,7 @@ public class Lokacija {
 		this.postanskiBroj = postanskiBroj;
 	}
 	
-	public String getAdress() {
+	public String celaAdress() {
 		adresa = this.ulica + " " + this.broj + ", " + this.mesto;
 		return adresa;
 	}

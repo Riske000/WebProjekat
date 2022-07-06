@@ -161,7 +161,7 @@ public class SportskiObjekatDAO {
 
 		for (SportskiObjekat sp : sportskiObjekti.values()) {
 			if (sp.getIme().toLowerCase().contains(searchIme.toLowerCase())) {
-				if (sp.getLokacija().getAdress().toLowerCase().contains(searchLokacija.toLowerCase())) {
+				if (sp.getLokacija().celaAdress().toLowerCase().contains(searchLokacija.toLowerCase())) {
 					if (sp.getTipObjekta().toLowerCase().contains(searchTip.toLowerCase())) {
 						if (sp.getProsecnaOcena() >= Double.parseDouble(searchOcena) ) {
 							pronadjeni.add(sp);
