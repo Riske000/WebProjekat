@@ -66,6 +66,8 @@
 			</div>
 		</form>
 		<p> {{error }} </p>
+		
+		<h3 v-bind:hidden="newUser.uloga!='kupac'">Treninzi</h3>
 
 		<table border="1" id="tabela" v-bind:hidden="newUser.uloga!='kupac'">
 			<thead>
@@ -83,6 +85,49 @@
 			</tr>
 		</table>
 		
+		<h3 v-bind:hidden="newUser.uloga!='trener'">Personalni treninzi</h3>
+		
+		<table border="1" id="tabelaPersonalni" v-bind:hidden="newUser.uloga!='trener'">
+			<thead>
+				<tr bgcolor="lightgrey">
+					<th>Naziv</th>
+					<th>Tip</th>
+					<th>Sportski objekat</th>
+					<th>Trajanje</th>
+					<th>Opis</th>
+				</tr>
+			</thead>
+
+			<tr v-for="pt in personalniTreninzi">
+				<td>{{pt.naziv }}</td>
+				<td>{{pt.tipTreninga }}</td>
+				<td>{{pt.objekatGdePripada.ime}}</td>
+				<td>{{pt.trajanje }}</td>
+				<td>{{pt.opis }}</td>
+			</tr>
+		</table>
+		
+		<h3 v-bind:hidden="newUser.uloga!='trener'">Grupni treninzi</h3>
+		
+		<table border="1" id="tabelaGrupni" v-bind:hidden="newUser.uloga!='trener'">
+			<thead>
+				<tr bgcolor="lightgrey">
+					<th>Naziv</th>
+					<th>Tip</th>
+					<th>Sportski objekat</th>
+					<th>Trajanje</th>
+					<th>Opis</th>
+				</tr>
+			</thead>
+
+			<tr v-for="gt in grupniTreninzi">
+				<td>{{gt.naziv }}</td>
+				<td>{{gt.tipTreninga }}</td>
+				<td>{{gt.objekatGdePripada.ime}}</td>
+				<td>{{gt.trajanje }}</td>
+				<td>{{gt.opis }}</td>
+			</tr>
+		</table>
 		
 	</div>
 

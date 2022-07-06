@@ -4,7 +4,7 @@ import beans.SportskiObjekat;
 import beans.Trening;
 
 public class TreningDTO {
-	private int id;
+	private int intId;
 	private String naziv;
 	private String tipTreninga;
 	private SportskiObjekat objekatGdePripada;
@@ -13,7 +13,7 @@ public class TreningDTO {
 	private String slika;
 	
 	public TreningDTO(Trening trening) {
-		this.id = trening.getIntId();
+		this.intId = trening.getIntId();
 		this.naziv = trening.getNaziv();
 		this.tipTreninga = trening.getTipTreninga();
 		this.objekatGdePripada = trening.getObjekatGdePripada();
@@ -23,10 +23,10 @@ public class TreningDTO {
 	}
 	
 	
-	public TreningDTO(int id, String naziv, String tipTreninga, SportskiObjekat objekatGdePripada,
+	public TreningDTO(int intId, String naziv, String tipTreninga, SportskiObjekat objekatGdePripada,
 			double trajanje, String opis, String slika) {
 		super();
-		this.id = id;
+		this.intId = intId;
 		this.naziv = naziv;
 		this.tipTreninga = tipTreninga;
 		this.objekatGdePripada = objekatGdePripada;
@@ -35,8 +35,8 @@ public class TreningDTO {
 		this.slika = slika;
 	}
 
-	public TreningDTO(int id) {
-		this.id = id;
+	public TreningDTO(int intId) {
+		this.intId = intId;
 	}
 
 	public TreningDTO() {
@@ -44,13 +44,13 @@ public class TreningDTO {
 	}
 
 
-	public int getId() {
-		return id;
+	public int getIntId() {
+		return intId;
 	}
 
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int intId) {
+		this.intId = intId;
 	}
 
 

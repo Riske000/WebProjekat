@@ -23,6 +23,8 @@ import dao.KorisnikDAO;
 import dao.SportskiObjekatDAO;
 import dao.TreningDAO;
 import dto.KorisnikDTO;
+
+import dto.TreningDTO;
 import utils.PokretanjeProjekta;
 
 @Path("/trening")
@@ -55,9 +57,53 @@ public class TreningService {
 	@GET
 	@Path("/getTreneri")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Korisnik> getTreneriZaSportskiObjekat(@QueryParam("idSportskogObjekta") int idSportskogObjekta) {
+	public Collection<KorisnikDTO> getTreneriZaSportskiObjekat(@QueryParam("idSportskogObjekta") int idSportskogObjekta) {
 		TreningDAO dao = (TreningDAO) ctx.getAttribute("treningDAO");
-		return dao.getTreneriZaSportskiObjekat(idSportskogObjekta);
+		Collection<Korisnik> treneri = dao.getTreneriZaSportskiObjekat(idSportskogObjekta);
+		ArrayList<KorisnikDTO> treneriDTO = new ArrayList<KorisnikDTO>();
+		for(Korisnik t : treneri) {
+			treneriDTO.add(new KorisnikDTO(t));
+		}
+		return treneriDTO;
+	}
+	
+	@GET
+	@Path("/getTreninzi")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<TreningDTO> getTreninziZaSportskiObjekat(@QueryParam("idSportskogObjekta") int idSportskogObjekta) {
+		TreningDAO dao = (TreningDAO) ctx.getAttribute("treningDAO");
+		ArrayList<Trening> treninzi = dao.getTreninziZaSportskiObjekat(idSportskogObjekta);
+		ArrayList<TreningDTO> treninziDTO = new ArrayList<TreningDTO>();
+		for(Trening t : treninzi) {
+			treninziDTO.add(new TreningDTO(t));
+		}
+		return treninziDTO;
+	}
+	
+	@GET
+	@Path("/getPersonalTrainings")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<TreningDTO> getPersonalniTreninziZaTrenera(@QueryParam("idKorisnika") int idKorisnika) {
+		TreningDAO dao = (TreningDAO) ctx.getAttribute("treningDAO");
+		ArrayList<Trening> personalniTreninzi = dao.getPersonalniTreninziZaTrenera(idKorisnika);
+		ArrayList<TreningDTO> personalniTreninziDTO = new ArrayList<TreningDTO>();
+		for(Trening t : personalniTreninzi) {
+			personalniTreninziDTO.add(new TreningDTO(t));
+		}
+		return personalniTreninziDTO;
+	}
+	
+	@GET
+	@Path("/getGroupTrainings")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<TreningDTO> getGrupniTreninziZaTrenera(@QueryParam("idKorisnika") int idKorisnika) {
+		TreningDAO dao = (TreningDAO) ctx.getAttribute("treningDAO");
+		ArrayList<Trening> grupniTreninzi = dao.getGrupniTreninziZaTrenera(idKorisnika);
+		ArrayList<TreningDTO> grupniTreninziDTO = new ArrayList<TreningDTO>();
+		for(Trening t : grupniTreninzi) {
+			grupniTreninziDTO.add(new TreningDTO(t));
+		}
+		return grupniTreninziDTO;
 	}
 	
 	//treba izmeniti

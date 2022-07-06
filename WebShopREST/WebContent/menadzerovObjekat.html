@@ -66,9 +66,9 @@
 			</tr>
 		</table>
 		
-		<button value="Treneri" v-on:click="pretraziOjekte">Treneri</button>
+		<h3>Treneri:</h3>
 		
-		<table border="1" id="tabela">
+		<table border="1" id="tabela1">
 			<thead>
 				<tr bgcolor="lightgrey">
 					<th>Ime</th>
@@ -84,9 +84,9 @@
 			</tr>
 		</table>
 		
-		<button value="Posetioci" v-on:click="getPosetioci">Posetioci</button>
+		<h3>Posetioci:</h3>
 		
-		<table border="1" id="tabela">
+		<table border="1" id="tabela2">
 			<thead>
 				<tr bgcolor="lightgrey">
 					<th>Ime</th>
@@ -100,7 +100,29 @@
 				<td>{{k.prezime }}</td>
 				<td>{{k.korisnickoIme }}</td>
 			</tr>
-		</table>		
+		</table>
+
+		<h3>Treninzi:</h3>
+		
+		<table border="1" id="tabela3">
+			<thead>
+				<tr bgcolor="lightgrey">
+					<th>Naziv</th>
+					<th>Tip</th>
+					<th>Trajanje</th>
+					<th>Opis</th>
+				</tr>
+			</thead>
+
+			<tr v-for="tr in treninzi">
+				<td>{{tr.naziv }}</td>
+				<td>{{tr.tipTreninga }}</td>
+				<td>{{tr.trajanje }}</td>
+				<td>{{tr.opis }}</td>
+			</tr>
+		</table>
+		
+				
 	</div>
 	<script src="js/vue.js"></script>
 	<script src="js/axios.js"></script>
