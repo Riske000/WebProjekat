@@ -67,7 +67,7 @@
 		</form>
 		<p> {{error }} </p>
 
-		<table border="1" id="tabela">
+		<table border="1" id="tabela" v-bind:hidden="newUser.uloga!='kupac'">
 			<thead>
 				<tr bgcolor="lightgrey">
 					<th>Naziv</th>
