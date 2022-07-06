@@ -67,9 +67,7 @@
 		</form>
 		<p> {{error }} </p>
 
-		<button value="Treninzi" v-on:click="getTreninzi">Treninzi</button>
-		
-		<table border="1" id="tabela">
+		<table border="1" id="tabela" v-bind:hidden="newUser.uloga!='kupac'">
 			<thead>
 				<tr bgcolor="lightgrey">
 					<th>Naziv</th>
@@ -81,25 +79,11 @@
 			<tr v-for="it in istorijeTreninga">
 				<td>{{it.trening.naziv }}</td>
 				<td>{{it.trening.objekatGdePripada.ime }}</td>
-				<td>{{it.datumVremePrijave.dayOfMonth }}. {{it.datumVremePrijave.monthValue}}. {{it.datumVremePrijave.year}}. {{it.datumVremePrijave.hour}}:{{it.datumVremePrijave.minute}}</td>
+				<td>{{it.datumVremePrijave}}</td>
 			</tr>
 		</table>
 		
-		<table border="1" id="tabela2" v-bind:hidden="newUser.uloga!=trener">
-			<thead>
-				<tr bgcolor="lightgrey">
-					<th>Naziv</th>
-					<th>Sportski objekat</th>
-					<th>Datum i vreme</th>
-				</tr>
-			</thead>
-
-			<tr v-for="istorijaTreninga in newUser.istorijaTreninga">
-				<td>{{istorijaTreninga.trening.naziv }}</td>
-				<td>{{istorijaTreninga.trening.objekatGdePripada.ime }}</td>
-				<td>{{istorijaTreninga.datumVremePrijave.dayOfMonth }}. {{istorijaTreninga.datumVremePrijave.monthValue}}. {{istorijaTreninga.datumVremePrijave.year}}. {{istorijaTreninga.datumVremePrijave.hour}}:{{istorijaTreninga.datumVremePrijave.minute}}</td>
-			</tr>
-		</table>
+		
 	</div>
 
 

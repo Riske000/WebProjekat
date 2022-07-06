@@ -4,13 +4,15 @@ var app = new Vue({
 		newUser: {},
 		error: '',
 		istorijeTreninga: null,
-		id: ''
 	},
 	mounted() {
 		axios.get('rest/korisnik1/currentUser')
 			.then((response) => {
 				this.newUser = response.data;
-				this.id = this.newUser.intId;
+				axios.get('rest/istorijaTreninga/getITforUser', { params: { idKorisnika: this.newUser.intId } }).
+					then((response) => {
+						this.istorijeTreninga = response.data;
+					})
 			})
 	},
 	methods: {
@@ -20,13 +22,6 @@ var app = new Vue({
 					alert('Podaci su uspesno promenjeni ')
 				})
 			event.preventDefault();
-		},
-
-		getTreninzi: function() {
-			axios.get('rest/istorijaTreninga/getITforUser', { params: { idKorisnika: this.id } }).
-				then((response) => {
-					this.istorijeTreninga = response.data;
-				})
-		},
+		}
 	}
 });
