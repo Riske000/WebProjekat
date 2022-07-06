@@ -15,6 +15,7 @@ import java.util.StringTokenizer;
 import beans.Komentar;
 import beans.Korisnik;
 import beans.Trening;
+import utils.TipTreninga;
 import beans.SportskiObjekat;
 import beans.TipKupca;
 
@@ -202,6 +203,30 @@ public class TreningDAO {
 			}
 		}
 		return treninziZaSportskiObjekat;
+	}
+	
+	public ArrayList<Trening> getPersonalniTreninziZaTrenera(int idKorisnika){
+		ArrayList<Trening> personalniTreninziZaTrenera = new ArrayList<Trening>();
+		for(Trening trening : treninzi.values()) {
+			if(trening.getTrener() != null) {
+				if((trening.getTrener().getIntId() == idKorisnika) && (trening.getTipTreninga().equals(TipTreninga.PERSONALNI))) {
+					personalniTreninziZaTrenera.add(trening);
+				}
+			}
+		}
+		return personalniTreninziZaTrenera;
+	}
+	
+	public ArrayList<Trening> getGrupniTreninziZaTrenera(int idKorisnika){
+		ArrayList<Trening> grupniTreninziZaTrenera = new ArrayList<Trening>();
+		for(Trening trening : treninzi.values()) {
+			if(trening.getTrener() != null) {
+				if((trening.getTrener().getIntId() == idKorisnika) && (trening.getTipTreninga().equals(TipTreninga.GRUPNI))) {
+					grupniTreninziZaTrenera.add(trening);
+				}
+			}
+		}
+		return grupniTreninziZaTrenera;
 	}
 
 }

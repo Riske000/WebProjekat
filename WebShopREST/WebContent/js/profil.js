@@ -4,6 +4,8 @@ var app = new Vue({
 		newUser: {},
 		error: '',
 		istorijeTreninga: null,
+		personalniTreninzi: null,
+		grupniTreninzi: null
 	},
 	mounted() {
 		axios.get('rest/korisnik1/currentUser')
@@ -13,6 +15,16 @@ var app = new Vue({
 					then((response) => {
 						this.istorijeTreninga = response.data;
 					})
+
+				axios.get('rest/trening/getPersonalTrainings', { params: { idKorisnika: this.newUser.intId } }).
+				then((response) => {
+					this.personalniTreninzi = response.data;
+				})
+
+				axios.get('rest/trening/getGroupTrainings', { params: { idKorisnika: this.newUser.intId } }).
+				then((response) => {
+					this.grupniTreninzi = response.data;
+				})
 			})
 	},
 	methods: {
