@@ -193,5 +193,15 @@ public class TreningDAO {
 			}
 		}
 	}
+	
+	public ArrayList<Trening> getTreninziZaSportskiObjekat(int idSportskogObjekta){
+		ArrayList<Trening> treninziZaSportskiObjekat = new ArrayList<Trening>();
+		for(Trening trening : treninzi.values()) {
+			if(trening.getObjekatGdePripada().getIntId() == idSportskogObjekta) {
+				treninziZaSportskiObjekat.add(trening);
+			}
+		}
+		return treninziZaSportskiObjekat;
+	}
 
 }
