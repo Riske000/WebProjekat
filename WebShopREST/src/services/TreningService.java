@@ -19,8 +19,10 @@ import javax.ws.rs.core.MediaType;
 import beans.Korisnik;
 import beans.SportskiObjekat;
 import beans.Trening;
+import dao.KorisnikDAO;
 import dao.SportskiObjekatDAO;
 import dao.TreningDAO;
+import dto.KorisnikDTO;
 import utils.PokretanjeProjekta;
 
 @Path("/trening")
