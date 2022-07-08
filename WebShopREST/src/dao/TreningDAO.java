@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -12,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import beans.IstorijaTreninga;
 import beans.Komentar;
 import beans.Korisnik;
 import beans.Trening;
@@ -23,8 +25,8 @@ public class TreningDAO {
 
 	private static TreningDAO treningInstance = null;
 	private static String contextPath = "";
-	
-	private HashMap<Integer, Trening> treninzi = new HashMap<Integer, Trening>();
+
+	public HashMap<Integer, Trening> treninzi = new HashMap<Integer, Trening>();
 
 	private TreningDAO() {
 
@@ -33,25 +35,24 @@ public class TreningDAO {
 	private TreningDAO(String contextPath) {
 		loadTreninzi(contextPath);
 	}
-	
-	public static TreningDAO getInstance()
-    {
-        if (treningInstance == null) {
-        	treningInstance = new TreningDAO();
-        }
- 
-        return treningInstance;
-    }
+
+	public static TreningDAO getInstance() {
+		if (treningInstance == null) {
+			treningInstance = new TreningDAO();
+		}
+
+		return treningInstance;
+	}
 
 	public Collection<Trening> findAll() {
 		return treninzi.values();
 	}
-	
-	public Collection<Korisnik> getTreneriZaSportskiObjekat(int idSportskogObjekta){
+
+	public Collection<Korisnik> getTreneriZaSportskiObjekat(int idSportskogObjekta) {
 		ArrayList<Korisnik> treneriZaSportskiObjekat = new ArrayList<Korisnik>();
-		for(Trening trening : treninzi.values()) {
-			if(trening.getObjekatGdePripada().getIntId() == idSportskogObjekta) {
-				if(trening.getTrener() != null) {
+		for (Trening trening : treninzi.values()) {
+			if (trening.getObjekatGdePripada().getIntId() == idSportskogObjekta) {
+				if (trening.getTrener() != null) {
 					treneriZaSportskiObjekat.add(trening.getTrener());
 				}
 			}
@@ -82,7 +83,7 @@ public class TreningDAO {
 		return trening;
 	}
 
-	public void delete(String id) {
+	public void delete(int id) {
 		this.treninzi.remove(id);
 	}
 
@@ -100,7 +101,7 @@ public class TreningDAO {
 			SportskiObjekat objekatGdePripada = new SportskiObjekat();
 			StringTokenizer st;
 
-			//SportskiObjekatDAO sod = new SportskiObjekatDAO();
+			// SportskiObjekatDAO sod = new SportskiObjekatDAO();
 			while ((line = in.readLine()) != null) {
 				line = line.trim();
 				if (line.equals("") || line.indexOf('#') == 0)
@@ -111,7 +112,7 @@ public class TreningDAO {
 					naziv = st.nextToken().trim();
 					tipTreninga = st.nextToken().trim();
 
-					//sportskiObjekat = sod.findObjekat(Integer.parseInt(st.nextToken().trim()));
+					// sportskiObjekat = sod.findObjekat(Integer.parseInt(st.nextToken().trim()));
 					objekatGdePripada = new SportskiObjekat(Integer.parseInt(st.nextToken().trim()));
 
 					// sportskiObjekat = sod.findObjekat(Integer.parseInt(st.nextToken().trim()));
@@ -119,8 +120,8 @@ public class TreningDAO {
 					// SportskiObjekat(Integer.parseInt(st.nextToken().trim()));
 					trajanje = Double.parseDouble(st.nextToken().trim());
 					int trenerId = Integer.parseInt(st.nextToken().trim());
-					
-					if(trenerId != -1) {
+
+					if (trenerId != -1) {
 						trener = new Korisnik(trenerId);
 					}
 					opis = st.nextToken().trim();
@@ -140,15 +141,15 @@ public class TreningDAO {
 		}
 
 	}
-	
+
 	public void sacuvajTreninge() {
 		BufferedWriter out = null;
 		try {
-			File file = new File(contextPath + "/files/treninzi.txt"); //proveri naziv fajla
+			File file = new File(contextPath + "/files/treninzi.txt"); // proveri naziv fajla
 			System.out.println(file.getCanonicalPath());
 			out = new BufferedWriter(new FileWriter(file));
 
-			for(Trening trening : treninzi.values()) {
+			for (Trening trening : treninzi.values()) {
 				out.write(trening.convertToString() + '\n');
 			}
 		} catch (Exception e) {
@@ -163,70 +164,89 @@ public class TreningDAO {
 		}
 
 	}
-	
+
 	public void connectTreningSportskiObjekat() {
-		ArrayList<SportskiObjekat> sportskiObjekti = new ArrayList<SportskiObjekat>(SportskiObjekatDAO.getInstance().findAll());
-		for(Trening trening : treninzi.values()) {
+		ArrayList<SportskiObjekat> sportskiObjekti = new ArrayList<SportskiObjekat>(
+				SportskiObjekatDAO.getInstance().findAll());
+		for (Trening trening : treninzi.values()) {
 			int idTrazeni = trening.getObjekatGdePripada().getIntId();
-			
-			for(SportskiObjekat sportskiObjekat : sportskiObjekti) {
-				if(sportskiObjekat.getIntId() == idTrazeni) {
+
+			for (SportskiObjekat sportskiObjekat : sportskiObjekti) {
+				if (sportskiObjekat.getIntId() == idTrazeni) {
 					trening.setObjekatGdePripada(sportskiObjekat);
 					break;
 				}
 			}
 		}
 	}
-	
+
 	public void connectTreningTrener() {
 		ArrayList<Korisnik> korisnici = new ArrayList<Korisnik>(KorisnikDAO.getInstance().findAll());
-		for(Trening trening : treninzi.values()) {
-			if(trening.getTrener() == null) {
+		for (Trening trening : treninzi.values()) {
+			if (trening.getTrener() == null) {
 				continue;
 			}
 			int idTrazeni = trening.getTrener().getIntId();
-			
-			for(Korisnik korisnik : korisnici) {
-				if(korisnik.getIntId() == idTrazeni) {
+
+			for (Korisnik korisnik : korisnici) {
+				if (korisnik.getIntId() == idTrazeni) {
 					trening.setTrener(korisnik);
 					break;
 				}
 			}
 		}
 	}
-	
-	public ArrayList<Trening> getTreninziZaSportskiObjekat(int idSportskogObjekta){
+
+	public ArrayList<Trening> getTreninziZaSportskiObjekat(int idSportskogObjekta) {
 		ArrayList<Trening> treninziZaSportskiObjekat = new ArrayList<Trening>();
-		for(Trening trening : treninzi.values()) {
-			if(trening.getObjekatGdePripada().getIntId() == idSportskogObjekta) {
+		for (Trening trening : treninzi.values()) {
+			if (trening.getObjekatGdePripada().getIntId() == idSportskogObjekta) {
 				treninziZaSportskiObjekat.add(trening);
 			}
 		}
 		return treninziZaSportskiObjekat;
 	}
-	
-	public ArrayList<Trening> getPersonalniTreninziZaTrenera(int idKorisnika){
+
+	public ArrayList<Trening> getPersonalniTreninziZaTrenera(int idKorisnika) {
 		ArrayList<Trening> personalniTreninziZaTrenera = new ArrayList<Trening>();
-		for(Trening trening : treninzi.values()) {
-			if(trening.getTrener() != null) {
-				if((trening.getTrener().getIntId() == idKorisnika) && (trening.getTipTreninga().equals(TipTreninga.PERSONALNI))) {
+		for (Trening trening : treninzi.values()) {
+			if (trening.getTrener() != null) {
+				if ((trening.getTrener().getIntId() == idKorisnika)
+						&& (trening.getTipTreninga().equals(TipTreninga.PERSONALNI))) {
 					personalniTreninziZaTrenera.add(trening);
 				}
 			}
 		}
 		return personalniTreninziZaTrenera;
 	}
-	
-	public ArrayList<Trening> getGrupniTreninziZaTrenera(int idKorisnika){
+
+	public ArrayList<Trening> getGrupniTreninziZaTrenera(int idKorisnika) {
 		ArrayList<Trening> grupniTreninziZaTrenera = new ArrayList<Trening>();
-		for(Trening trening : treninzi.values()) {
-			if(trening.getTrener() != null) {
-				if((trening.getTrener().getIntId() == idKorisnika) && (trening.getTipTreninga().equals(TipTreninga.GRUPNI))) {
+		for (Trening trening : treninzi.values()) {
+			if (trening.getTrener() != null) {
+				if ((trening.getTrener().getIntId() == idKorisnika)
+						&& (trening.getTipTreninga().equals(TipTreninga.GRUPNI))) {
 					grupniTreninziZaTrenera.add(trening);
 				}
 			}
 		}
 		return grupniTreninziZaTrenera;
+	}
+
+	public boolean OtkaziTr(int id) {
+		LocalDateTime yesterday = LocalDateTime.now().minusDays(1);
+		Trening tren = TreningDAO.getInstance().findTrening(id);
+		HashMap<Integer, IstorijaTreninga> i = IstorijaTreningaDAO.getInstance().istorijeTreninga;
+		for (IstorijaTreninga it : i.values()) {
+			if (tren.getIntId() == it.getTrening().getIntId()) {
+				if (it.getDatumVremePrijave().isBefore(yesterday)) {
+					it.setTrening(null);
+					delete(id);
+					return true;
+				} 
+			}
+		}
+		return false;
 	}
 
 }

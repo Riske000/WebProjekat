@@ -226,4 +226,16 @@ public class IstorijaTreningaDAO {
 		}
 		return pronadjene;
 	}
+	
+//	public ArrayList<Trening> searchTreninzi(String searchImeObjekta, String minCena, String maxCena, String startDate, String endDate){
+//		ArrayList<Trening> pronadjeni = new ArrayList<Trening>();
+//		ArrayList<IstorijaTreninga> tren = new ArrayList<IstorijaTreninga>(IstorijaTreningaDAO.getInstance().findAll());
+//		for(Trening tr : tren) {
+//			if(tr.getNaziv().toLowerCase().contains(searchImeObjekta)) {
+//				if(LocalDateTime.parse(startDate).isBefore())
+//			}
+//		}
+//		
+//		return pronadjeni;
+//	}
 }

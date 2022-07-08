@@ -1,6 +1,6 @@
 package beans;
 
-import utils.TimeHelper;
+import java.time.LocalDateTime;
 
 public class Trening {
 

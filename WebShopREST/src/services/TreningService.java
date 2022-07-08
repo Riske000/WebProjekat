@@ -15,6 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import beans.Korisnik;
 import beans.SportskiObjekat;
@@ -130,6 +131,15 @@ public class TreningService {
 	public SportskiObjekat update(SportskiObjekat sportskiObjekat) {
 		SportskiObjekatDAO dao = (SportskiObjekatDAO) ctx.getAttribute("sportskiObjekatDAO");
 		return dao.update(sportskiObjekat);
+	}
+	
+	@PUT
+	@Path("/cancelTraining")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response OtkaziTrening(int id) {
+		TreningDAO dao = (TreningDAO) ctx.getAttribute("treningDAO");
+		//return dao.update(sportskiObjekat);
+		return null;
 	}
 	
 	@DELETE
