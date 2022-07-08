@@ -14,6 +14,7 @@ import beans.Clanarina;
 import beans.Korisnik;
 import beans.SportskiObjekat;
 import utils.DateHelper;
+import utils.TipClanarine;
 
 public class ClanarinaDAO {
 	
@@ -44,6 +45,22 @@ public class ClanarinaDAO {
 	
 	public Clanarina findClanarina(int id) {
 		return clanarine.containsKey(id) ? clanarine.get(id) : null;
+	}
+	
+	public Clanarina novaClanarina(Clanarina clanarina) {
+		if(clanarina.getTipClanarine() == TipClanarine.DNEVNA) {
+			clanarina.setKrajnjiDatumVazenja(DateHelper.dateToString( clanarina.getPocetniDatumVazenja().plusDays(1)));
+		}else if(clanarina.getTipClanarine() == TipClanarine.MESECNA) {
+			clanarina.setKrajnjiDatumVazenja(DateHelper.dateToString( clanarina.getPocetniDatumVazenja().plusMonths(1)));
+		}else {
+			clanarina.setKrajnjiDatumVazenja(DateHelper.dateToString( clanarina.getPocetniDatumVazenja().plusYears(1)));
+		}
+		
+		clanarina = save(clanarina);
+		sacuvajClanarine();
+		
+		return clanarina;
+		
 	}
 	
 	public Clanarina save(Clanarina clanarina) {

@@ -58,7 +58,25 @@
 						v-model="so.prosecnaOcena" disabled>
 				</div>
 
-				
+				<table  id="tabela">
+					<thead>
+						<tr bgcolor="lightgrey">
+							<th>Slika</th>
+							<th>Opis</th>
+							<th>Naziv trenera</th>
+							<th>Doplata</th>
+							<th>Prijava</th>
+						</tr>
+					</thead>
+	
+					<tr v-for="t in treninzi">
+						<td>{{t.slika }}</td>
+						<td>{{t.opis }}</td>
+						<td>{{t.trener}}</td>
+						<td>0</td>
+						<td><button type="button" v-on:click="prijavaNaTrening(t)">Prijava</button></td>
+					</tr>
+				</table>	
 			</div>
 		</form>
 

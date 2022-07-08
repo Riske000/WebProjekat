@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container" id="clanarina">
+		<div class="title">Membership</div>
+		<form @submit='platiClanarinu'>
+			<div class="user-details">
+
+
+				<div class="input-box">
+					<span class="details"></span>
+
+				</div>
+
+				<div class="input-box">
+
+					<span class="details">ID</span> <input
+						v-model="clanarina.id" type="text" name="name"
+						disabled>
+				</div>
+
+				<div class="input-box">
+
+					<span class="details">Tip clanarine</span> <input
+						v-model="clanarina.tipClanarine" type="text" name="name"
+						disabled>
+				</div>
+
+				<div class="input-box">
+					<span class="details">Cena</span> <input
+						v-model="clanarina.punaCena" type="text" name="surname" disabled>
+				</div>
+
+				<div class="input-box">
+					<span class="details">Datum placanja</span> <input
+						v-model="clanarina.datumPlacanja" type="date" name="birthday"
+						disabled>
+				</div>
+
+				<div class="input-box">
+					<span class="details">Pocetak vazenja</span> <input
+						v-model="clanarina.pocetniDatumVazenja" type="date" v-bind:min="min" name="birthday">
+				</div>
+
+
+
+				<div class="button">
+					<input type="submit" value="Plati">
+				</div>
+
+
+			</div>
+
+
+
+
+		</form>
+
+	</div>
+
+
+	<script src="js/vue.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="js/clanarina.js"></script>
+</body>
+</html>

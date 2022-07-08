@@ -11,6 +11,7 @@ public class TreningDTO {
 	private double trajanje;
 	private String opis;
 	private String slika;
+	private String trener;
 	
 	public TreningDTO(Trening trening) {
 		this.intId = trening.getIntId();
@@ -20,9 +21,10 @@ public class TreningDTO {
 		this.trajanje = trening.getTrajanje();
 		this.opis = trening.getOpis();
 		this.slika = trening.getSlika();
+		this.trener = (trening.getTrener()==null)?null:(trening.getTrener().getIme() + " " + trening.getTrener().getPrezime());
 	}
-	
-	
+
+
 	public TreningDTO(int intId, String naziv, String tipTreninga, SportskiObjekat objekatGdePripada,
 			double trajanje, String opis, String slika) {
 		super();
@@ -113,6 +115,13 @@ public class TreningDTO {
 		this.slika = slika;
 	}
 
-	
+	public String getTrener() {
+		return trener;
+	}
+
+
+	public void setTrener(String trener) {
+		this.trener = trener;
+	}
 
 }

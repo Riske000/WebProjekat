@@ -8,7 +8,7 @@ import utils.DateHelper;
 public class Clanarina {
 
 	private int intId;
-	private String ID;
+	private String id;
 	private String tipClanarine;
 	private LocalDate datumPlacanja;
 	private LocalDate pocetniDatumVazenja;
@@ -33,11 +33,11 @@ public class Clanarina {
 
 	
 
-	public Clanarina(int intId, String iD, String tipClanarine, LocalDate datumPlacanja, LocalDate pocetniDatumVazenja,
+	public Clanarina(int intId, String id, String tipClanarine, LocalDate datumPlacanja, LocalDate pocetniDatumVazenja,
 			LocalDate krajnjiDatumVazenja, double punaCena, Korisnik kupac, String status, int brojTermina) {
 		super();
 		this.intId = intId;
-		ID = iD;
+		this.id = id;
 		this.tipClanarine = tipClanarine;
 		this.datumPlacanja = datumPlacanja;
 		this.pocetniDatumVazenja = pocetniDatumVazenja;
@@ -75,28 +75,43 @@ public class Clanarina {
 	public LocalDate getDatumPlacanja() {
 		return datumPlacanja;
 	}
-	public void setDatumPlacanja(LocalDate datumPlacanja) {
-		this.datumPlacanja = datumPlacanja;
+	public void setDatumPlacanja(String datumPlacanja) {
+		if(datumPlacanja == null || datumPlacanja.equals("")) {
+			return;
+		}
+		this.datumPlacanja = DateHelper.stringToDate(datumPlacanja);
 	}
 	
-	public String getID() {
-		return ID;
+	public String getId() {
+		return id;
 	}
-	public void setID(String iD) {
-		ID = iD;
+
+	public void setId(String id) {
+		this.id = id;
 	}
+
 	public LocalDate getPocetniDatumVazenja() {
-		return pocetniDatumVazenja;
+		return datumPlacanja;
 	}
-	public void setPocetniDatumVazenja(LocalDate pocetniDatumVazenja) {
-		this.pocetniDatumVazenja = pocetniDatumVazenja;
+	
+	public void setPocetniDatumVazenja(String pocetniDatumVazenja) {
+		if(pocetniDatumVazenja == null || pocetniDatumVazenja.equals("")) {
+			return;
+		}
+		this.pocetniDatumVazenja = DateHelper.stringToDate(pocetniDatumVazenja);
 	}
+	
 	public LocalDate getKrajnjiDatumVazenja() {
-		return krajnjiDatumVazenja;
+		return datumPlacanja;
 	}
-	public void setKrajnjiDatumVazenja(LocalDate krajnjiDatumVazenja) {
-		this.krajnjiDatumVazenja = krajnjiDatumVazenja;
+	
+	public void setKrajnjiDatumVazenja(String krajnjiDatumVazenja) {
+		if(krajnjiDatumVazenja == null || krajnjiDatumVazenja.equals("")) {
+			return;
+		}
+		this.krajnjiDatumVazenja = DateHelper.stringToDate(krajnjiDatumVazenja);
 	}
+	
 	public double getPunaCena() {
 		return punaCena;
 	}
@@ -125,7 +140,7 @@ public class Clanarina {
 	}
 	
 	public String convertToString() {
-		return intId + ";" + ID + ";" + tipClanarine + ";" + DateHelper.dateToString(datumPlacanja) + ";" + DateHelper.dateToString(pocetniDatumVazenja) + ";" + DateHelper.dateToString(krajnjiDatumVazenja) + ";" + punaCena + ";" 
+		return intId + ";" + id + ";" + tipClanarine + ";" + DateHelper.dateToString(datumPlacanja) + ";" + DateHelper.dateToString(pocetniDatumVazenja) + ";" + DateHelper.dateToString(krajnjiDatumVazenja) + ";" + punaCena + ";" 
 				+ kupac.getIntId() + ";" + status + ";" + brojTermina;
 	}
 	
