@@ -238,4 +238,28 @@ public class IstorijaTreningaDAO {
 //		
 //		return pronadjeni;
 //	}
+	
+	public IstorijaTreninga check(Trening trening, Korisnik korisnik) {
+		Integer maxId = -1;
+		for (int id : istorijeTreninga.keySet()) {
+			if (id > maxId) {
+				maxId = id;
+			}
+		}
+		maxId++;
+		Trening tr = new Trening();
+		for(Trening t : TreningDAO.getInstance().treninzi.values()) {
+			if(t.getIntId() == trening.getIntId()) {
+				tr = t;
+				break;
+			}
+		}
+		
+		IstorijaTreninga it = new IstorijaTreninga(maxId, LocalDateTime.now(), tr, korisnik, tr.getTrener());
+		istorijeTreninga.put(it.getIntId(), it);
+		tr.getTrener().getIstorijaTreninga().add(it);
+		sacuvajIstorijeTreninga();
+		return it;
+	}
+	
 }

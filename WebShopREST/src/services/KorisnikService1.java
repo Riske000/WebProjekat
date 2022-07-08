@@ -137,4 +137,19 @@ public class KorisnikService1 {
 		KorisnikDAO dao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
 		return dao.update(korisnik);
 	}
+	
+	@PUT
+	@Path("/cekirajSe")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response cekirajSe(@Context HttpServletRequest request) {
+		KorisnikDAO dao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
+		Korisnik logovani = (Korisnik) request.getSession().getAttribute("user");
+		if(dao.cekirajSe(logovani.getIntId())) {        
+			return Response.status(200).build();
+		} else {
+			return Response.status(400).build();
+		}
+		
+	}
 }

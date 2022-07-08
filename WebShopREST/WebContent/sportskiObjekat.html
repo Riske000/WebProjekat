@@ -62,6 +62,7 @@
 					<thead>
 						<tr bgcolor="lightgrey">
 							<th>Slika</th>
+							<th>Tip treninga</th>
 							<th>Opis</th>
 							<th>Naziv trenera</th>
 							<th>Doplata</th>
@@ -69,8 +70,9 @@
 						</tr>
 					</thead>
 	
-					<tr v-for="t in treninzi">
+					<tr v-for="t in treninzi" v-bind:hidden="t.tipTreninga=='personalni'">
 						<td>{{t.slika }}</td>
+						<td>{{t.tipTreninga }}</td>
 						<td>{{t.opis }}</td>
 						<td>{{t.trener}}</td>
 						<td>0</td>

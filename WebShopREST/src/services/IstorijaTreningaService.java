@@ -5,6 +5,8 @@ import java.util.Collection;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -64,6 +66,17 @@ public class IstorijaTreningaService {
 			treninziDTO.add(new IstorijaTreningaDTO(istorija));
 		}
 		return treninziDTO;
+	}
+	
+	@POST
+	@Path("/cekirajSe")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public IstorijaTreninga napravi(Trening trening, @Context HttpServletRequest request) {
+		Korisnik logovani = (Korisnik) request.getSession().getAttribute("user");
+		IstorijaTreningaDAO dao = (IstorijaTreningaDAO) ctx.getAttribute("istorijaTreningaDAO");
+		
+		return dao.check(trening, logovani);
 	}
 	
 	//treba izmeniti

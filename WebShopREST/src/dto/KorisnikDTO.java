@@ -22,7 +22,6 @@ public class KorisnikDTO {
 	private String uloga;
 
 	// kupac
-	private Clanarina clanarina;
 	private List<SportskiObjekat> poseceniObjekti;
 	private double brojSakupljenihPoena;
 	private TipKupca tipKupca;
@@ -44,7 +43,6 @@ public class KorisnikDTO {
 		this.pol = korisnik.getPol();
 		this.datumRodjenja = DateHelper.stringToDate(korisnik.getDatumRodjenja());
 		this.uloga = korisnik.getUloga();
-		this.clanarina = korisnik.getClanarina();
 		this.poseceniObjekti = korisnik.getPoseceniObjekti();
 		this.brojSakupljenihPoena = korisnik.getBrojSakupljenihPoena();
 		this.tipKupca = korisnik.getTipKupca();
@@ -113,14 +111,6 @@ public class KorisnikDTO {
 
 	public void setUloga(String uloga) {
 		this.uloga = uloga;
-	}
-
-	public Clanarina getClanarina() {
-		return clanarina;
-	}
-
-	public void setClanarina(Clanarina clanarina) {
-		this.clanarina = clanarina;
 	}
 
 	public List<SportskiObjekat> getPoseceniObjekti() {

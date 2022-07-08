@@ -102,7 +102,7 @@ public class Clanarina {
 	}
 	
 	public LocalDate getKrajnjiDatumVazenja() {
-		return datumPlacanja;
+		return krajnjiDatumVazenja;
 	}
 	
 	public void setKrajnjiDatumVazenja(String krajnjiDatumVazenja) {

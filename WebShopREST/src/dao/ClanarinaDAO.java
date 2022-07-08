@@ -161,7 +161,14 @@ public class ClanarinaDAO {
 
 	}
 	
-	// da li treba connect clanarina <-> korisnik 
-	
+	public void smanjiBrojTermina(int intId) {
+		for(Clanarina clanarina: clanarine.values()) {
+			if(clanarina.getIntId() == intId) {
+				clanarina.setBrojTermina(clanarina.getBrojTermina() - 1);
+				sacuvajClanarine();
+			}
+		}
+	}
+
 	
 }

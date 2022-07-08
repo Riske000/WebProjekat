@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -349,6 +350,19 @@ public class KorisnikDAO {
 		}
 		return freeManagers;
 		
+	}
+	
+	public boolean cekirajSe(int intId) {
+		for(Korisnik korisnik : korisnici.values()) {
+			if(korisnik.getIntId() == intId) {
+				if(LocalDate.now().isBefore(korisnik.getClanarina().getKrajnjiDatumVazenja()) &&
+						korisnik.getClanarina().getBrojTermina() > 0 ) {
+					ClanarinaDAO.getInstance().smanjiBrojTermina(korisnik.getClanarina().getIntId());
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 }

@@ -15,8 +15,17 @@ var app = new Vue({
 			})
 		},
 	methods: {
-		prijavaNaTrening: function(training){
-			
+		prijavaNaTrening: function(t){
+			axios.put('rest/korisnik1/cekirajSe')
+			.then((response) => {
+				axios.post('rest/istorijaTreninga/cekirajSe', { intId: t.intId })
+				.then((response) => {
+					alert('Uspesno ste se cekirali za trening!')
+				})
+			}).catch(() => {
+				alert('Istekla Vam je clanarina ili ste potrosili sve termine!')
+				return;
+			})
 		}
 	}
 });
