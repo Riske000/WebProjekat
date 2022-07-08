@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="uplataClanarine">
+
+		<table border="1" id="tabela">
+			<thead>
+				<tr bgcolor="lightgrey">
+				    <th>Tip clanarine</th>
+					<th>Cena</th>
+					<th>Broj termina</th>
+				</tr>
+			</thead>
+
+			<tr v-for="c in clanarine" v-on:click="izabratiClanarinu(c)">
+				<td>{{c.tipClanarine }}</td>
+				<td>{{c.punaCena }}</td>
+				<td>{{c.brojTermina }}</td>
+			</tr>
+		</table>
+
+
+	</div>
+	<script src="js/vue.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="js/uplataClanarine.js"></script>
+</body>
+</html>
