@@ -10,6 +10,7 @@ import dao.LokacijaDAO;
 import dao.SportskiObjekatDAO;
 import dao.TipKupcaDAO;
 import dao.TreningDAO;
+import dao.ZakazanTreningDAO;
 
 
 public class PokretanjeProjekta {
@@ -26,7 +27,7 @@ public class PokretanjeProjekta {
 		SportskiObjekatDAO.getInstance().loadSportskiObjekti(contextPath);
 		TipKupcaDAO.getInstance().loadTipoviKupca(contextPath);
 		TreningDAO.getInstance().loadTreninzi(contextPath);
-		
+		ZakazanTreningDAO.getInstance().loadZakazaniTreninzi(contextPath);
 		
 		KorisnikDAO.getInstance().connectKorisnikClanarina();
 		KorisnikDAO.getInstance().connectKorisnikSportskiObjekat();
@@ -44,6 +45,8 @@ public class PokretanjeProjekta {
 		IstorijaTreningaDAO.getInstance().connectIstorijaTreningaKupac();
 		IstorijaTreningaDAO.getInstance().connectIstorijaTreningaTrener();
 		IstorijaTreningaDAO.getInstance().connectIstorijaTreningaTrening();
+		
+		ZakazanTreningDAO.getInstance().connectZakazanTreningTrening();
 	}
 
 	public static PokretanjeProjekta getInstance(String contextPath) {
