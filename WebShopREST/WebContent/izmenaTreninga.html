@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<div class="container" id="izmenaTreninga">
+		<div class="title">Izmena treninga</div>
+		<form @submit='izmeniTrening'>
+			<div class="user-details">
+
+
+				<div class="input-box">
+					<span class="details"></span>
+
+				</div>
+
+				<div class="input-box">
+					<span class="details">Naziv treninga</span> <input type="text"
+						name="naziv" required
+						v-model="trening.naziv">
+				</div>
+
+				<div class="input-box">
+					<span class="details">Ime objekta</span> <input type="text" disabled
+						name="imeObjekta" 
+						v-model="trening.objekatGdePripada.ime">
+				</div>
+
+
+
+				<div class="input-box">
+					<span class="details">Tip treninga</span> <select type="combobox"
+						class="combobox" v-model="trening.tipTreninga" width="15"
+						required size=1
+						style="width: 300px; height: 40px; border-radius: 5px; font-size: 16px">
+						<option value="grupni">Grupni</option>
+						<option value="personalni">Personalni</option>
+						<option value="individualni">Individualni</option>
+						<option value="teretana">Teretana</option>
+						<option value="bazen">Bazen</option>
+					</select>
+				</div>
+
+				<div class="input-box">
+					<span class="details">Trajanje</span> <input type="text"
+						name="trajanje" required
+						v-model="trening.trajanje">
+				</div>
+
+				<div class="input-box">
+					<span class="details">Opis</span> <input 
+						name="opis" required
+						v-model="trening.opis">
+				</div>
+
+				<div class="input-box">
+					<span class="details">Slika</span> <input name="slika" required
+						v-model="trening.slika">
+				</div>
+				
+				<div class="input-box">
+					<span class="details">Ime trenera</span> <input name="imeTrenera" disabled
+						v-model="izabraniTrener.ime">
+				</div>
+				
+
+				<select v-model="izabraniTrener" 
+					v-bind:hidden="treneri === null || treneri.length == 0">
+					<option v-for="t in treneri" :value="t"  >
+						{{t.ime}} {{t.prezime}} {{t.korisnickoIme}}</option>
+				</select>
+
+
+
+				<div class="button">
+					<input type="submit" value="Izmeni">
+
+				</div>
+			</div>
+		</form>
+		
+	</div>
+
+
+	<script src="js/vue.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="js/izmenaTreninga.js"></script>
+
+</body>
+</body>
+</html>

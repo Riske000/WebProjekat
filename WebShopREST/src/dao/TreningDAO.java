@@ -80,6 +80,7 @@ public class TreningDAO {
 
 	public Trening update(Trening trening) {
 		treninzi.put(trening.getIntId(), trening);
+		sacuvajTreninge();
 		return trening;
 	}
 

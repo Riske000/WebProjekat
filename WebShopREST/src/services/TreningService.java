@@ -5,6 +5,8 @@ import java.util.Collection;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -107,31 +109,6 @@ public class TreningService {
 		return grupniTreninziDTO;
 	}
 	
-	//treba izmeniti
-	
-	@GET
-	@Path("/getSportsObject")
-	@Produces(MediaType.APPLICATION_JSON)
-	public SportskiObjekat getSportskiObjekat(@QueryParam("id") int id) {
-		SportskiObjekatDAO dao = (SportskiObjekatDAO) ctx.getAttribute("sportskiObjekatDAO");
-		return dao.findObjekat(id);
-	}
-	
-	@POST
-	@Path("/")
-	@Produces(MediaType.APPLICATION_JSON)
-	public SportskiObjekat save(SportskiObjekat sportskiObjekat) {
-		SportskiObjekatDAO dao = (SportskiObjekatDAO) ctx.getAttribute("sportskiObjekatDAO");
-		return dao.save(sportskiObjekat);
-	}
-	
-	@PUT
-	@Path("/")
-	@Produces(MediaType.APPLICATION_JSON)
-	public SportskiObjekat update(SportskiObjekat sportskiObjekat) {
-		SportskiObjekatDAO dao = (SportskiObjekatDAO) ctx.getAttribute("sportskiObjekatDAO");
-		return dao.update(sportskiObjekat);
-	}
 	
 	@PUT
 	@Path("/cancelTraining")
@@ -142,20 +119,43 @@ public class TreningService {
 		return null;
 	}
 	
-	@DELETE
-	@Path("/{id}")
+	@PUT
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void getProducts(@PathParam("id") String id) { //izmeni u int
-		SportskiObjekatDAO dao = (SportskiObjekatDAO) ctx.getAttribute("sportskiObjekatDAO");
-		dao.delete(id);
+	public void changeOne(TreningDTO treningDTO) {
+		TreningDAO dao = (TreningDAO) ctx.getAttribute("treningDAO");
+		Trening trening = new Trening();
+		trening.setIntId(treningDTO.getIntId());
+		trening.setNaziv(treningDTO.getNaziv());
+		trening.setTipTreninga(treningDTO.getTipTreninga());
+		trening.setObjekatGdePripada(treningDTO.getObjekatGdePripada());
+		trening.setTrajanje(treningDTO.getTrajanje());
+		trening.setOpis(treningDTO.getOpis());
+		trening.setSlika(treningDTO.getSlika());
+		Korisnik trener = KorisnikDAO.getInstance().find(treningDTO.getTrenerIntId());
+		trening.setTrener(trener);
+		
+		dao.update(trening);
 	}
 	
-//	@GET
-//	@Path("/search")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public ArrayList<SportskiObjekat> search(@QueryParam("searchIme") String searchIme, @QueryParam("searchTip") String searchTip,
-//			@QueryParam("searchLokacija") String searchLokacija, @QueryParam("searchOcena") String searchOcena) {
-//		SportskiObjekatDAO dao = (SportskiObjekatDAO) ctx.getAttribute("sportskiObjekatDAO");
-//		return dao.search(searchIme, searchTip, searchLokacija, searchOcena);
-//	}
+	@POST
+	@Path("/setSelected")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response setSelected(TreningDTO treningDTO, @Context HttpServletRequest request) {
+		Trening trening = TreningDAO.getInstance().findTrening(treningDTO.getIntId());
+		request.getSession().setAttribute("izabraniTrening", trening);
+		return Response.status(200).build();
+	}
+	
+	@GET
+	@Path("/getSelected")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public TreningDTO getSelected( @Context HttpServletRequest request) {
+		Trening trening = (Trening)request.getSession().getAttribute("izabraniTrening");
+		return new TreningDTO(trening);
+	}
+	
 }

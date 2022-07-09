@@ -103,7 +103,7 @@ public class KorisnikDAO {
 
 	public Korisnik update(Korisnik korisnik) {
 
-		if (korisnik.getSportskiObjekat() != null) {
+		if (korisnik.getSportskiObjekat() != null) { //izmeni ovo
 			int id = korisnik.getSportskiObjekat().getIntId();
 			Collection<SportskiObjekat> sportskiObjekti = SportskiObjekatDAO.getInstance().findAll();
 			ArrayList<SportskiObjekat> sportskiObjekti1 = new ArrayList<SportskiObjekat>();
@@ -368,6 +368,16 @@ public class KorisnikDAO {
 			}
 		}
 		return false;
+	}
+	
+	public Collection<Korisnik> getTreneri(){
+		ArrayList<Korisnik> treneri = new ArrayList<Korisnik>();
+		for(Korisnik k : korisnici.values()) {
+			if(k.getUloga().equals("trener")) {
+				treneri.add(k);
+			}
+		}
+		return treneri;
 	}
 
 }

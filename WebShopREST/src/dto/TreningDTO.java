@@ -12,29 +12,18 @@ public class TreningDTO {
 	private String opis;
 	private String slika;
 	private String trener;
+	private int trenerIntId;
 	
 	public TreningDTO(Trening trening) {
 		this.intId = trening.getIntId();
 		this.naziv = trening.getNaziv();
 		this.tipTreninga = trening.getTipTreninga();
 		this.objekatGdePripada = trening.getObjekatGdePripada();
-		this.trajanje = trening.getTrajanje();
+		this.trajanje = trening.getTrajanje(); //da li trba kastovati
 		this.opis = trening.getOpis();
 		this.slika = trening.getSlika();
 		this.trener = (trening.getTrener()==null)?null:(trening.getTrener().getIme() + " " + trening.getTrener().getPrezime());
-	}
-
-
-	public TreningDTO(int intId, String naziv, String tipTreninga, SportskiObjekat objekatGdePripada,
-			double trajanje, String opis, String slika) {
-		super();
-		this.intId = intId;
-		this.naziv = naziv;
-		this.tipTreninga = tipTreninga;
-		this.objekatGdePripada = objekatGdePripada;
-		this.trajanje = trajanje;
-		this.opis = opis;
-		this.slika = slika;
+		this.trenerIntId = (trening.getTrener()==null)?-1:(trening.getTrener().getIntId());
 	}
 
 	public TreningDTO(int intId) {
@@ -51,7 +40,7 @@ public class TreningDTO {
 	}
 
 
-	public void setId(int intId) {
+	public void setIntId(int intId) {
 		this.intId = intId;
 	}
 
@@ -123,5 +112,15 @@ public class TreningDTO {
 	public void setTrener(String trener) {
 		this.trener = trener;
 	}
+
+	public int getTrenerIntId() {
+		return trenerIntId;
+	}
+
+	public void setTrenerIntId(int trenerIntId) {
+		this.trenerIntId = trenerIntId;
+	}
+	
+	
 
 }

@@ -6,8 +6,9 @@ import java.util.Collection;
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.websocket.server.PathParam;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -22,6 +23,7 @@ import beans.Korisnik;
 import beans.SportskiObjekat;
 import dao.KorisnikDAO;
 import dao.SportskiObjekatDAO;
+import dao.TreningDAO;
 import dto.KorisnikDTO;
 import utils.PokretanjeProjekta;
 
@@ -160,5 +162,28 @@ public class KorisnikService1 {
 			return Response.status(400).build();
 		}
 		
+	}
+	
+	@GET
+	@Path("/{id}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public KorisnikDTO getKorisnik(@PathParam("id") int id) { //izmeni u int
+		KorisnikDAO dao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
+		return new KorisnikDTO(dao.find(id));
+	}
+	
+	@GET
+	@Path("/getTreneri")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<KorisnikDTO> getTreneri() {
+		KorisnikDAO dao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
+		Collection<Korisnik> treneri = dao.getTreneri();
+		ArrayList<KorisnikDTO> treneriDTO = new ArrayList<KorisnikDTO>();
+		for(Korisnik t : treneri) {
+			treneriDTO.add(new KorisnikDTO(t));
+		}
+		return treneriDTO;
 	}
 }

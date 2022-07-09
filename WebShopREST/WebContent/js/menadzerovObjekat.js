@@ -31,6 +31,11 @@ var app = new Vue({
 			
 	},
 	methods: {
-
+		izmeniTrening: function(tr) {
+			axios.post('rest/trening/setSelected', tr)
+			 .then((response) => {
+				 window.location.href = 'http://localhost:8080/WebShopREST/izmenaTreninga.html';
+			 })
+		 }
 	}
 });
