@@ -50,7 +50,7 @@ public class KorisnikDAO {
 	}
 
 	public Korisnik save(Korisnik korisnik) {
-		if(korisnik.getUloga() == Uloge.KUPAC) {
+		if (korisnik.getUloga() == Uloge.KUPAC) {
 			TipKupca type = new TipKupca(0);
 			type.setImeTipa(ImeTipa.BRONZANI);
 			type.setPopust(0);
@@ -102,17 +102,17 @@ public class KorisnikDAO {
 	}
 
 	public Korisnik update(Korisnik korisnik) {
-		
-		if(korisnik.getSportskiObjekat() !=null) {
+
+		if (korisnik.getSportskiObjekat() != null) {
 			int id = korisnik.getSportskiObjekat().getIntId();
 			Collection<SportskiObjekat> sportskiObjekti = SportskiObjekatDAO.getInstance().findAll();
 			ArrayList<SportskiObjekat> sportskiObjekti1 = new ArrayList<SportskiObjekat>();
-			for(SportskiObjekat sp : sportskiObjekti) {
+			for (SportskiObjekat sp : sportskiObjekti) {
 				sportskiObjekti1.add(sp);
 			}
-			korisnik.setSportskiObjekat(sportskiObjekti1.get(sportskiObjekti1.size()-1));
+			korisnik.setSportskiObjekat(sportskiObjekti1.get(sportskiObjekti1.size() - 1));
 		}
-		if(korisnik.getClanarina() != null) {
+		if (korisnik.getClanarina() != null) {
 			int id = korisnik.getClanarina().getIntId();
 			Clanarina clanarina = ClanarinaDAO.getInstance().findClanarina(id);
 			korisnik.setClanarina(clanarina);
@@ -150,7 +150,7 @@ public class KorisnikDAO {
 					List<SportskiObjekat> poseceniObjekti = new ArrayList<SportskiObjekat>();
 					TipKupca tipKupca = null;
 					SportskiObjekat sportskiObjekat = null;
-					
+
 					intId = Integer.parseInt(st.nextToken().trim());
 					korisnickoIme = st.nextToken().trim();
 					sifra = st.nextToken().trim();
@@ -181,8 +181,10 @@ public class KorisnikDAO {
 					if (sportskiObjekatId != -1) {
 						sportskiObjekat = new SportskiObjekat(sportskiObjekatId);
 					}
-					korisnici.put(intId, new Korisnik(intId, korisnickoIme, sifra, ime, prezime, pol, datumRodjenja, uloga,
-							istorijaTreninga, clanarina, poseceniObjekti, brojSakupljenihPoena, tipKupca, sportskiObjekat));
+					korisnici.put(intId,
+							new Korisnik(intId, korisnickoIme, sifra, ime, prezime, pol, datumRodjenja, uloga,
+									istorijaTreninga, clanarina, poseceniObjekti, brojSakupljenihPoena, tipKupca,
+									sportskiObjekat));
 				}
 			}
 		} catch (Exception e) {
@@ -309,14 +311,17 @@ public class KorisnikDAO {
 		}
 	}
 
-	public ArrayList<Korisnik> search(String searchIme, String searchPrezime, String searchKorisnickoIme) {
+	public ArrayList<Korisnik> search(String searchIme, String searchPrezime, String searchKorisnickoIme,
+			String tipKorisnika) {
 		ArrayList<Korisnik> pronadjeni = new ArrayList<Korisnik>();
 
 		for (Korisnik k : korisnici.values()) {
 			if (k.getKorisnickoIme().toLowerCase().contains(searchKorisnickoIme.toLowerCase())) {
 				if (k.getIme().toLowerCase().contains(searchIme.toLowerCase())) {
 					if (k.getPrezime().toLowerCase().contains(searchPrezime.toLowerCase())) {
-						pronadjeni.add(k);
+						if (k.getUloga().contains(tipKorisnika)) {
+							pronadjeni.add(k);
+						}
 					}
 				}
 			}
@@ -324,12 +329,12 @@ public class KorisnikDAO {
 
 		return pronadjeni;
 	}
-	
-	public ArrayList<Korisnik> getKupciZaSportskiObjekat(int idSportskogObjekta){
+
+	public ArrayList<Korisnik> getKupciZaSportskiObjekat(int idSportskogObjekta) {
 		ArrayList<Korisnik> kupci = new ArrayList<Korisnik>();
-		for(Korisnik korisnik : korisnici.values()) {
-			for(SportskiObjekat sportskiObjekat : korisnik.getPoseceniObjekti()) {
-				if(sportskiObjekat.getIntId() == idSportskogObjekta) {
+		for (Korisnik korisnik : korisnici.values()) {
+			for (SportskiObjekat sportskiObjekat : korisnik.getPoseceniObjekti()) {
+				if (sportskiObjekat.getIntId() == idSportskogObjekta) {
 					kupci.add(korisnik);
 					break;
 				}
@@ -337,26 +342,26 @@ public class KorisnikDAO {
 		}
 		return kupci;
 	}
-	
-	public ArrayList<Korisnik> getSlobodniMenadzeri(){
+
+	public ArrayList<Korisnik> getSlobodniMenadzeri() {
 		ArrayList<Korisnik> freeManagers = new ArrayList<Korisnik>();
-		
-		for(Korisnik korisnik : korisnici.values()) {
-			if(korisnik.getUloga().equals( Uloge.MENADZER)) {
-				if(korisnik.getSportskiObjekat() == null) {
+
+		for (Korisnik korisnik : korisnici.values()) {
+			if (korisnik.getUloga().equals(Uloge.MENADZER)) {
+				if (korisnik.getSportskiObjekat() == null) {
 					freeManagers.add(korisnik);
 				}
 			}
 		}
 		return freeManagers;
-		
+
 	}
-	
+
 	public boolean cekirajSe(int intId) {
-		for(Korisnik korisnik : korisnici.values()) {
-			if(korisnik.getIntId() == intId) {
-				if(LocalDate.now().isBefore(korisnik.getClanarina().getKrajnjiDatumVazenja()) &&
-						korisnik.getClanarina().getBrojTermina() > 0 ) {
+		for (Korisnik korisnik : korisnici.values()) {
+			if (korisnik.getIntId() == intId) {
+				if (LocalDate.now().isBefore(korisnik.getClanarina().getKrajnjiDatumVazenja())
+						&& korisnik.getClanarina().getBrojTermina() > 0) {
 					ClanarinaDAO.getInstance().smanjiBrojTermina(korisnik.getClanarina().getIntId());
 					return true;
 				}

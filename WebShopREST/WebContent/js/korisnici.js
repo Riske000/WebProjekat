@@ -5,7 +5,8 @@ var app = new Vue({
 		searchIme: "",
 		searchPrezime: "",
 		searchKorisnickoIme: "",
-		loggedUser: {}
+		loggedUser: {},
+		tipKorisnika: ""
 	},
 	mounted() {
 		axios.get('rest/korisnik1')
@@ -16,7 +17,8 @@ var app = new Vue({
 	},
 	methods: {
 		pretraziKorisnike: function() {
-			axios.get('rest/korisnik1/search', { params: { searchIme: this.searchIme, searchPrezime: this.searchPrezime, searchKorisnickoIme: this.searchKorisnickoIme } })
+			axios.get('rest/korisnik1/search', { params: { searchIme: this.searchIme, searchPrezime: this.searchPrezime, searchKorisnickoIme: this.searchKorisnickoIme, 
+				tipKorisnika: this.tipKorisnika } })
 				.then(response => (this.korisnici = response.data))
 		},
 		Sortiraj: function(n) {

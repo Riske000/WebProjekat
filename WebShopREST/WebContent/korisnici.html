@@ -23,6 +23,12 @@
 			<input type="text" name="searchKorisnickoIme" placeholder="Korisnicko ime" v-model="searchKorisnickoIme">
 			<input type="text" name="searchIme" placeholder="Ime" v-model="searchIme">
 			<input type="text" name="searchPrezime" placeholder="Prezime" v-model="searchPrezime">
+			<select type="combobox" class="combobox" v-model="tipKorisnika">
+				<option value="administrator">Administrator</option>
+				<option value="menadzer">Menadzer</option>
+				<option value="trener">Trener</option>
+				<option value="kupac">Kupac</option>
+			</select>
 			<button value="Pretrazi" v-on:click="pretraziKorisnike">Pretrazi</button>
 		</p>
 
