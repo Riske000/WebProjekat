@@ -58,17 +58,17 @@ public class SportskiObjekatDAO {
 		}
 		maxId++;
 		sportskiObjekat.setIntId(maxId);
-		
+
 		LokacijaDAO.getInstance().save(sportskiObjekat.getLokacija());
-		if(sportskiObjekat.getLokacija() !=null) {
+		if (sportskiObjekat.getLokacija() != null) {
 			Collection<Lokacija> lokacije = LokacijaDAO.getInstance().findAll();
 			ArrayList<Lokacija> lokacije1 = new ArrayList<Lokacija>();
-			for(Lokacija l : lokacije) {
+			for (Lokacija l : lokacije) {
 				lokacije1.add(l);
 			}
-			sportskiObjekat.setLokacija(lokacije1.get(lokacije1.size()-1));
+			sportskiObjekat.setLokacija(lokacije1.get(lokacije1.size() - 1));
 		}
-		
+
 		sportskiObjekti.put(sportskiObjekat.getIntId(), sportskiObjekat);
 		sacuvajSportskeObjekte();
 		return sportskiObjekat;
@@ -156,15 +156,26 @@ public class SportskiObjekatDAO {
 
 	}
 
-	public ArrayList<SportskiObjekat> search(String searchIme, String searchTip, String searchLokacija, String searchOcena) {
+	public ArrayList<SportskiObjekat> search(String searchIme, String searchTip, String searchLokacija,
+			String searchOcena, String daLiRadi, String filterStatus) {
 		ArrayList<SportskiObjekat> pronadjeni = new ArrayList<SportskiObjekat>();
 
 		for (SportskiObjekat sp : sportskiObjekti.values()) {
 			if (sp.getIme().toLowerCase().contains(searchIme.toLowerCase())) {
 				if (sp.getLokacija().celaAdress().toLowerCase().contains(searchLokacija.toLowerCase())) {
 					if (sp.getTipObjekta().toLowerCase().contains(searchTip.toLowerCase())) {
-						if (sp.getProsecnaOcena() >= Double.parseDouble(searchOcena) ) {
-							pronadjeni.add(sp);
+						if (sp.getProsecnaOcena() >= Double.parseDouble(searchOcena)) {
+							if (daLiRadi.equals("true")) {
+								if (sp.getStatus().equals("radi")) {
+									if (sp.getTipObjekta().contains(filterStatus)) {
+										pronadjeni.add(sp);
+									}
+								}
+							} else {
+								if (sp.getTipObjekta().contains(filterStatus)) {
+									pronadjeni.add(sp);
+								}
+							}
 						}
 					}
 				}

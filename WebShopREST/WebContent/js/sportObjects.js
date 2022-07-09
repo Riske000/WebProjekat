@@ -1,7 +1,8 @@
 var app = new Vue({
 	el: '#sportskiObjekti',
 	data: {
-		sportObjects: null,
+		sportObjects: [],
+		tmp: [],
 		searchIme: "",
 		searchTip: "",
 		searchLokacija: "",
@@ -9,11 +10,25 @@ var app = new Vue({
 		loggedUser: {},
 		logovan: false,
 		error: "",
-		intId: ""
+		intId: "",
+		daLiRadi: "ne radi",
+		filterStatus: ""
 	},
 	mounted() {
 		axios.get('rest/sportskiObjekti')
-			.then(response => (this.sportObjects = response.data))
+			.then((response) => {
+				this.tmp = response.data; 
+				for(let s of this.tmp){
+					if(s.status === 'radi'){
+						this.sportObjects.push(s);
+					}
+				}
+				for(let s of this.tmp){
+					if(s.status === 'ne radi'){
+						this.sportObjects.push(s);
+					}
+				}
+			})
 		axios.get('rest/korisnik1/currentUser').then((response) => {
 			this.loggedUser = response.data
 			this.logovan = true
@@ -31,7 +46,7 @@ var app = new Vue({
 				return;
 			}
 			axios.get('rest/sportskiObjekti/search', { params: { searchIme: this.searchIme, searchTip: this.searchTip, searchLokacija: this.searchLokacija, 
-				searchOcena: this.searchOcena } })
+				searchOcena: this.searchOcena,  daLiRadi: this.daLiRadi, filterStatus: this.filterStatus} })
 				.then(response => (this.sportObjects = response.data))
 		},
 		

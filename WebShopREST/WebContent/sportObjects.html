@@ -12,41 +12,55 @@
 	<div id="sportskiObjekti">
 
 		<p style="text-align: right;">
-			<label v-bind:hidden="loggedUser.korisnickoIme==undefined">Trenutni korisnik:</label> 
-			<label v-bind:hidden="loggedUser.korisnickoIme==undefined">{{loggedUser.korisnickoIme}}</label>
-			<label v-bind:hidden="loggedUser.korisnickoIme!=undefined"><a href="login.html">Uloguj se</a> </label>
-			<label v-bind:hidden="loggedUser.korisnickoIme!=undefined"><a href="registracija.html">Registruj se</a> </label>
-			<label v-bind:hidden="loggedUser.korisnickoIme==undefined"><a href="profil.html">Moj profil</a> </label> 
+			<label v-bind:hidden="loggedUser.korisnickoIme==undefined">Trenutni
+				korisnik:</label> <label v-bind:hidden="loggedUser.korisnickoIme==undefined">{{loggedUser.korisnickoIme}}</label>
+			<label v-bind:hidden="loggedUser.korisnickoIme!=undefined"><a
+				href="login.html">Uloguj se</a> </label> <label
+				v-bind:hidden="loggedUser.korisnickoIme!=undefined"><a
+				href="registracija.html">Registruj se</a> </label> <label
+				v-bind:hidden="loggedUser.korisnickoIme==undefined"><a
+				href="profil.html">Moj profil</a> </label>
 		</p>
 
 		<p>
-			
-			<input type="text" placeholder="Ime" name="searchIme" v-model="searchIme">
-			<input type="text" placeholder="Tip" name="searchTip" v-model="searchTip">
-			<input type="text" placeholder="Lokacija" name="searchLokacija" v-model="searchLokacija">
-			<input type="number" min="1" max="5" style="width:163px;" placeholder="Minimalna ocena"  name="searchProsecnaOcena" v-model="searchOcena">
+			<label>Filteri:</label>
+			<select type="combobox" class="combobox" v-model="filterStatus">
+				<option value="teretana">Teretana</option>
+				<option value="bazen">Bazen</option>
+				<option value="sportski centar">Sportski centar</option>
+				<option value="plesni studio">Plesni studio</option>
+				<option value="fitnes centar">Fitnes centar</option>
+				<option value="fudbalski teren">Fudbalski teren</option>
+				<option value="kosarkaski teren">Kosarkaski teren</option>
+			</select>
+			<input type="checkbox" id="daLiRadi" v-model="daLiRadi" value="true">
+			<label for="daLiRadi">Samo otvoreni objekti</label> 
+		</p>
+		<p>
+			<input type="text" placeholder="Ime" name="searchIme"
+				v-model="searchIme"> <input type="text" placeholder="Tip"
+				name="searchTip" v-model="searchTip"> <input type="text"
+				placeholder="Lokacija" name="searchLokacija"
+				v-model="searchLokacija"> <input type="number" min="1"
+				max="5" style="width: 163px;" placeholder="Minimalna ocena"
+				name="searchProsecnaOcena" v-model="searchOcena">
 			<button value="Pretrazi" v-on:click="pretraziOjekte">Pretrazi</button>
 			{{error}}
 		</p>
-
-
-
 		<table border="1" id="tabela">
 			<thead>
 				<tr bgcolor="lightgrey">
-					<th>ID</th>
-					<th v-on:click="Sortiraj(1)">Ime</th>
+					<th v-on:click="Sortiraj(0)">Ime</th>
 					<th>Tip objekta</th>
 					<th>Status</th>
-					<th v-on:click="Sortiraj(4)">Lokacija</th>
+					<th v-on:click="Sortiraj(3)">Lokacija</th>
 					<th>Logo objekta</th>
-					<th v-on:click="Sortiraj(6)">Prosecna ocena</th>
+					<th v-on:click="Sortiraj(5)">Prosecna ocena</th>
 					<th>Radno vreme</th>
 				</tr>
 			</thead>
 
 			<tr v-for="sp in sportObjects" v-on:click="Selected(sp)">
-				<td>{{sp.intId }}</td>
 				<td>{{sp.ime }}</td>
 				<td>{{sp.tipObjekta }}</td>
 				<td>{{sp.status }}</td>
