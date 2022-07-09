@@ -106,10 +106,19 @@ public class KorisnikService1 {
 	@GET
 	@Path("/search")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<Korisnik> search(@QueryParam("searchIme") String searchIme, @QueryParam("searchPrezime") String searchPrezime, 
+	public ArrayList<KorisnikDTO> search(@QueryParam("searchIme") String searchIme, @QueryParam("searchPrezime") String searchPrezime, 
 			@QueryParam("searchKorisnickoIme") String searchKorisnickoIme) {
 		KorisnikDAO dao = (KorisnikDAO) ctx.getAttribute("korisnikDAO");
-		return dao.search(searchIme, searchPrezime, searchKorisnickoIme);
+		ArrayList<Korisnik> pronadjeni = dao.search(searchIme, searchPrezime, searchKorisnickoIme);
+		if(pronadjeni.size() == 0) {
+			return new ArrayList<KorisnikDTO>();
+		} else {
+			ArrayList<KorisnikDTO> pronadjeniDTO = new ArrayList<KorisnikDTO>();
+			for(Korisnik k : pronadjeni) {
+				pronadjeniDTO.add(new KorisnikDTO(k));
+			}
+			return pronadjeniDTO;
+		}
 	}
 	
 	@GET

@@ -20,9 +20,9 @@
 		</p>
 
 		<p>
-			<input type="text" name="searchIme" v-model="searchIme">
-			<input type="text" name="searchPrezime" v-model="searchPrezime">
-			<input type="text" name="searchKorisnickoIme" v-model="searchKorisnickoIme">
+			<input type="text" name="searchKorisnickoIme" placeholder="Korisnicko ime" v-model="searchKorisnickoIme">
+			<input type="text" name="searchIme" placeholder="Ime" v-model="searchIme">
+			<input type="text" name="searchPrezime" placeholder="Prezime" v-model="searchPrezime">
 			<button value="Pretrazi" v-on:click="pretraziKorisnike">Pretrazi</button>
 		</p>
 
@@ -31,12 +31,13 @@
 		<table border="1" id="tabela">
 			<thead>
 				<tr bgcolor="lightgrey">
-				    <th>Korisnicko ime</th>
-					<th>Ime</th>
-					<th>Prezime</th>
+				    <th v-on:click="Sortiraj(0)">Korisnicko ime</th>
+					<th v-on:click="Sortiraj(1)">Ime</th>
+					<th v-on:click="Sortiraj(2)">Prezime</th>
 					<th>Pol</th>
 					<th>Datum rodjenja</th>
 					<th>Uloga</th>
+					<th v-on:click="Sortiraj(6)">Broj sakupljenih bodova</th>
 				</tr>
 			</thead>
 
@@ -47,6 +48,7 @@
 				<td>{{k.pol }}</td>
 				<td>{{k.datumRodjenja}} </td>
 				<td>{{k.uloga}}</td>
+				<td>{{k.brojSakupljenihPoena}}</td>
 			</tr>
 		</table>
 
