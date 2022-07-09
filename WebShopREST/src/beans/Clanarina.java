@@ -91,7 +91,7 @@ public class Clanarina {
 	}
 
 	public LocalDate getPocetniDatumVazenja() {
-		return datumPlacanja;
+		return pocetniDatumVazenja;
 	}
 	
 	public void setPocetniDatumVazenja(String pocetniDatumVazenja) {

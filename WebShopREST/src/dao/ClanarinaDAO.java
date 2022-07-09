@@ -48,9 +48,9 @@ public class ClanarinaDAO {
 	}
 	
 	public Clanarina novaClanarina(Clanarina clanarina) {
-		if(clanarina.getTipClanarine() == TipClanarine.DNEVNA) {
+		if(clanarina.getTipClanarine().equals(TipClanarine.DNEVNA)) {
 			clanarina.setKrajnjiDatumVazenja(DateHelper.dateToString( clanarina.getPocetniDatumVazenja().plusDays(1)));
-		}else if(clanarina.getTipClanarine() == TipClanarine.MESECNA) {
+		}else if(clanarina.getTipClanarine().equals(TipClanarine.MESECNA)) {
 			clanarina.setKrajnjiDatumVazenja(DateHelper.dateToString( clanarina.getPocetniDatumVazenja().plusMonths(1)));
 		}else {
 			clanarina.setKrajnjiDatumVazenja(DateHelper.dateToString( clanarina.getPocetniDatumVazenja().plusYears(1)));
