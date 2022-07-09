@@ -150,12 +150,12 @@ public class TreningService {
 		dao.delete(id);
 	}
 	
-	@GET
-	@Path("/search")
-	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<SportskiObjekat> search(@QueryParam("searchIme") String searchIme, @QueryParam("searchTip") String searchTip,
-			@QueryParam("searchLokacija") String searchLokacija, @QueryParam("searchOcena") String searchOcena) {
-		SportskiObjekatDAO dao = (SportskiObjekatDAO) ctx.getAttribute("sportskiObjekatDAO");
-		return dao.search(searchIme, searchTip, searchLokacija, searchOcena);
-	}
+//	@GET
+//	@Path("/search")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public ArrayList<SportskiObjekat> search(@QueryParam("searchIme") String searchIme, @QueryParam("searchTip") String searchTip,
+//			@QueryParam("searchLokacija") String searchLokacija, @QueryParam("searchOcena") String searchOcena) {
+//		SportskiObjekatDAO dao = (SportskiObjekatDAO) ctx.getAttribute("sportskiObjekatDAO");
+//		return dao.search(searchIme, searchTip, searchLokacija, searchOcena);
+//	}
 }
