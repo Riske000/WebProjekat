@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -185,5 +186,22 @@ public class KorisnikService1 {
 			treneriDTO.add(new KorisnikDTO(t));
 		}
 		return treneriDTO;
+	}
+	
+	@GET
+	@Path("/logout")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response logout(@Context HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		Korisnik user = (Korisnik) session.getAttribute("user");
+		
+		if(user != null) {
+			session.invalidate();
+			return Response.status(200).build();
+		}
+		else {
+			return Response.status(400).entity("Korisnik je vec izlogovan!").build();
+		}
 	}
 }

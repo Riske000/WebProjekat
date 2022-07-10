@@ -92,6 +92,18 @@ var app = new Vue({
 			      }
 			    }
 			  }
+		},
+		
+		logOut: function() {
+			axios.get('rest/korisnik1/logout').then((response)=>{
+				alert('Odjavili ste se!')
+				window.location.href = 'http://localhost:8080/WebShopREST/sportObjects.html';
+			}).catch(() =>{
+					alert('Korisnik je vec odjavljen!')
+					event.preventDefault();
+					return;
+				})
+			
 		}
 
 

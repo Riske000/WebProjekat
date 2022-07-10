@@ -20,6 +20,7 @@
 				href="registracija.html">Registruj se</a> </label> <label
 				v-bind:hidden="loggedUser.korisnickoIme==undefined"><a
 				href="profil.html">Moj profil</a> </label>
+				<label v-bind:hidden="loggedUser.korisnickoIme==undefined"><button type="button" v-on:click="logOut()">Odjavi se</button> </label>
 		</p>
 
 		<p>
