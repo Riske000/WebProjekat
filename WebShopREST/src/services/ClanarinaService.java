@@ -34,6 +34,7 @@ import dto.KorisnikDTO;
 import dto.TreningDTO;
 import utils.DateHelper;
 import utils.PokretanjeProjekta;
+import utils.StatusClanarine;
 
 @Path("/clanarina")
 public class ClanarinaService {
@@ -63,6 +64,9 @@ public class ClanarinaService {
 		Korisnik logged = (Korisnik) request.getSession().getAttribute("user");
 		if(logged == null) {
 			return null;
+		}
+		if(logged.getClanarina() != null) {
+			logged.getClanarina().setStatus(StatusClanarine.NEAKTIVNA);
 		}
 		logged.setClanarina(clanarina);
 		clanarina.setKupac(logged);

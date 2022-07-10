@@ -47,6 +47,9 @@ public class PokretanjeProjekta {
 		IstorijaTreningaDAO.getInstance().connectIstorijaTreningaTrening();
 		
 		ZakazanTreningDAO.getInstance().connectZakazanTreningTrening();
+		
+		PointsChangeThread thread = new PointsChangeThread();
+		thread.start();
 	}
 
 	public static PokretanjeProjekta getInstance(String contextPath) {

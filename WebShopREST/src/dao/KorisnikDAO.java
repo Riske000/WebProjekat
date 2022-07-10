@@ -380,4 +380,19 @@ public class KorisnikDAO {
 		return treneri;
 	}
 
+	public void setImeTipaKupca() {
+		for(Korisnik k : korisnici.values()) {
+			double poeni = k.getTipKupca().getPotrebniPoeni();
+			if(poeni < 500) {
+				k.getTipKupca().setImeTipa(ImeTipa.BRONZANI);
+				k.getTipKupca().setPopust(2);
+			}else if(poeni < 1000) {
+				k.getTipKupca().setImeTipa(ImeTipa.SREBRNI);
+				k.getTipKupca().setPopust(5);
+			}else {
+				k.getTipKupca().setImeTipa(ImeTipa.ZLATNI);
+				k.getTipKupca().setPopust(10);
+			}
+		}
+	}
 }

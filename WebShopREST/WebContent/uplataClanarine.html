@@ -13,6 +13,7 @@
 				    <th>Tip clanarine</th>
 					<th>Cena</th>
 					<th>Broj termina</th>
+					<th>Cena sa popustom</th>
 				</tr>
 			</thead>
 
@@ -20,6 +21,7 @@
 				<td>{{c.tipClanarine }}</td>
 				<td>{{c.punaCena }}</td>
 				<td>{{c.brojTermina }}</td>
+				<td>{{c.punaCena *(1 - (loggedUser.tipKupca.popust)/100) }}</td>
 			</tr>
 		</table>
 

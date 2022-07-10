@@ -20,6 +20,7 @@ var app = new Vue({
 			axios.post('rest/korisnik1/login', this.userToLogin)
 				.then((response) => {
 					alert('Uspesno ste se ulogovali')
+					window.location.href = 'http://localhost:8080/WebShopREST/sportObjects.html';
 				}).catch(() =>{
 					alert('Pogresno korisnicko ime ili sifra!')
 					event.preventDefault();

@@ -14,6 +14,7 @@ import beans.Clanarina;
 import beans.Korisnik;
 import beans.SportskiObjekat;
 import utils.DateHelper;
+import utils.StatusClanarine;
 import utils.TipClanarine;
 
 public class ClanarinaDAO {
@@ -170,5 +171,36 @@ public class ClanarinaDAO {
 		}
 	}
 
+	public void clanarinaIstekla() {
+		for(Clanarina clanarina : clanarine.values()) {
+			if(clanarina.getStatus() == StatusClanarine.NEAKTIVNA) {
+				continue;
+			}
+			LocalDate trenutniDatum = LocalDate.now();
+			
+			int brojTermina = 0;
+			if(clanarina.getTipClanarine() == TipClanarine.DNEVNA) {
+				brojTermina = 1;
+			}else if(clanarina.getTipClanarine() == TipClanarine.MESECNA) {
+				brojTermina = 30;
+			}else {
+				brojTermina = 360;
+			}
+			if(clanarina.getKrajnjiDatumVazenja().isBefore(trenutniDatum)){
+				int broj_iskoristenih_termina = brojTermina - clanarina.getBrojTermina();
+				double broj_bodova = (clanarina.getPunaCena() / 1000) * (broj_iskoristenih_termina);
+				double broj_izgubljenih_bodova = 0;
+				if(broj_iskoristenih_termina <= brojTermina / 3) {
+					broj_izgubljenih_bodova = (clanarina.getPunaCena() / 1000) * (133 * 4);
+				}
+				double poeni = clanarina.getKupac().getTipKupca().getPotrebniPoeni();
+				poeni += (broj_bodova - broj_izgubljenih_bodova);
+				clanarina.getKupac().getTipKupca().setPotrebniPoeni(poeni);
+				clanarina.setStatus(StatusClanarine.NEAKTIVNA);
+			}
+			
+			
+		}
+	}
 	
 }
