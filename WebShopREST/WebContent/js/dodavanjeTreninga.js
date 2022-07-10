@@ -19,7 +19,11 @@ var app = new Vue({
 			axios.post('rest/trening/', this.trening)
 			 .then((response) => {
 				 alert('Uspesno ste dodali trening!')
-			 })
+			 }).catch(() =>{
+					alert('Takav naziv vec postoji!')
+					event.preventDefault();
+					return;
+				})
 			 event.preventDefault()
 		 }
 	 }

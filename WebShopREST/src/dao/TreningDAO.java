@@ -250,5 +250,14 @@ public class TreningDAO {
 		}
 		return false;
 	}
+	
+	public boolean postojiNaziv(String naziv) {
+		for (Trening t : treninzi.values()) {
+			if (t.getNaziv().equals(naziv)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 }

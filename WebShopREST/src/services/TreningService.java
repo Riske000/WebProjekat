@@ -162,22 +162,27 @@ public class TreningService {
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void save(TreningDTO treningDTO, @Context HttpServletRequest request) {
+	public Response save(TreningDTO treningDTO, @Context HttpServletRequest request) {
 		TreningDAO dao = (TreningDAO) ctx.getAttribute("treningDAO");
-		Trening trening = new Trening();
-		trening.setIntId(treningDTO.getIntId());
-		trening.setNaziv(treningDTO.getNaziv());
-		trening.setTipTreninga(treningDTO.getTipTreninga());
-		Korisnik menadzer = (Korisnik)request.getSession().getAttribute("user");
-		SportskiObjekat objekatGdePripada = menadzer.getSportskiObjekat(); // proveri da li mora preko SportskiObjekatDAO
-		trening.setObjekatGdePripada(objekatGdePripada);
-		trening.setTrajanje(treningDTO.getTrajanje());
-		trening.setOpis(treningDTO.getOpis());
-		trening.setSlika(treningDTO.getSlika());
-		Korisnik trener = KorisnikDAO.getInstance().find(treningDTO.getTrenerIntId());
-		trening.setTrener(trener);
-		
-		dao.save(trening);
+		if(dao.postojiNaziv(treningDTO.getNaziv())) {
+			return Response.status(400).entity("Takav naziv vec postoji!").build();
+		} else {
+			Trening trening = new Trening();
+			trening.setIntId(treningDTO.getIntId());
+			trening.setNaziv(treningDTO.getNaziv());
+			trening.setTipTreninga(treningDTO.getTipTreninga());
+			Korisnik menadzer = (Korisnik)request.getSession().getAttribute("user");
+			SportskiObjekat objekatGdePripada = menadzer.getSportskiObjekat(); // proveri da li mora preko SportskiObjekatDAO
+			trening.setObjekatGdePripada(objekatGdePripada);
+			trening.setTrajanje(treningDTO.getTrajanje());
+			trening.setOpis(treningDTO.getOpis());
+			trening.setSlika(treningDTO.getSlika());
+			Korisnik trener = KorisnikDAO.getInstance().find(treningDTO.getTrenerIntId());
+			trening.setTrener(trener);
+			
+			dao.save(trening);
+			return Response.status(200).build();
+		}	
 	}
 	
 }
