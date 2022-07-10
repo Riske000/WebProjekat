@@ -72,7 +72,7 @@ public class KorisnikDAO {
 	}
 
 	public Korisnik find(int intId) {
-		return korisnici.get(intId);
+		return korisnici.containsKey(intId) ? korisnici.get(intId) : null;
 	}
 
 	public boolean postojiKorisnickoIme(String korisnickoIme) {

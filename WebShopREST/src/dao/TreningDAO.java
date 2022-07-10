@@ -75,6 +75,7 @@ public class TreningDAO {
 		maxId++;
 		trening.setIntId(maxId);
 		treninzi.put(trening.getIntId(), trening);
+		sacuvajTreninge();
 		return trening;
 	}
 
