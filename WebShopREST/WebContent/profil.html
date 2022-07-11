@@ -7,6 +7,8 @@
 
 <body>
 	<div class="container" id="mojProfil">
+		<label><a href="sportObjects.html">Pocetna</a></label>
+		
 		<div class="title">Moj profil</div>
 		<form @submit='updateUser'>
 			<div class="user-details">
@@ -63,6 +65,11 @@
 					<input type="submit" value="Update">
 
 				</div>
+
+				<div class="input-box" v-bind:hidden="newUser.uloga!='kupac'">
+					<label><a href="uplataClanarine.html">Uplati clanarinu</a></label>
+				</div>
+
 			</div>
 		</form>
 		<p> {{error }} </p>

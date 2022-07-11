@@ -50,13 +50,14 @@
 					<span class="details">Slika</span> <input name="slika" required
 						v-model="trening.slika">
 				</div>			
-
-				<select v-model="izabraniTrener" 
-					v-bind:hidden="treneri === null || treneri.length == 0">
-					<option v-for="t in treneri" :value="t"  >
+				<div class="input-box">
+				<label>Trener</label>
+					<select v-model="izabraniTrener" 
+						v-bind:hidden="treneri === null || treneri.length == 0">
+						<option v-for="t in treneri" :value="t"  >
 						{{t.ime}} {{t.prezime}} {{t.korisnickoIme}}</option>
-				</select>
-
+					</select>
+				</div>
 
 
 				<div class="button">

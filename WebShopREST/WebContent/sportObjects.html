@@ -27,7 +27,11 @@
 
 		<p>
 			<label v-bind:hidden="loggedUser.uloga!='administrator'"><a
-				href="korisnici.html">Svi korisnici</a></label>
+				href="korisnici.html">Svi korisnici</a></label><br>
+			<label v-bind:hidden="loggedUser.uloga!='administrator'"><a
+				href="kreiranjeTrenera.html">Dodaj novog trenera</a></label><br>
+			<label v-bind:hidden="loggedUser.uloga!='administrator'"><a
+				href="noviSportskiObjekat.html">Kreiraj novi sportski objekat</a></label>		
 		</p>
 
 		<p>
