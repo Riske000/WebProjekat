@@ -11,7 +11,7 @@
 <body>
 	<div id="sportskiObjekti">
 
-		<p style="text-align: right;">
+		<h3 style="text-align: right;">
 			<label v-bind:hidden="loggedUser.korisnickoIme==undefined">Trenutni
 				korisnik:</label> <label v-bind:hidden="loggedUser.korisnickoIme==undefined">{{loggedUser.korisnickoIme}}</label>
 			<label v-bind:hidden="loggedUser.korisnickoIme!=undefined"><a
@@ -20,7 +20,14 @@
 				href="registracija.html">Registruj se</a> </label> <label
 				v-bind:hidden="loggedUser.korisnickoIme==undefined"><a
 				href="profil.html">Moj profil</a> </label>
+				<label v-bind:hidden="loggedUser.uloga!='menadzer'"><a
+				href="menadzerovObjekat.html">Moj objekat</a></label>
 				<label v-bind:hidden="loggedUser.korisnickoIme==undefined"><button type="button" v-on:click="logOut()">Odjavi se</button> </label>
+		</h3>
+
+		<p>
+			<label v-bind:hidden="loggedUser.uloga!='administrator'"><a
+				href="korisnici.html">Svi korisnici</a></label>
 		</p>
 
 		<p>
