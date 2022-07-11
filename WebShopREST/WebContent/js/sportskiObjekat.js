@@ -26,6 +26,9 @@ var app = new Vue({
 				alert('Istekla Vam je clanarina ili ste potrosili sve termine!')
 				return;
 			})
-		}
+		},
+		zakaziPersonalni: function(){
+			window.location.href = 'http://localhost:8080/WebShopREST/zakazivanjePersonalnogTreninga.html';
+		} 
 	}
 });

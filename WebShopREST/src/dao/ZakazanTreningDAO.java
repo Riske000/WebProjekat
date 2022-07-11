@@ -11,6 +11,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
+import beans.Clanarina;
+import beans.Korisnik;
+import beans.SportskiObjekat;
 import beans.Trening;
 import beans.ZakazanTrening;
 import utils.DateTimeHelper;
@@ -55,13 +58,33 @@ public class ZakazanTreningDAO {
 			}
 		}
 		maxId++;
-		zakazanTrening.setIntId(maxId);
-		zakazaniTreninzi.put(zakazanTrening.getIntId(), zakazanTrening);
+		zakazanTrening.setIntID(maxId);
+		zakazaniTreninzi.put(zakazanTrening.getIntID(), zakazanTrening);
+		sacuvajZakazaneTreninge();
 		return zakazanTrening;
 	}
 
 	public ZakazanTrening update(ZakazanTrening zakazanTrening) {
-		zakazaniTreninzi.put(zakazanTrening.getIntId(), zakazanTrening);
+		
+		if (zakazanTrening.getKupac() != null) {
+			int id = zakazanTrening.getKupac().getIntId();
+			Korisnik kupac = KorisnikDAO.getInstance().find(id);
+			zakazanTrening.setKupac(kupac);
+		}
+		
+		if (zakazanTrening.getTrener() != null) {
+			int id = zakazanTrening.getTrener().getIntId();
+			Korisnik trener = KorisnikDAO.getInstance().find(id);
+			zakazanTrening.setTrener(trener);
+		}
+		
+		if (zakazanTrening.getObjekatGdePripada() != null) {
+			int id = zakazanTrening.getObjekatGdePripada().getIntId();
+			SportskiObjekat obejkat = SportskiObjekatDAO.getInstance().findObjekat(id);
+			zakazanTrening.setObjekatGdePripada(obejkat);
+		}
+		
+		zakazaniTreninzi.put(zakazanTrening.getIntID(), zakazanTrening);
 		return zakazanTrening;
 	}
 
@@ -77,7 +100,7 @@ public class ZakazanTreningDAO {
 			System.out.println(file.getCanonicalPath());
 			in = new BufferedReader(new FileReader(file));
 			String line, statusTreninga = "";
-			Trening trening = new Trening();
+			
 			int id = -1;
 			LocalDateTime terminTreninga = LocalDateTime.now();
 			StringTokenizer st;
@@ -89,12 +112,18 @@ public class ZakazanTreningDAO {
 				st = new StringTokenizer(line, ";");
 
 				while (st.hasMoreTokens()) {
+					Korisnik kupac = null;
+					Korisnik trener = null;
+					SportskiObjekat objekat = null;
 					id = Integer.parseInt(st.nextToken().trim());
-					trening = new Trening(Integer.parseInt(st.nextToken().trim()));
 					terminTreninga = DateTimeHelper.stringToDateTime(st.nextToken().trim());
 					statusTreninga = st.nextToken().trim();
+					kupac = new Korisnik(Integer.parseInt(st.nextToken().trim()));
+					trener = new Korisnik(Integer.parseInt(st.nextToken().trim()));
+					objekat = new SportskiObjekat(Integer.parseInt(st.nextToken().trim()));
+					zakazaniTreninzi.put(id, new ZakazanTrening(id, terminTreninga, statusTreninga, kupac, trener, objekat));
 				}
-				zakazaniTreninzi.put(id, new ZakazanTrening(id, trening, terminTreninga, statusTreninga));
+				
 			}
 
 		} catch (Exception e) {
@@ -132,14 +161,42 @@ public class ZakazanTreningDAO {
 		}
 	}
 	
-	public void connectZakazanTreningTrening() {
-		ArrayList<Trening> treninzi = new ArrayList<Trening>(TreningDAO.getInstance().findAll());
+	public void connectZakazanTreningKupac() {
+		ArrayList<Korisnik> kupci = new ArrayList<Korisnik>(KorisnikDAO.getInstance().findAll());
 		for(ZakazanTrening zakazanTrening : zakazaniTreninzi.values()) {
-			int idTrazeni = zakazanTrening.getTrening().getIntId();
+			int idTrazeni = zakazanTrening.getKupac().getIntId();
 			
-			for(Trening trening : treninzi) {
-				if(trening.getIntId() == idTrazeni) {
-					zakazanTrening.setTrening(trening);
+			for(Korisnik kupac : kupci) {
+				if(kupac.getIntId() == idTrazeni) {
+					zakazanTrening.setKupac(kupac);
+					break;
+				}
+			}
+		}
+	}
+	
+	public void connectZakazanTreningTrener() {
+		ArrayList<Korisnik> treneri = new ArrayList<Korisnik>(KorisnikDAO.getInstance().findAll());
+		for(ZakazanTrening zakazanTrening : zakazaniTreninzi.values()) {
+			int idTrazeni = zakazanTrening.getTrener().getIntId();
+			
+			for(Korisnik trener : treneri) {
+				if(trener.getIntId() == idTrazeni) {
+					zakazanTrening.setTrener(trener);
+					break;
+				}
+			}
+		}
+	}
+	
+	public void connectZakazanTreningObjekatGdePripada() {
+		ArrayList<SportskiObjekat> objekti = new ArrayList<SportskiObjekat>(SportskiObjekatDAO.getInstance().findAll());
+		for(ZakazanTrening zakazanTrening : zakazaniTreninzi.values()) {
+			int idTrazeni = zakazanTrening.getObjekatGdePripada().getIntId();
+			
+			for(SportskiObjekat objekat : objekti) {
+				if(objekat.getIntId() == idTrazeni) {
+					zakazanTrening.setObjekatGdePripada(objekat);
 					break;
 				}
 			}

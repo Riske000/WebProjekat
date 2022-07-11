@@ -13,7 +13,7 @@ public class PointsChangeThread extends Thread{
 				
 				
 				ClanarinaDAO.getInstance().clanarinaIstekla();
-				KorisnikDAO.getInstance().setImeTipaKupca();
+				KorisnikDAO.getInstance().podesiImeTipaKupca();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

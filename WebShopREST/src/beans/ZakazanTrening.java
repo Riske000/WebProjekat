@@ -2,14 +2,17 @@ package beans;
 
 import java.time.LocalDateTime;
 
+import utils.DateHelper;
 import utils.DateTimeHelper;
 
 public class ZakazanTrening {
 
 	private int intID;
-	private Trening trening;
 	private LocalDateTime terminTreninga;
 	private String statusTreninga;
+	private Korisnik kupac;
+	private Korisnik trener;
+	private SportskiObjekat objekatGdePripada;
 	
 	public ZakazanTrening() {
 		
@@ -19,28 +22,23 @@ public class ZakazanTrening {
 		this.intID = intID;
 	}
 
-	public ZakazanTrening(int intID, Trening trening, LocalDateTime terminTreninga, String statusTreninga) {
+	public ZakazanTrening(int intID, LocalDateTime terminTreninga, String statusTreninga, Korisnik kupac,
+			Korisnik trener, SportskiObjekat objekatGdePripada) {
 		super();
 		this.intID = intID;
-		this.trening = trening;
 		this.terminTreninga = terminTreninga;
 		this.statusTreninga = statusTreninga;
+		this.kupac = kupac;
+		this.trener = trener;
+		this.objekatGdePripada = objekatGdePripada;
 	}
 
-	public int getIntId() {
+	public int getIntID() {
 		return intID;
 	}
 
-	public void setIntId(int intID) {
+	public void setIntID(int intID) {
 		this.intID = intID;
-	}
-
-	public Trening getTrening() {
-		return trening;
-	}
-
-	public void setTrening(Trening trening) {
-		this.trening = trening;
 	}
 
 	public String getTerminTreninga() {
@@ -58,9 +56,32 @@ public class ZakazanTrening {
 	public void setStatusTreninga(String statusTreninga) {
 		this.statusTreninga = statusTreninga;
 	}
-	
-	public String convertToString() {
-		return intID + ";" + trening.getIntId() + ";" + DateTimeHelper.dateTimeToString(terminTreninga) + ";" + statusTreninga;
+
+	public Korisnik getKupac() {
+		return kupac;
+	}
+
+	public void setKupac(Korisnik kupac) {
+		this.kupac = kupac;
+	}
+
+	public Korisnik getTrener() {
+		return trener;
+	}
+
+	public void setTrener(Korisnik trener) {
+		this.trener = trener;
+	}
+
+	public SportskiObjekat getObjekatGdePripada() {
+		return objekatGdePripada;
+	}
+
+	public void setObjekatGdePripada(SportskiObjekat objekatGdePripada) {
+		this.objekatGdePripada = objekatGdePripada;
 	}
 	
+	public String convertToString() {
+		return intID + ";" + DateTimeHelper.dateTimeToString(terminTreninga) + ";" + statusTreninga + ";" + kupac.getIntId() + ";" + trener.getIntId() + ";" + objekatGdePripada.getIntId();
+	}
 }

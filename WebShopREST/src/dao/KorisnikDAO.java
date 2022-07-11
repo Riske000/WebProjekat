@@ -380,7 +380,7 @@ public class KorisnikDAO {
 		return treneri;
 	}
 
-	public void setImeTipaKupca() {
+	public void podesiImeTipaKupca() {
 		for(Korisnik k : korisnici.values()) {
 			double poeni = k.getTipKupca().getPotrebniPoeni();
 			if(poeni < 500) {

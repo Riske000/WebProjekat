@@ -53,7 +53,9 @@ public class TreningDAO {
 		for (Trening trening : treninzi.values()) {
 			if (trening.getObjekatGdePripada().getIntId() == idSportskogObjekta) {
 				if (trening.getTrener() != null) {
-					treneriZaSportskiObjekat.add(trening.getTrener());
+					if(!treneriZaSportskiObjekat.contains(trening.getTrener())) {
+						treneriZaSportskiObjekat.add(trening.getTrener());
+					}
 				}
 			}
 		}

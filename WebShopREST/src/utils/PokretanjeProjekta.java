@@ -46,7 +46,9 @@ public class PokretanjeProjekta {
 		IstorijaTreningaDAO.getInstance().connectIstorijaTreningaTrener();
 		IstorijaTreningaDAO.getInstance().connectIstorijaTreningaTrening();
 		
-		ZakazanTreningDAO.getInstance().connectZakazanTreningTrening();
+		ZakazanTreningDAO.getInstance().connectZakazanTreningKupac();
+		ZakazanTreningDAO.getInstance().connectZakazanTreningTrener();
+		ZakazanTreningDAO.getInstance().connectZakazanTreningObjekatGdePripada();
 		
 		PointsChangeThread thread = new PointsChangeThread();
 		thread.start();

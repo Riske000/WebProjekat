@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+<div class="container" id="zakazivanjeTreninga">
+		<div class="title">Zakazivenje personalnog treninga</div>
+		<form @submit='zakaziTrening'>
+			<div class="user-details">
+
+
+				<div class="input-box">
+					<span class="details"></span>
+
+				</div>
+
+
+				<div class="input-box">
+					<span class="details">Datum termina:</span> <input type="date" name="datum" required
+						v-model="datum">
+				</div>
+				
+				<div class="input-box">
+					<span class="details">Vreme termina:</span> <input type="time" name="vreme" required
+						v-model="vreme">
+				</div>			
+
+				<select v-model="izabraniTrener" 
+					v-bind:hidden="treneri === null || treneri.length == 0">
+					<option v-for="t in treneri" :value="t"  >
+						{{t.ime}} {{t.prezime}} {{t.korisnickoIme}}</option>
+				</select>
+				
+				<select v-model="izabraniObjekat" 
+					v-bind:hidden="objekti === null || objekti.length == 0">
+					<option v-for="o in objekti" :value="o"  >
+						{{o.ime}}</option>
+				</select>
+
+
+
+				<div class="button">
+					<input type="submit" value="Zakazi">
+
+				</div>
+			</div>
+		</form>
+		
+	</div>
+
+
+	<script src="js/vue.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="js/zakazivanjePersonalnogTreninga.js"></script>
+
+</body>
+</html>
