@@ -5,7 +5,14 @@ var app = new Vue({
 		error: '',
 		istorijeTreninga: null,
 		personalniTreninzi: null,
-		grupniTreninzi: null
+		grupniTreninzi: null,
+		searchObjekat: "",
+		pocetniDatum: "",
+		pocetnoVreme: "",
+		krajnjiDatum: "",
+		krajnjeVreme: "",
+		pocetno: "",
+		krajnje: ""
 	},
 	mounted() {
 		axios.get('rest/korisnik1/currentUser')
@@ -34,6 +41,12 @@ var app = new Vue({
 					alert('Podaci su uspesno promenjeni ')
 				})
 			event.preventDefault();
+		},
+		pretraziTreninge: function(event){
+			this.pocetno = this.pocetniDatum + " " + this.pocetnoVreme;
+			this.krajnje = this.krajnjiDatum + " " + this.krajnjeVreme;
+			axios.get('rest/istorijaTreninga/search', { params: { searchObjekat: this.searchObjekat, pocetno: this.pocetno, krajnje: this.krajnje} })
+				.then(response => (this.istorijeTreninga = response.data))
 		}
 	}
 });
