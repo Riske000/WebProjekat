@@ -15,6 +15,7 @@ import java.util.StringTokenizer;
 import beans.Clanarina;
 import beans.IstorijaTreninga;
 import beans.Korisnik;
+import beans.SportskiObjekat;
 import beans.Trening;
 import utils.DateHelper;
 import utils.DateTimeHelper;
@@ -260,6 +261,22 @@ public class IstorijaTreningaDAO {
 		tr.getTrener().getIstorijaTreninga().add(it);
 		sacuvajIstorijeTreninga();
 		return it;
+	}
+	
+	public ArrayList<IstorijaTreninga> search(String searchObjekat, LocalDateTime pocetno, LocalDateTime krajnje, Korisnik korisnik){
+		ArrayList<IstorijaTreninga> pronadjeni = new ArrayList<IstorijaTreninga>();
+		
+		for(IstorijaTreninga it : istorijeTreninga.values() ) {
+			if(it.getKupac().getIntId() == korisnik.getIntId()) {
+				if(it.getTrening().getObjekatGdePripada().getIme().contains(searchObjekat)) {
+					if(it.getDatumVremePrijave().isAfter(pocetno) && it.getDatumVremePrijave().isBefore(krajnje)) {
+						pronadjeni.add(it);
+					}
+				}
+			}
+		}
+		
+		return pronadjeni;
 	}
 	
 }

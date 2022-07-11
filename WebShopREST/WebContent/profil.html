@@ -66,8 +66,18 @@
 			</div>
 		</form>
 		<p> {{error }} </p>
-		
 		<h3 v-bind:hidden="newUser.uloga!='kupac'">Treninzi</h3>
+		<p v-bind:hidden="newUser.uloga!='kupac'">
+			<label>Sportski objekat:</label>
+			<input type="text" name="objekat" v-model="searchObjekat"><br>
+			<label>Datum:</label>
+			<input type="date" name="pocetni datum" v-model="pocetniDatum">
+			<input type="time" name="pocetno vreme" v-model="pocetnoVreme">
+			<label>-</label>
+			<input type="date" name="krajni datum" v-model="krajniDatum">
+			<input type="time" name="krajnje vreme" v-model="krajneVreme">
+			<button value="Pretrazi" v-on:click="pretraziTreninge">Pretrazi</button>
+		</p>
 
 		<table border="1" id="tabela" v-bind:hidden="newUser.uloga!='kupac'">
 			<thead>

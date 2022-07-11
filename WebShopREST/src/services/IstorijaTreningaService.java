@@ -1,5 +1,6 @@
 package services;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -26,6 +27,7 @@ import dao.IstorijaTreningaDAO;
 import dao.SportskiObjekatDAO;
 import dao.TreningDAO;
 import dto.IstorijaTreningaDTO;
+import utils.DateTimeHelper;
 import utils.PokretanjeProjekta;
 
 @Path("/istorijaTreninga")
@@ -80,4 +82,19 @@ public class IstorijaTreningaService {
 	}
 	
 	//treba izmeniti
+	
+	@GET
+	@Path("/search")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<IstorijaTreninga> search(@QueryParam("searchObjekat") String searchObjekat, @QueryParam("pocetno") String pocetno, 
+			@QueryParam("krajnje") String krajnje, @Context HttpServletRequest request){
+		
+		Korisnik logovani = (Korisnik) request.getSession().getAttribute("user");
+		LocalDateTime p = DateTimeHelper.stringToDateTime(pocetno);
+		LocalDateTime k = DateTimeHelper.stringToDateTime(krajnje);
+		
+		IstorijaTreningaDAO dao = (IstorijaTreningaDAO) ctx.getAttribute("istorijaTreningaDAO");
+		
+		return dao.search(searchObjekat, p, k, logovani);
+	}
 }
