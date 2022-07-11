@@ -17,6 +17,7 @@ import beans.SportskiObjekat;
 import beans.Trening;
 import beans.ZakazanTrening;
 import utils.DateTimeHelper;
+import utils.TipTreninga;
 
 public class ZakazanTreningDAO {
 
@@ -88,8 +89,15 @@ public class ZakazanTreningDAO {
 		return zakazanTrening;
 	}
 
-	public void delete(int id) {
-		this.zakazaniTreninzi.remove(id);
+	public boolean delete(int id) {
+		if(LocalDateTime.now().plusDays(2).isBefore(DateTimeHelper.stringToDateTime(zakazaniTreninzi.get(id).getTerminTreninga())))
+		{		
+			this.zakazaniTreninzi.remove(id);
+			sacuvajZakazaneTreninge();
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	public void loadZakazaniTreninzi(String contextPath) {
@@ -201,6 +209,18 @@ public class ZakazanTreningDAO {
 				}
 			}
 		}
+	}
+	
+	public ArrayList<ZakazanTrening> getPersonalniTreninziZaTrenera(int idKorisnika) {
+		ArrayList<ZakazanTrening> personalniTreninziZaTrenera = new ArrayList<ZakazanTrening>();
+		for (ZakazanTrening trening : zakazaniTreninzi.values()) {
+			if (trening.getTrener() != null) {
+				if (trening.getTrener().getIntId() == idKorisnika) {
+					personalniTreninziZaTrenera.add(trening);
+				}
+			}
+		}
+		return personalniTreninziZaTrenera;
 	}
 
 }

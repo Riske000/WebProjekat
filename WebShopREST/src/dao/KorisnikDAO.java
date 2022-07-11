@@ -382,6 +382,9 @@ public class KorisnikDAO {
 
 	public void podesiImeTipaKupca() {
 		for(Korisnik k : korisnici.values()) {
+			if(k.getTipKupca() == null) {
+				continue;
+			}
 			double poeni = k.getTipKupca().getPotrebniPoeni();
 			if(poeni < 500) {
 				k.getTipKupca().setImeTipa(ImeTipa.BRONZANI);

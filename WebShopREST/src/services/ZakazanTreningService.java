@@ -83,5 +83,31 @@ public class ZakazanTreningService {
 		return Response.status(200).build();
 	}	
 	
+	@GET
+	@Path("/getPersonalTrainings")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<ZakazanTreningDTO> getPersonalniTreninziZaTrenera(@QueryParam("idKorisnika") int idKorisnika) {
+		ZakazanTreningDAO dao = (ZakazanTreningDAO) ctx.getAttribute("zakazanTreningDAO");
+		ArrayList<ZakazanTrening> personalniTreninzi = dao.getPersonalniTreninziZaTrenera(idKorisnika);
+		ArrayList<ZakazanTreningDTO> personalniTreninziDTO = new ArrayList<ZakazanTreningDTO>();
+		for(ZakazanTrening t : personalniTreninzi) {
+			personalniTreninziDTO.add(new ZakazanTreningDTO(t));
+		}
+		return personalniTreninziDTO;
+	}
+	
+	@DELETE
+	@Path("/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response delete(@PathParam("id") int id) { //izmeni u int
+		ZakazanTreningDAO dao = (ZakazanTreningDAO) ctx.getAttribute("zakazanTreningDAO");
+		
+		boolean uspesno = dao.delete(id);
+		if(uspesno) {
+			return Response.status(200).build();
+		}else {
+			return Response.status(400).build();
+		}
+	}
 
 }

@@ -23,15 +23,15 @@ var app = new Vue({
 						this.istorijeTreninga = response.data;
 					})
 
-				axios.get('rest/trening/getPersonalTrainings', { params: { idKorisnika: this.newUser.intId } }).
-				then((response) => {
-					this.personalniTreninzi = response.data;
-				})
+				axios.get('rest/zakazanTrening/getPersonalTrainings', { params: { idKorisnika: this.newUser.intId } }).
+					then((response) => {
+						this.personalniTreninzi = response.data;
+					})
 
 				axios.get('rest/trening/getGroupTrainings', { params: { idKorisnika: this.newUser.intId } }).
-				then((response) => {
-					this.grupniTreninzi = response.data;
-				})
+					then((response) => {
+						this.grupniTreninzi = response.data;
+					})
 			})
 	},
 	methods: {
@@ -42,11 +42,23 @@ var app = new Vue({
 				})
 			event.preventDefault();
 		},
-		pretraziTreninge: function(event){
+		pretraziTreninge: function(event) {
 			this.pocetno = this.pocetniDatum + " " + this.pocetnoVreme;
 			this.krajnje = this.krajnjiDatum + " " + this.krajnjeVreme;
-			axios.get('rest/istorijaTreninga/search', { params: { searchObjekat: this.searchObjekat, pocetno: this.pocetno, krajnje: this.krajnje} })
+			axios.get('rest/istorijaTreninga/search', { params: { searchObjekat: this.searchObjekat, pocetno: this.pocetno, krajnje: this.krajnje } })
 				.then(response => (this.istorijeTreninga = response.data))
+		},
+		otkaziTrening: function(pt) {
+			axios.delete('rest/zakazanTrening/' + pt.intID)
+				.then((response) => {
+					alert('Uspesno ste otkazali trening!');
+					this.personalniTreninzi = this.personalniTreninzi.filter((p)=> p.intID !== pt.intID)
+
+				}).catch(() =>{
+					alert('Ne mozete otkazati trening. Termin treninga je za manje od dva dana!')
+					event.preventDefault();
+					return;
+				})
 		}
 	}
 });

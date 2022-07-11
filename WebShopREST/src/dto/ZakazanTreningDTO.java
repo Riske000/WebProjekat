@@ -14,6 +14,8 @@ public class ZakazanTreningDTO {
 	private int kupacIntId;
 	private int trenerIntId;
 	private int objekatIntId;
+	private String imeKupca;
+	private String imeObjekta;
 	
 	public ZakazanTreningDTO() {
 		
@@ -30,6 +32,8 @@ public class ZakazanTreningDTO {
 		this.kupacIntId = zakazanTrening.getKupac().getIntId();
 		this.trenerIntId = zakazanTrening.getTrener().getIntId();
 		this.objekatIntId = zakazanTrening.getObjekatGdePripada().getIntId();
+		this.imeKupca = zakazanTrening.getKupac().getIme() + zakazanTrening.getKupac().getPrezime();
+		this.imeObjekta = zakazanTrening.getObjekatGdePripada().getIme();
 	}
 
 	public int getIntID() {
@@ -78,6 +82,22 @@ public class ZakazanTreningDTO {
 
 	public void setObjekatIntId(int objekatIntId) {
 		this.objekatIntId = objekatIntId;
+	}
+
+	public String getImeKupca() {
+		return imeKupca;
+	}
+
+	public void setImeKupca(String imeKupca) {
+		this.imeKupca = imeKupca;
+	}
+
+	public String getImeObjekta() {
+		return imeObjekta;
+	}
+
+	public void setImeObjekta(String imeObjekta) {
+		this.imeObjekta = imeObjekta;
 	}
 	
 	

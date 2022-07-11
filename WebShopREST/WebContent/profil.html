@@ -74,8 +74,8 @@
 			<input type="date" name="pocetni datum" v-model="pocetniDatum">
 			<input type="time" name="pocetno vreme" v-model="pocetnoVreme">
 			<label>-</label>
-			<input type="date" name="krajni datum" v-model="krajniDatum">
-			<input type="time" name="krajnje vreme" v-model="krajneVreme">
+			<input type="date" name="krajni datum" v-model="krajnjiDatum">
+			<input type="time" name="krajnje vreme" v-model="krajnjeVreme">
 			<button value="Pretrazi" v-on:click="pretraziTreninge">Pretrazi</button>
 		</p>
 
@@ -100,22 +100,17 @@
 		<table border="1" id="tabelaPersonalni" v-bind:hidden="newUser.uloga!='trener'">
 			<thead>
 				<tr bgcolor="lightgrey">
-					<th>Naziv</th>
-					<th>Tip</th>
+					<th>Termin</th>
+					<th>Kupac</th>
 					<th>Sportski objekat</th>
-					<th>Trajanje</th>
-					<th>Opis</th>
-					
 				</tr>
 			</thead>
 
 			<tr v-for="pt in personalniTreninzi">
-				<td>{{pt.naziv }}</td>
-				<td>{{pt.tipTreninga }}</td>
-				<td>{{pt.objekatGdePripada.ime}}</td>
-				<td>{{pt.trajanje }}</td>
-				<td>{{pt.opis }}</td>
-				
+				<td>{{pt.terminTreninga }}</td>
+				<td>{{pt.imeKupca }}</td>
+				<td>{{pt.imeObjekta}}</td>
+				<td><button type="button" v-on:click="otkaziTrening(pt)">Otkazi</button></td>
 			</tr>
 		</table>
 		
