@@ -3,127 +3,139 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-	<div id="sportskiObjekat">
-		<table>
-			<tr>
-				<td>Ime: </td>
-				<td><input type="text" name="ime" v-model="loggedUser.sportskiObjekat.ime" disabled></td>
-			</tr>
-			<tr>
-				<td>Tip objekta: </td>
-				<td><select name="tipObjekta" id="tipObjekta" v-model="loggedUser.sportskiObjekat.tipObjekta" disabled>
-  						<option value="teretana">Teretana</option>
-  						<option value="bazen">Bazen</option>
-  						<option value="sportski centar">Sportski centar</option>
-  						<option value="plesni studio">Plesni studio</option>
-  						<option value="fitnes centar">Fitnes centar</option>
-  						<option value="fudbalski teren">Fudbalski teren</option>
-  						<option value="kosarkaski teren">Kosarkaski teren</option>
-					</select></td>
-			</tr>
-			<tr>
-				<td>Geografska sirina: </td>
-				<td><input type="number" name="geografskaSirina" v-model="loggedUser.sportskiObjekat.lokacija.geografskaSirina" disabled></td>
-			</tr>
-			<tr>
-				<td>Geografska duzina: </td>
-				<td><input type="number" name="geografskaDuzina" v-model="loggedUser.sportskiObjekat.lokacija.geografskaDuzina" disabled></td>
-			</tr>
-			<tr>
-				<td>Ulica: </td>
-				<td><input type="text" name="ulica" v-model="loggedUser.sportskiObjekat.lokacija.ulica" disabled></td>
-			</tr>
-			<tr>
-				<td>Broj: </td>
-				<td><input type="text" name="broj" v-model="loggedUser.sportskiObjekat.lokacija.broj" disabled></td>
-			</tr>
-				
-			<tr>
-				<td>Mesto: </td>
-				<td><input type="text" name="mesto" v-model="loggedUser.sportskiObjekat.lokacija.mesto" disabled></td>
-			</tr>
-				
-			<tr>
-				<td>Postanski broj: </td>
-				<td><input type="text" name="postanskiBroj" v-model="loggedUser.sportskiObjekat.lokacija.postanskiBroj" disabled></td>
-			</tr>
-				
-			<tr>
-				<td>Prosecna ocena: </td>
-				<td><input type="number" name="prosecnaOcena" v-model="loggedUser.sportskiObjekat.prosecnaOcena" disabled></td>
-			</tr>
-				
-			<tr>
-				<td>Pocetak radnog vremena: </td>
-				<td><input type="time" name="pocetakRadnogVremena" v-model="loggedUser.sportskiObjekat.pocetakRadnogVremena" disabled></td>
-			</tr>
-				
-			<tr>
-				<td>Kraj radnog vremena: </td>
-				<td><input type="time" name="krajRadnogVremena" v-model="loggedUser.sportskiObjekat.krajRadnogVremena" disabled></td>
-			</tr>
-		</table>
-		
-		<h3>Treneri:</h3>
-		
-		<table border="1" id="tabela1">
-			<thead>
-				<tr bgcolor="lightgrey">
-					<th>Ime</th>
-					<th>Prezime</th>
-					<th>Korisnicko ime</th>
-				</tr>
-			</thead>
+	<div class="main">
+		<div class="inner2">
+			<div class="welcome"></div>
+			<div class="registration_options">
+				<div id="sportskiObjekat">
+					<table style="width: 50%" class="table">
+						<tr>
+							<td>Ime: </td>
+							<td><input type="text" name="ime" v-model="loggedUser.sportskiObjekat.ime" disabled></td>
+						</tr>
+						<tr>
+							<td>Tip objekta: </td>
+							<td><select name="tipObjekta" id="tipObjekta" v-model="loggedUser.sportskiObjekat.tipObjekta" disabled style="width: 312px;
+							height: 38px">
+									<option value="teretana">Teretana</option>
+									<option value="bazen">Bazen</option>
+									<option value="sportski centar">Sportski centar</option>
+									<option value="plesni studio">Plesni studio</option>
+									<option value="fitnes centar">Fitnes centar</option>
+									<option value="fudbalski teren">Fudbalski teren</option>
+									<option value="kosarkaski teren">Kosarkaski teren</option>
+								</select></td>
+						</tr>
+						<tr>
+							<td>Geografska sirina: </td>
+							<td><input type="number" name="geografskaSirina" v-model="loggedUser.sportskiObjekat.lokacija.geografskaSirina" disabled></td>
+						</tr>
+						<tr>
+							<td>Geografska duzina: </td>
+							<td><input type="number" name="geografskaDuzina" v-model="loggedUser.sportskiObjekat.lokacija.geografskaDuzina" disabled></td>
+						</tr>
+						<tr>
+							<td>Ulica: </td>
+							<td><input type="text" name="ulica" v-model="loggedUser.sportskiObjekat.lokacija.ulica" disabled></td>
+						</tr>
+						<tr>
+							<td>Broj: </td>
+							<td><input type="text" name="broj" v-model="loggedUser.sportskiObjekat.lokacija.broj" disabled></td>
+						</tr>
+							
+						<tr>
+							<td>Mesto: </td>
+							<td><input type="text" name="mesto" v-model="loggedUser.sportskiObjekat.lokacija.mesto" disabled></td>
+						</tr>
+							
+						<tr>
+							<td>Postanski broj: </td>
+							<td><input type="text" name="postanskiBroj" v-model="loggedUser.sportskiObjekat.lokacija.postanskiBroj" disabled></td>
+						</tr>
+							
+						<tr>
+							<td>Prosecna ocena: </td>
+							<td><input type="number" name="prosecnaOcena" v-model="loggedUser.sportskiObjekat.prosecnaOcena" disabled></td>
+						</tr>
+							
+						<tr>
+							<td>Pocetak radnog vremena: </td>
+							<td><input type="time" name="pocetakRadnogVremena" v-model="loggedUser.sportskiObjekat.pocetakRadnogVremena" disabled></td>
+						</tr>
+							
+						<tr>
+							<td>Kraj radnog vremena: </td>
+							<td><input type="time" name="krajRadnogVremena" v-model="loggedUser.sportskiObjekat.krajRadnogVremena" disabled></td>
+						</tr>
+					</table><br>
+					
+					
+					<table  id="tabela1" class="table2" >
+						<caption style="background:yellow;">Treneri</caption>
+						<thead>
+							<tr bgcolor="lightgrey">
+								<th>Ime</th>
+								<th>Prezime</th>
+								<th>Korisnicko ime</th>
+							</tr>
+						</thead>
 
-			<tr v-for="t in treneri">
-				<td>{{t.ime }}</td>
-				<td>{{t.prezime }}</td>
-				<td>{{t.korisnickoIme }}</td>
-			</tr>
-		</table>
-		
-		<h3>Posetioci:</h3>
-		
-		<table border="1" id="tabela2">
-			<thead>
-				<tr bgcolor="lightgrey">
-					<th>Ime</th>
-					<th>Prezime</th>
-					<th>Korisnicko ime</th>
-				</tr>
-			</thead>
+						<tr v-for="t in treneri">
+							<td>{{t.ime }}</td>
+							<td>{{t.prezime }}</td>
+							<td>{{t.korisnickoIme }}</td>
+						</tr>
+					</table>
+						<br>	
+					
+					<table border="1" id="tabela2" class="table2">
+					<caption style="background:yellow; ;">Posetioci</caption>
+						<thead>
+							<tr bgcolor="lightgrey">
+								<th>Ime</th>
+								<th>Prezime</th>
+								<th>Korisnicko ime</th>
+							</tr>
+						</thead>
 
-			<tr v-for="k in kupci">
-				<td>{{k.ime }}</td>
-				<td>{{k.prezime }}</td>
-				<td>{{k.korisnickoIme }}</td>
-			</tr>
-		</table>
+						<tr v-for="k in kupci">
+							<td>{{k.ime }}</td>
+							<td>{{k.prezime }}</td>
+							<td>{{k.korisnickoIme }}</td>
+						</tr>
+					</table>
 
-		<h3>Treninzi:</h3>
-		<label><a href="dodavanjeTreninga.html">Dodaj trening</a></label>
-		<table border="1" id="tabela3">
-			<thead>
-				<tr bgcolor="lightgrey">
-					<th>Naziv</th>
-					<th>Tip</th>
-					<th>Trajanje</th>
-					<th>Opis</th>
-				</tr>
-			</thead>
+					<br>
+					<table border="1" id="tabela3" class="table2">
+					<caption style="background:yellow; ;">Treninzi</caption>
+						<thead>
+							<tr bgcolor="lightgrey">
+								<th>Naziv</th>
+								<th>Tip</th>
+								<th>Trajanje</th>
+								<th>Opis</th>
+								<th></th>
+							</tr>
+						</thead>
 
-			<tr v-for="tr in treninzi">
-				<td>{{tr.naziv }}</td>
-				<td>{{tr.tipTreninga }}</td>
-				<td>{{tr.trajanje }}</td>
-				<td>{{tr.opis }}</td>
-				<td><button type="button" v-on:click="izmeniTrening(tr)">Izmeni</button></td>
-			</tr>
-		</table>
-		
-				
+						<tr v-for="tr in treninzi">
+							<td>{{tr.naziv }}</td>
+							<td>{{tr.tipTreninga }}</td>
+							<td>{{tr.trajanje }}</td>
+							<td>{{tr.opis }}</td>
+							<td><button type="button" class="button" v-on:click="izmeniTrening(tr)">Izmeni</button></td>
+						</tr>
+					</table>
+					<p style="margin-left: 400px">
+					<label ><a href="dodavanjeTreninga.html"  class="lnkbtn">Dodaj trening</a></label>
+					</p>
+							
+				</div>
+			</div>
+		</div>
 	</div>
 	<script src="js/vue.js"></script>
 	<script src="js/axios.js"></script>

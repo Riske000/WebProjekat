@@ -74,6 +74,13 @@
 					<td><input type="time" name="krajRadnogVremena"
 						v-model="noviSportskiObjekat.krajRadnogVremena"></td>
 				</tr>
+				
+				<tr>
+					<td>Logo:</td>
+					<td><input type="file"
+								accept="image/*" @change="uploadImage($event)">
+</td>
+				</tr>
 
 				<tr>
 					<td>Menadzer:</td>

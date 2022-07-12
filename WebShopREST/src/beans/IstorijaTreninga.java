@@ -11,8 +11,7 @@ public class IstorijaTreninga {
 	private LocalDateTime datumVremePrijave;
 	private Trening trening;
 	private Korisnik kupac;
-	private Korisnik trener;		//ako je trener -1 onda datumVremePrijave oznacava kada se korisnik ulogovao, ako nije -1 onda oznacava kada je trening zakazan
-	//a tada kupac treba da bude -1
+	private Korisnik trener;
 
 	public IstorijaTreninga() {
 		super();

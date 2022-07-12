@@ -9,35 +9,38 @@
 </head>
 
 <body>
+<div class="main">
+		<div class="inner2">
+			<div class="welcome">Svi korisnici</div>
 	<div id="korisnici">
 
-		<p style="text-align: right;">
+		<nav style="text-align: right;" >
+			<label style="margin-right: 1300px" ><a href="sportObjects.html">Pocetna</a></label>
 			<label v-bind:hidden="loggedUser.korisnickoIme==undefined">Trenutni korisnik:</label> 
 			<label v-bind:hidden="loggedUser.korisnickoIme==undefined">{{loggedUser.korisnickoIme}}</label>
-			<label v-bind:hidden="loggedUser.korisnickoIme!=undefined"><a href="login.html">Uloguj se</a> </label>
-			<label v-bind:hidden="loggedUser.korisnickoIme!=undefined"><a href="registracija.html">Registruj se</a> </label>
-			<label v-bind:hidden="loggedUser.korisnickoIme==undefined"><a href="profil.html">Moj profil</a> </label> 
-		</p>
+			<label v-bind:hidden="loggedUser.korisnickoIme!=undefined"><a href="login.html" >Uloguj se</a> </label>
+			<label v-bind:hidden="loggedUser.korisnickoIme!=undefined"><a href="registracija.html" >Registruj se</a> </label>
+			<label v-bind:hidden="loggedUser.korisnickoIme==undefined"><a href="profil.html" >Moj profil</a> </label> 
+		</nav>
 
-		<p>
-			<label><a href="sportObjects.html">Pocetna</a></label><br><br>
-			<input type="text" name="searchKorisnickoIme" placeholder="Korisnicko ime" v-model="searchKorisnickoIme">
-			<input type="text" name="searchIme" placeholder="Ime" v-model="searchIme">
-			<input type="text" name="searchPrezime" placeholder="Prezime" v-model="searchPrezime">
-			<select type="combobox" class="combobox" v-model="tipKorisnika">
+		<p style="margin-left: 600px; margin-top: 50px"> 
+			<input type="text" style="height: 30px; width: 180px" name="searchKorisnickoIme" placeholder="Korisnicko ime" v-model="searchKorisnickoIme">
+			<input type="text" style="height: 30px; width: 180px" name="searchIme" placeholder="Ime" v-model="searchIme">
+			<input type="text" style="height: 30px; width: 180px" name="searchPrezime" placeholder="Prezime" v-model="searchPrezime">
+			<select type="combobox" style="height: 38px; width: 180px" class="combobox" v-model="tipKorisnika">
 				<option value="administrator">Administrator</option>
 				<option value="menadzer">Menadzer</option>
 				<option value="trener">Trener</option>
 				<option value="kupac">Kupac</option>
 			</select>
-			<button value="Pretrazi" v-on:click="pretraziKorisnike">Pretrazi</button>
+			<button value="Pretrazi" v-on:click="pretraziKorisnike" class="button">Pretrazi</button>
 		</p>
 
 
 
-		<table border="1" id="tabela">
+		<table border="1" id="tabela" class="table2">
 			<thead>
-				<tr bgcolor="lightgrey">
+				<tr bgcolor="yellow">
 				    <th v-on:click="Sortiraj(0)">Korisnicko ime</th>
 					<th v-on:click="Sortiraj(1)">Ime</th>
 					<th v-on:click="Sortiraj(2)">Prezime</th>
@@ -59,7 +62,9 @@
 			</tr>
 		</table>
 
-
+		</div>
+		</div>
+	</div>
 	</div>
 	<script src="js/vue.js"></script>
 	<script src="js/axios.js"></script>

@@ -105,12 +105,14 @@ public class KorisnikDAO {
 
 		if (korisnik.getSportskiObjekat() != null) { //izmeni ovo
 			int id = korisnik.getSportskiObjekat().getIntId();
-			Collection<SportskiObjekat> sportskiObjekti = SportskiObjekatDAO.getInstance().findAll();
+			/*Collection<SportskiObjekat> sportskiObjekti = SportskiObjekatDAO.getInstance().findAll();
 			ArrayList<SportskiObjekat> sportskiObjekti1 = new ArrayList<SportskiObjekat>();
 			for (SportskiObjekat sp : sportskiObjekti) {
 				sportskiObjekti1.add(sp);
 			}
-			korisnik.setSportskiObjekat(sportskiObjekti1.get(sportskiObjekti1.size() - 1));
+			korisnik.setSportskiObjekat(sportskiObjekti1.get(sportskiObjekti1.size() - 1));*/
+			SportskiObjekat sportskiObjekat = SportskiObjekatDAO.getInstance().findObjekat(id);
+			korisnik.setSportskiObjekat(sportskiObjekat);
 		}
 		if (korisnik.getClanarina() != null) {
 			int id = korisnik.getClanarina().getIntId();

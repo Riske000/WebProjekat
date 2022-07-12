@@ -40,6 +40,7 @@ var app = new Vue({
 				this.izabraniMenadzer = this.slobodniMenadzeri[0]
 			}
 
+			this.noviSportskiObjekat.prosecnaOcena = 1
 			this.noviSportskiObjekat.lokacija = this.novaLokacija
 			axios.post('rest/sportskiObjekti', this.noviSportskiObjekat)
 				.then((response) => {
@@ -48,9 +49,9 @@ var app = new Vue({
 					this.izabraniMenadzer.sportskiObjekat = this.noviSportskiObjekat;
 					axios.put('rest/korisnik1/', this.izabraniMenadzer)
 						.then((response) => {
-							alert('Sport object added to manager')
+							alert('Sportski objekat dodat menadzeru')
 						}).catch(() => {
-							alert('This sport object already exists.USER');
+							alert('Korisnicko ime vec postoji');
 							this.error = "This sport object already exists.";
 							event.preventDefault();
 							return;
@@ -89,6 +90,11 @@ var app = new Vue({
 					return;
 				})
 			event.preventDefault();
-	   }
+	   },
+	   uploadImage: function() {
+			 var fileData = event.target.files[0];
+			 this.noviSportskiObjekat.logoObjekta = fileData.name;
+			 
+		 }
 	}
 });

@@ -5,15 +5,24 @@
 </head>
 <body>
 	<p style="text-align: right;"><a href="sportObjects.html">Pocetna</a></p>
-	<form id="loginForm" @submit='loginUser'>
-		<table>
-			<tr><td>Korisnicko ime: </td><td><input type="text" name="username" v-model="userToLogin.korisnickoIme"></td></tr>
-			<tr><td>Lozinka: </td><td><input type="password" name="password" v-model="userToLogin.sifra"></td></tr>
-			<tr><td><input type="submit" value="Uloguj se"></td></tr>
-		</table>
-		<p id="error" hidden="true"></p>
-		<p id="success" hidden="true"></p>
-	</form>
+	<div class="main">
+		<div class="inner">
+			<div class="welcome">Log in</div>
+			<div class="registration_options">
+				<form id="loginForm" @submit='loginUser'>
+					<table class="table"> 
+						<tr><td>Korisnicko ime: </td><td><input type="text" name="username" v-model="userToLogin.korisnickoIme"></td></tr>
+						<tr><td>Lozinka: </td><td><input type="password" name="password" v-model="userToLogin.sifra"></td></tr>
+					</table>
+					<p id="error" hidden="true"></p>
+					<p id="success" hidden="true"></p>
+					<div class="btn">
+						<input type="submit" value="Uloguj se" id="save">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 	
 	<script src="js/vue.js"></script>
 	<script src="js/axios.js"></script>
