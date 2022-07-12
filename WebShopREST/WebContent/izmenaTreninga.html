@@ -2,37 +2,45 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="styles.css">
 <title>Insert title here</title>
 </head>
 <body>
 
 <div class="container" id="izmenaTreninga">
-		<div class="title">Izmena treninga</div>
-		<form @submit='izmeniTrening'>
-			<div class="user-details">
+		<h1 class="title">Izmena treninga</h1>
 
 
-				<div class="input-box">
-					<span class="details"></span>
-
-				</div>
-
-				<div class="input-box">
-					<span class="details">Naziv treninga</span> <input type="text"
+		<form @submit='izmeniTrening' class="registartion-form">
+			<table>
+				<tr>
+					<td>
+						 Naziv treninga:
+					</td>
+					<td>
+						<input type="text"
 						name="naziv" required
 						v-model="trening.naziv">
-				</div>
+					</td>
+				</tr>
 
-				<div class="input-box">
-					<span class="details">Ime objekta</span> <input type="text" disabled
+				<tr>
+					<td>
+						 Naziv objekta:
+					</td>
+					<td>
+						<input type="text" disabled
 						name="imeObjekta" 
 						v-model="trening.objekatGdePripada.ime">
-				</div>
+					</td>
+				</tr>
 
-
-
-				<div class="input-box">
-					<span class="details">Tip treninga</span> <select type="combobox"
+				<tr>
+					<td>
+						Tip treninga:
+					</td>
+					<td>
+						<select type="combobox"
 						class="combobox" v-model="trening.tipTreninga" width="15"
 						required size=1
 						style="width: 300px; height: 40px; border-radius: 5px; font-size: 16px">
@@ -42,46 +50,72 @@
 						<option value="teretana">Teretana</option>
 						<option value="bazen">Bazen</option>
 					</select>
-				</div>
+					</td>
+				</tr>
 
-				<div class="input-box">
-					<span class="details">Trajanje</span> <input type="text"
+				<tr>
+					<td>
+						Trajanje:
+					</td>
+					<td>
+						<input type="text"
 						name="trajanje" required
 						v-model="trening.trajanje">
-				</div>
+					</td>
+				</tr>
 
-				<div class="input-box">
-					<span class="details">Opis</span> <input 
-						name="opis" required
-						v-model="trening.opis">
-				</div>
+				<tr>
+					<td>
+						Opis:
+					</td>
+					<td>
+						<input 
+						name="opis" v-model="trening.opis">
+					</td>
+				</tr>
 
-				<div class="input-box">
-					<span class="details">Slika</span> <input name="slika" required
-						v-model="trening.slika">
-				</div>
-				
-				<div class="input-box">
-					<span class="details">Ime trenera</span> <input name="imeTrenera" disabled
+				<tr>
+					<td>
+						Slika:
+					</td>
+					<td>
+						<input type="file"
+								accept="image/*" @change="uploadImage($event)">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						Ime trenera:
+					</td>
+					<td>
+						<input name="imeTrenera" disabled
 						v-model="izabraniTrener.ime">
-				</div>
-				
+					</td>
+				</tr>
 
-				<select v-model="izabraniTrener" 
+				<tr>
+					<td>
+						Izmeni trenera:
+					</td>
+					<td>
+						<select v-model="izabraniTrener" 
 					v-bind:hidden="treneri === null || treneri.length == 0">
 					<option v-for="t in treneri" :value="t"  >
 						{{t.ime}} {{t.prezime}} {{t.korisnickoIme}}</option>
 				</select>
+					</td>
+				</tr>
 
+				<tr>
+					<td>
 
-
-				<div class="button">
-					<input type="submit" value="Izmeni">
-
-				</div>
-			</div>
+					</td>
+					<td>
+						<input type="submit" value="Izmeni" class="submit">
+					</td>
+				</tr>
+			</table>
 		</form>
-		
 	</div>
 
 

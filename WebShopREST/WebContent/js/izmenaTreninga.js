@@ -29,6 +29,11 @@ var app = new Vue({
 				 alert('Uspesno ste izmenili trening!')
 			 })
 			 event.preventDefault()
+		 },
+		  uploadImage: function() {
+			 var fileData = event.target.files[0];
+			 this.trening.slika = fileData.name;
+			 
 		 }
 	 }
  });

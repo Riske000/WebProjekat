@@ -2,53 +2,71 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="styles.css">
 <title>Insert title here</title>
 </head>
 <body>
 
 <div class="container" id="zakazivanjeTreninga">
-		<div class="title">Zakazivenje personalnog treninga</div>
-		<form @submit='zakaziTrening'>
-			<div class="user-details">
-
-
-				<div class="input-box">
-					<span class="details"></span>
-
-				</div>
-
-
-				<div class="input-box">
-					<span class="details">Datum termina:</span> <input type="date" name="datum" required
+		<h1 class="title">Zakazivenje personalnog treninga</h1>
+		<form @submit='zakaziTrening' class="registartion-form">
+			<table>
+				<tr>
+					<td>
+						Datum termina:
+					</td>
+					<td>
+						<input type="date" name="datum" required
 						v-model="datum">
-				</div>
-				
-				<div class="input-box">
-					<span class="details">Vreme termina:</span> <input type="time" name="vreme" required
-						v-model="vreme">
-				</div>			
+					</td>
+				</tr>
 
-				<select v-model="izabraniTrener" 
+				<tr>
+					<td>
+						Vreme termina:
+					</td>
+					<td>
+						<input type="time" name="vreme" required
+						v-model="vreme">
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						Trener:
+					</td>
+					<td>
+						<select v-model="izabraniTrener" 
 					v-bind:hidden="treneri === null || treneri.length == 0">
 					<option v-for="t in treneri" :value="t"  >
 						{{t.ime}} {{t.prezime}} {{t.korisnickoIme}}</option>
 				</select>
-				
-				<select v-model="izabraniObjekat" 
+					</td>
+				</tr>
+
+				<tr>
+					<td>
+						Sportski objekat:
+					</td>
+					<td>
+						<select v-model="izabraniObjekat" 
 					v-bind:hidden="objekti === null || objekti.length == 0">
 					<option v-for="o in objekti" :value="o"  >
 						{{o.ime}}</option>
 				</select>
+					</td>
+				</tr>
 
+				<tr>
+					<td>
 
-
-				<div class="button">
-					<input type="submit" value="Zakazi">
-
-				</div>
-			</div>
+					</td>
+					<td>
+						<input type="submit" value="Zakazi" class="submit">
+					</td>
+				</tr>
+			</table>
 		</form>
-		
 	</div>
 
 

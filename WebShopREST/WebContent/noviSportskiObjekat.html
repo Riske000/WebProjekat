@@ -7,11 +7,10 @@
 </head>
 
 <body>
-	<p style="text-align: right;">
-		<a href="sportObjects.html">Pocetna</a>
-	</p>
-	<div id="noviSportskiObjekat">
-		<form  @submit='createSportskiObjekat'>
+	
+	<div id="noviSportskiObjekat" class="container">
+		<h1 class="title">Kreiranje sportskog objekta</h1>
+		<form  @submit='createSportskiObjekat' class="registartion-form">
 			<table>
 				<tr>
 					<td>Ime:</td>
@@ -104,7 +103,7 @@
 			<p id="error">{{error}}</p>
 		</form>
 
-		<div class="input-box" v-bind:hidden="prikaziFormu == false">
+		<div class="registration-form" v-bind:hidden="prikaziFormu == false">
 
 			<div class="input-box">
 				<span class="details">Ime</span> <input v-model="izabraniMenadzer.ime" type="text" name="ime">

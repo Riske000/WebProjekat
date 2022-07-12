@@ -2,87 +2,123 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="styles.css">
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="container" id="viewSO">
-	<label><a href="sportObjects.html">Pocetna</a></label>
-		<div class="title">Sportski objekat</div>
-		<form>
-			<div class="user-details">
+	<div class="main">
+		<div class="inner2">
+			<div class="welcome"></div>
+			<div class="registration_options">
 
+				<div id="viewSO">
+					<label><a href="sportObjects.html">Pocetna</a></label>
+					
+						<table class="table" style="width: 50%">
+							<tr>
+								<td>
+									Ime:
+								</td>
+								<td>
+									<input type="text" name="name"
+										v-model="so.ime"
+										pattern="[A-Za-z]{1,32}" disabled>
+								</td>
+							</tr>
 
-				<div class="input-box">
-					<span class="details"></span>
+							<tr>
+								<td>
+									Tip:
+								</td>
+								<td>
+									<input type="text"
+										name="surname" 
+										v-model="so.tipObjekta" pattern="[A-Za-z]{1,32}" disabled>
+								</td>
+							</tr>
 
+							<tr>
+								<td>
+									Status:
+								</td>
+								<td>
+									<input type="text"
+										name="birthday"
+										v-model="so.status" disabled>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									Ulica:
+								</td>
+								<td>
+									<input type="text"
+										v-model="so.lokacija.ulica" width="15" disabled>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									Broj:
+								</td>
+								<td>
+									<input type="text"
+										v-model="so.lokacija.broj" width="15" disabled>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									Mesto:
+								</td>
+								<td>
+									<input type="text"
+										v-model="so.lokacija.mesto" width="15" disabled>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									Prosecna ocena:
+								</td>
+								<td>
+									<input type="text"
+										name="grade" 
+										v-model="so.prosecnaOcena" disabled>
+								</td>
+							</tr>
+						</table>
+						<br>
+
+						<table  id="tabela" class="table2">
+							<caption style="background:yellow;">Treninzi</caption>
+							<thead>
+								<tr bgcolor="lightgrey">
+									<th>Slika</th>
+									<th>Tip treninga</th>
+									<th>Opis</th>
+									<th>Naziv trenera</th>
+									<th>Doplata</th>
+									<th>Prijava</th>
+								</tr>
+							</thead>
+
+							<tr v-for="t in treninzi" v-bind:hidden="t.tipTreninga=='personalni'">
+								<td><img width="90" height="90" v-bind:src="'images/' + t.slika" alt="No picture found"></td>
+								<td>{{t.tipTreninga }}</td>
+								<td>{{t.opis }}</td>
+								<td>{{t.trener}}</td>
+								<td>0</td>
+								<td><button type="button" v-on:click="prijavaNaTrening(t)">Prijava</button></td>
+							</tr>
+						</table>
+					
+						
+					<button type="button" v-on:click="zakaziPersonalni()">Zakazi personalni trening</button>
 				</div>
-
-				<div class="input-box">
-
-					<span class="details">Name</span> <input type="text" name="name"
-						v-model="so.ime"
-						pattern="[A-Za-z]{1,32}" disabled>
-				</div>
-
-				<div class="input-box">
-					<span class="details">Type</span> <input type="text"
-						name="surname" 
-						v-model="so.tipObjekta" pattern="[A-Za-z]{1,32}" disabled>
-				</div>
-
-				<div class="input-box">
-					<span class="details">Working status</span> <input type="text"
-						name="birthday"
-						v-model="so.status" disabled>
-				</div>
-
-
-				<div class="input-box">
-					<span class="details">Street</span> <input type="text"
-						v-model="so.lokacija.ulica" width="15" disabled>
-
-				</div>
-				<div class="input-box">
-					<span class="details">Number</span> <input type="text"
-						v-model="so.lokacija.broj" width="15" disabled>
-
-				</div>
-				<div class="input-box">
-					<span class="details">City</span> <input type="text"
-						v-model="so.lokacija.mesto" width="15" disabled>
-
-				</div>
-
-				<div class="input-box">
-					<span class="details">Average grade</span> <input type="text"
-						name="grade" 
-						v-model="so.prosecnaOcena" disabled>
-				</div>
-
-				<table  id="tabela">
-					<thead>
-						<tr bgcolor="lightgrey">
-							<th>Slika</th>
-							<th>Tip treninga</th>
-							<th>Opis</th>
-							<th>Naziv trenera</th>
-							<th>Doplata</th>
-							<th>Prijava</th>
-						</tr>
-					</thead>
-	
-					<tr v-for="t in treninzi" v-bind:hidden="t.tipTreninga=='personalni'">
-						<td>{{t.slika }}</td>
-						<td>{{t.tipTreninga }}</td>
-						<td>{{t.opis }}</td>
-						<td>{{t.trener}}</td>
-						<td>0</td>
-						<td><button type="button" v-on:click="prijavaNaTrening(t)">Prijava</button></td>
-					</tr>
-				</table>	
 			</div>
-		</form>
-		<button type="button" v-on:click="zakaziPersonalni()">Zakazi personalni trening</button>
+		</div>
 	</div>
 
 

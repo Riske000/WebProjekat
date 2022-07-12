@@ -26,7 +26,7 @@
 							href="profil.html">Moj profil</a> </label>
 							<label v-bind:hidden="loggedUser.uloga!='menadzer'"><a
 							href="menadzerovObjekat.html">Moj objekat</a></label>
-							<label v-bind:hidden="loggedUser.korisnickoIme==undefined"><button type="button" v-on:click="logOut()">Odjavi se</button> </label>
+							<label v-bind:hidden="loggedUser.korisnickoIme==undefined"><button type="button" class="button" v-on:click="logOut()">Odjavi se</button> </label>
 		</h3>
 					
 

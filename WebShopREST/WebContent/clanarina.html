@@ -2,64 +2,79 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="styles.css">
 <title>Insert title here</title>
 </head>
 <body>
 	<div class="container" id="clanarina">
 		
+		<h1 class="title">Membership</h1>
 		<label><a href="sportObjects.html">Pocetna</a></label>
-		<div class="title">Membership</div>
-		<form @submit='platiClanarinu'>
-			<div class="user-details">
-
-
-				<div class="input-box">
-					<span class="details"></span>
-
-				</div>
-
-				<div class="input-box">
-
-					<span class="details">ID</span> <input
+		
+		<form @submit='platiClanarinu' class="registartion-form">
+			<table>
+				<tr>
+					<td>
+						ID
+					</td>
+					<td>
+						<input
 						v-model="clanarina.id" type="text" name="name"
 						disabled>
-				</div>
+					</td>
+				</tr>
 
-				<div class="input-box">
-
-					<span class="details">Tip clanarine</span> <input
+				<tr>
+					<td>
+						Tip clanarine:
+					</td>
+					<td>
+						<input
 						v-model="clanarina.tipClanarine" type="text" name="name"
 						disabled>
-				</div>
+					</td>
+				</tr>
 
-				<div class="input-box">
-					<span class="details">Cena</span> <input
+				<tr>
+					<td>
+						Cena:
+					</td>
+					<td>
+						<input
 						v-model="clanarina.punaCena" type="text" name="surname" disabled>
-				</div>
+					</td>
+				</tr>
 
-				<div class="input-box">
-					<span class="details">Datum placanja</span> <input
+				<tr>
+					<td>
+						Datum placanja:
+					</td>
+					<td>
+						<input
 						v-model="clanarina.datumPlacanja" type="date" name="birthday"
 						disabled>
-				</div>
+					</td>
+				</tr>
 
-				<div class="input-box">
-					<span class="details">Pocetak vazenja</span> <input
+				<tr>
+					<td>
+						Pocetak vazenja:
+					</td>
+					<td>
+						<input
 						v-model="clanarina.pocetniDatumVazenja" type="date" v-bind:min="min" name="birthday" required>
-				</div>
+					</td>
+				</tr>
 
+				<tr>
+					<td>
 
-
-				<div class="button">
-					<input type="submit" value="Plati">
-				</div>
-
-
-			</div>
-
-
-
-
+					</td>
+					<td>
+						<input type="submit" value="Plati" class="submit">
+					</td>
+				</tr>
+			</table>
 		</form>
 
 	</div>

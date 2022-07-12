@@ -25,6 +25,11 @@ var app = new Vue({
 					return;
 				})
 			 event.preventDefault()
+		 },
+		  uploadImage: function() {
+			 var fileData = event.target.files[0];
+			 this.trening.slika = fileData.name;
+			 
 		 }
 	 }
  });

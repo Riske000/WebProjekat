@@ -2,76 +2,103 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="styles.css">
 <title>Insert title here</title>
 </head>
 
 <body>
 	<div class="container" id="mojProfil">
-		<label><a href="sportObjects.html">Pocetna</a></label>
 		
-		<div class="title">Moj profil</div>
-		<form @submit='updateUser'>
-			<div class="user-details">
+		
+		<h1 class="title">Moj profil</h1>
+		<label><a href="sportObjects.html" class="lnkbtn">Pocetna</a></label>
+		<form @submit='updateUser' class="registartion-form">
+			<table>
+				<tr>
+					<td>
+						Ime:
+					</td>
+					<td>
+						<input type="text" name="name"
+							placeholder="Enter your name" required v-model="newUser.ime"
+							pattern="[A-Za-z]{1,32}" >
+					</td>
+				</tr>
 
+				<tr>
+					<td>
+						Prezime:
+					</td>
+					<td>
+						<input type="text"
+							name="surname" placeholder="Enter your surname" required
+							v-model="newUser.prezime" pattern="[A-Za-z]{1,32}">
+					</td>
+				</tr>
 
-				<div class="input-box">
-					<span class="details"></span>
+				<tr>
+					<td>
+						Datum rodjenja:
+					</td>
+					<td>
+						<input type="date"
+							name="birthday" placeholder="Enter your birthday" required
+							v-model="newUser.datumRodjenja">
+					</td>
+				</tr>
 
-				</div>
+				<tr>
+					<td>
+						Pol:
+					</td>
+					<td>
+						<select type="combobox"
+							class="combobox" width="15" required
+							v-model="newUser.pol" size=1
+							style="width: 300px; height: 40px; border-radius: 5px; font-size: 16px">
+							<option value="zenski pol">Zenski</option>
+							<option value="muski pol">Muski</option>
+						</select>
+					</td>
+				</tr>
 
-				<div class="input-box">
-					<span class="details">Ime</span> <input type="text" name="name"
-						placeholder="Enter your name" required v-model="newUser.ime"
-						pattern="[A-Za-z]{1,32}" >
-				</div>
+				<tr>
+					<td>
+						Korisnicko ime:
+					</td>
+					<td>
+						<input type="text"
+							name="username" placeholder="Enter your username" required
+							v-model="newUser.korisnickoIme">
+					</td>
+				</tr>
 
-				<div class="input-box">
-					<span class="details">Prezime</span> <input type="text"
-						name="surname" placeholder="Enter your surname" required
-						v-model="newUser.prezime" pattern="[A-Za-z]{1,32}">
-				</div>
+				<tr>
+					<td>
+						Sifra:
+					</td>
+					<td>
+						<input type="password"
+							name="password" placeholder="Enter your password" required
+							v-model="newUser.sifra">
+					</td>
+				</tr>
 
-				<div class="input-box">
-					<span class="details">Datum rodjenja</span> <input type="date"
-						name="birthday" placeholder="Enter your birthday" required
-						v-model="newUser.datumRodjenja">
-				</div>
+				<tr>
+					<td>
 
-
-				<div class="input-box">
-					<span class="details">Pol</span> <select type="combobox"
-						class="combobox" width="15" required
-						v-model="newUser.pol" size=1
-						style="width: 300px; height: 40px; border-radius: 5px; font-size: 16px">
-						<option value="zenski pol">Zenski</option>
-						<option value="muski pol">Muski</option>
-					</select>
-				</div>
-
-				<div class="input-box">
-					<span class="details">Korisnicko ime</span> <input type="text"
-						name="username" placeholder="Enter your username" required
-						v-model="newUser.korisnickoIme">
-				</div>
-
-				<div class="input-box">
-					<span class="details">Sifra</span> <input type="password"
-						name="password" placeholder="Enter your password" required
-						v-model="newUser.sifra">
-				</div>
-
-
-				<div class="button">
-					<input type="submit" value="Update">
-
-				</div>
-
-				<div class="input-box" v-bind:hidden="newUser.uloga!='kupac'">
-					<label><a href="uplataClanarine.html">Uplati clanarinu</a></label>
-				</div>
-
-			</div>
+					</td>
+					<td>
+						<input type="submit" value="Update" class="submit">
+					</td>
+				</tr>
+			</table>
 		</form>
+
+		<div class="input-box" v-bind:hidden="newUser.uloga!='kupac'">
+			<label><a href="uplataClanarine.html" class="lnkbtn">Uplati clanarinu</a></label>
+		</div>
+
 		<p> {{error }} </p>
 		<h3 v-bind:hidden="newUser.uloga!='kupac'">Treninzi</h3>
 		<p v-bind:hidden="newUser.uloga!='kupac'">
@@ -86,7 +113,8 @@
 			<button value="Pretrazi" v-on:click="pretraziTreninge">Pretrazi</button>
 		</p>
 
-		<table border="1" id="tabela" v-bind:hidden="newUser.uloga!='kupac'">
+		<table border="1" id="tabela" v-bind:hidden="newUser.uloga!='kupac'" class="table2">
+			<caption style="background:pink;">Teninzi</caption>
 			<thead>
 				<tr bgcolor="lightgrey">
 					<th>Naziv</th>
@@ -104,7 +132,8 @@
 		
 		<h3 v-bind:hidden="newUser.uloga!='trener'">Personalni treninzi</h3>
 		
-		<table border="1" id="tabelaPersonalni" v-bind:hidden="newUser.uloga!='trener'">
+		<table border="1" id="tabelaPersonalni" v-bind:hidden="newUser.uloga!='trener'" class="table2">
+			<caption style="background:pink;">Personalni treninzi</caption>
 			<thead>
 				<tr bgcolor="lightgrey">
 					<th>Termin</th>
@@ -123,7 +152,8 @@
 		
 		<h3 v-bind:hidden="newUser.uloga!='trener'">Grupni treninzi</h3>
 		
-		<table border="1" id="tabelaGrupni" v-bind:hidden="newUser.uloga!='trener'">
+		<table border="1" id="tabelaGrupni" v-bind:hidden="newUser.uloga!='trener'" class="table2">
+			<caption style="background:pink;">Grupni treninzi</caption>
 			<thead>
 				<tr bgcolor="lightgrey">
 					<th>Naziv</th>

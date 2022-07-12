@@ -2,31 +2,39 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="styles.css">
 <title>Insert title here</title>
 </head>
 <body>
-	<label><a href="sportObjects.html">Pocetna</a></label>
-	<div id="uplataClanarine">
+	<div class="main">
+		<div class="inner2">
+			<div class="welcome"></div>
+			<div class="registration_options">
+				<label><a href="sportObjects.html">Pocetna</a></label>
+				<div id="uplataClanarine">
 
-		<table border="1" id="tabela">
-			<thead>
-				<tr bgcolor="lightgrey">
-				    <th>Tip clanarine</th>
-					<th>Cena</th>
-					<th>Broj termina</th>
-					<th>Cena sa popustom</th>
-				</tr>
-			</thead>
+					<table border="1" id="tabela" class="table2" style="width: 50%">
+						<thead>
+							<tr bgcolor="lightgrey">
+								<th>Tip clanarine</th>
+								<th>Cena</th>
+								<th>Broj termina</th>
+								<th>Cena sa popustom</th>
+							</tr>
+						</thead>
 
-			<tr v-for="c in clanarine" v-on:click="izabratiClanarinu(c)">
-				<td>{{c.tipClanarine }}</td>
-				<td>{{c.punaCena }}</td>
-				<td>{{c.brojTermina }}</td>
-				<td>{{c.punaCena *(1 - (loggedUser.tipKupca.popust)/100) }}</td>
-			</tr>
-		</table>
+						<tr v-for="c in clanarine" v-on:click="izabratiClanarinu(c)">
+							<td>{{c.tipClanarine }}</td>
+							<td>{{c.punaCena }}</td>
+							<td>{{c.brojTermina }}</td>
+							<td>{{c.punaCena *(1 - (loggedUser.tipKupca.popust)/100) }}</td>
+						</tr>
+					</table>
 
 
+				</div>
+			</div>	
+		</div>
 	</div>
 	<script src="js/vue.js"></script>
 	<script src="js/axios.js"></script>
